@@ -7,7 +7,7 @@
 }
 
 + (void)initialize;
-- (Class)valueClassForBinding:(id)fp8;
+- (Class)valueClassForBinding:(NSBindingName)binding;
 - (void)dealloc;
 - (void)showInspector:(id)fp8;
 

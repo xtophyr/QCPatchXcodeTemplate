@@ -12,7 +12,7 @@ extern NSString * const QCLogViewNewMessageNotification;
 }
 
 + (void)initialize;
-- (Class)valueClassForBinding:(id)fp8;
+- (Class)valueClassForBinding:(NSBindingName)binding;
 - (void)_appendLog:(id)fp8;
 - (void)_message:(id)fp8;
 - (void)_finishInitialization;

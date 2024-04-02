@@ -4,14 +4,38 @@ extern NSString * const QCViewDidSetPatchNotification;
 extern NSString * const QCViewDidStartRenderingNotification;
 extern NSString * const QCViewDidStopRenderingNotification;
 
+/* kQCOptionFlags are OR'd together. */
+typedef enum {
+    kQCOptionFlagDisableDoubleBuffering = 0x1,
+    kQCOptionFlagDisableDepthBuffer     = 0x2,
+    kQCOptionFlagSoftwareRendering      = 0x4,
+    kQCOptionFlagDisableVBLSyncing      = 0x8,
+    // multithreadedOpenGL maybe sets 0x10 (?), but no logging verifies that so far
+    // (this ends up being useless anyway, may have been removed)
+    // multisampling sets maybe 0x100 (?), but no logging verifies that so far
+    kQCOptionFlagAttributeLoading       = 0x10000, // loads attributes, like patch port localizations
+    kQCOptionFlagUserInfoLoading        = 0x20000, // loads userInfo data, like patch locations
+    kQCOptionFlagRenderingDisabled      = 0x40000, // prevents rendering?
+} QCViewOptionFlags;
+
 typedef struct __QCViewPrivateStruct
 {
 #ifdef __LP64__
+    // this may be 0x190 (400) bytes in the latest versions (MacOS 14.4.1) NSAllocateCollectable is called with 0x190 (size), 1 (NSScannedOption)
 	void *unknown[39];	// 0x138 (312) bytes alloc'd
+    // QCViewOptionFlags _flags is at 0x20 [5]
+    // double W:H aspect ratio is at 0xf0:0xf8 [30, 31]
+    // 0xc8 contains a dispatch_source
+    // 0xc0 contains something that gets dispatch_release'd in -dealloc
+    // 0x80 might be a pthread_mutex?
+    // the following offsets get -release'd in -dealloc (in this order):
+    //   0x10, 0x8, 0x30, 0x38, 0x28, 0x148, 0x160, 0xe0, 0xe8
+    //
 #else
 	void *unknown[43];	// 0x0ac (172) bytes alloc'd
 #endif
 } QCViewPrivateStruct;
+
 
 @interface QCView : NSView <QCCompositionRenderer>
 {
@@ -19,18 +43,18 @@ typedef struct __QCViewPrivateStruct
 }
 
 + (id)defaultRenderingOptions; // always returns nil
-+ (void)setDefaultOptionFlags:(NSUInteger)flags;
++ (void)setDefaultOptionFlags:(QCViewOptionFlags)flags;
 + (void)initialize;
-- (Class)valueClassForBinding:(id)fp8;
+- (Class)valueClassForBinding:(NSBindingName)binding;
 - (id)_createLayer;
 - (void)setEraseColor:(NSColor*)eraseColor;
 - (NSColor*)eraseColor;
 - (void)setBackgroundColor:(NSColor*)bgColor;
 - (NSColor*)backgroundColor;
 - (void)erase;
-- (id)snapshotImage;
-- (id)createSnapshotImageOfType:(id)fp8;
-- (NSUInteger)_flags;
+- (NSImage*)snapshotImage;
+- (id)createSnapshotImageOfType:(NSString*)type;
+- (QCViewOptionFlags)_flags;
 - (void)_updateColorSpace;
 - (void)_reconfigure;
 - (void)_viewGlobalFrameDidChange:(id)fp8;
@@ -49,7 +73,7 @@ typedef struct __QCViewPrivateStruct
 - (void)_setupOpenGLContext;
 - (void)lockFocus;
 - (void)drawRect:(NSRect)rect;
-- (void)_forwardEvent:(id)fp8 location:(NSPoint)fp12;
+- (void)_forwardEvent:(NSEvent*)event location:(NSPoint)fp12;
 - (void)_renderGLContext;
 - (BOOL)_hasSurface;
 - (void)_surfaceWillGoAway;
@@ -171,4 +195,5 @@ typedef struct __QCViewPrivateStruct
 - (void)tabletPoint:(NSEvent *)theEvent;
 - (void)tabletProximity:(NSEvent *)theEvent;
 - (void)copy:(id)sender;
+- (BOOL)wantsBestResolutionOpenGLSurface; // always returns YES (not sure when this was added, probably when retina/2x displays launched)
 @end

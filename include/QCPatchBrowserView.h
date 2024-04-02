@@ -8,7 +8,7 @@
 
 + (void)initialize;
 + (BOOL)_isGraph:(id)fp8;
-- (Class)valueClassForBinding:(id)fp8;
+- (Class)valueClassForBinding:(NSBindingName)binding;
 
 @end
 

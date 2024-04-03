@@ -5,7 +5,7 @@
 	void *_QCCompositionParameterViewPrivate;	// 80 = 0x50
 }
 
-- (void)observeValueForKeyPath:(id)fp8 ofObject:(id)fp12 change:(id)fp16 context:(void *)fp20;
+- (void)observeValueForKeyPath:(NSString*)path ofObject:(id)object change:(NSDictionary*)change context:(void *)context;
 - (void)_setPatch:(id)fp8;
 - (void)__patchUpdated:(id)fp8;
 - (void)setCompositionRenderer:(id)fp8;

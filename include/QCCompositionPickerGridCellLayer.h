@@ -30,7 +30,7 @@
 - (void)restoreExpandedLayout;
 - (void)selectionModeDidChange;
 - (void)animateCompositionsIfNeeded;
-- (void)observeValueForKeyPath:(id)fp8 ofObject:(id)fp12 change:(id)fp16 context:(void *)fp20;
+- (void)observeValueForKeyPath:(NSString*)path ofObject:(id)object change:(NSDictionary*)change context:(void *)context;
 - (void)runActionForKey:(id)fp8 object:(id)fp12 arguments:(id)fp16;
 - (id)initWithComposition:(id)fp8 controller:(id)fp12;
 

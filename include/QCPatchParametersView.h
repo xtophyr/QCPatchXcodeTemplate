@@ -20,7 +20,7 @@
 - (Class)valueClassForBinding:(NSBindingName)binding;
 - (void)_setView:(id)fp8 enabled:(BOOL)fp12;
 - (void)_layoutUpdated:(id)fp8;
-- (void)observeValueForKeyPath:(id)fp8 ofObject:(id)fp12 change:(id)fp16 context:(void *)fp20;
+- (void)observeValueForKeyPath:(NSString*)path ofObject:(id)object change:(NSDictionary*)change context:(void *)context;
 - (void)_cleanup;
 - (void)resizeSubviewsWithOldSize:(NSSize)fp8;
 - (void)_setup;

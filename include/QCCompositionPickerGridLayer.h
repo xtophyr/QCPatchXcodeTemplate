@@ -7,7 +7,7 @@
 
 - (void)layoutStateDidChange;
 - (void)selectCompositionIfNeeded;
-- (void)observeValueForKeyPath:(id)fp8 ofObject:(id)fp12 change:(id)fp16 context:(void *)fp20;
+- (void)observeValueForKeyPath:(NSString*)path ofObject:(id)object change:(NSDictionary*)change context:(void *)context;
 - (void)wakeup;
 - (void)sleep;
 - (id)initWithFrame:(NSRect)fp8 compositions:(id)fp24 controller:(id)fp28;

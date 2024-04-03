@@ -24,7 +24,7 @@
 - (BOOL)_needsDisplay;
 - (void)addKeyToBeUpdated:(id)fp8;
 - (void)addKeysToBeUpdated:(id)fp8;
-- (void)observeValueForKeyPath:(id)fp8 ofObject:(id)fp12 change:(id)fp16 context:(void *)fp20;
+- (void)observeValueForKeyPath:(NSString*)path ofObject:(id)object change:(NSDictionary*)change context:(void *)context;
 - (id)initWithComposition:(id)fp8 controller:(id)fp12;
 - (void)pauseAnimation;
 - (void)resumeAnimation;

@@ -20,20 +20,16 @@ typedef enum {
 
 typedef struct __QCViewPrivateStruct
 {
-#ifdef __LP64__
     // this may be 0x190 (400) bytes in the latest versions (MacOS 14.4.1) NSAllocateCollectable is called with 0x190 (size), 1 (NSScannedOption)
 	void *unknown[39];	// 0x138 (312) bytes alloc'd
-    // QCViewOptionFlags _flags is at 0x20 [5]
-    // double W:H aspect ratio is at 0xf0:0xf8 [30, 31]
+    // QCViewOptionFlags _flags is at offset 0x20 [qword 5]
+    // double W:H aspect ratio is at 0xf0:0xf8 [qwords 30, 31]
     // 0xc8 contains a dispatch_source
     // 0xc0 contains something that gets dispatch_release'd in -dealloc
     // 0x80 might be a pthread_mutex?
     // the following offsets get -release'd in -dealloc (in this order):
     //   0x10, 0x8, 0x30, 0x38, 0x28, 0x148, 0x160, 0xe0, 0xe8
     //
-#else
-	void *unknown[43];	// 0x0ac (172) bytes alloc'd
-#endif
 } QCViewPrivateStruct;
 
 

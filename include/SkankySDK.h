@@ -35,20 +35,11 @@
 
 
 
-#pragma mark GL 32/64 expansions
+#pragma mark GL 32/64 expansions (deprecated)
 
-#if defined(__LP64__) && __LP64__
-	#define KIGLColor4 glColor4d
-	#define KIGLColor4v glColor4dv
-	#define KIGLMultMatrix glMultMatrixd
-#else
-	#define KIGLColor4 glColor4f
-	#define KIGLColor4v glColor4fv
-	#define KIGLMultMatrix glMultMatrixf
-#endif
-
-
-
+#define KIGLColor4 glColor4d
+#define KIGLColor4v glColor4dv
+#define KIGLMultMatrix glMultMatrixd
 
 #pragma mark Skanky Stuff
 

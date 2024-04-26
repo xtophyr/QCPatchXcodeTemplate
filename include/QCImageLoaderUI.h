@@ -8,7 +8,7 @@
 	IBOutlet QCImageLoaderView *imageView;	// 28 = 0x1c
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)didLoadNib;
 - (void)_updatePreview;
 - (void)setupViewForPatch:(id)fp8;

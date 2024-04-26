@@ -1,60 +1,75 @@
 // TODO: these aren't really void (void) functions -- need to spend some time working out what they really take/return.
-// TODO: find functions added in 10.6
+// TODO: find functions added in 10.6 (this probably isn't important in 2024...  there may be new functions added though)
 
-void GFArrayFromArgumentList(void);
+NSMutableArray* GFArrayFromArgumentList(void); // I think this takes var args
 NSArray *GFBacktrace(void);
-void GFDebug(void);
-int GFDebuggingLevel(void);	// returns UserDefaults value GFDebuggingLevel
-void GFException(void);
+void GFDebug(NSString *formatString, ...);
+NSInteger GFDebuggingLevel(void);	// returns UserDefaults value GFDebuggingLevel
+void GFException(NSString *debugFormatString, NSString *exceptionFormatString, ...); // takes 2 integer args and some var-args stuff
 void GFFilterStringsWithKeywords(void);
-void GFGetDebugMessageCallback(void);
-void GFGetLogMessageCallback(void);
+void GFGetDebugMessageCallback(void);   // takes 2 nullable args to return 2 function pointers (callback, refcon)
+void GFGetLogMessageCallback(void);     // takes 2 nullable args to return 2 function pointers (callback, refcon)
 void GFKeywordsFromSearchString(void);
 void GFLog(NSString*format, ...);
-void GFNameForNode(void);
-void GFNameForPort(void);
-void GFSetDebugMessageCallback(void);
-void GFSetLogMessageCallback(void);
+void GFNameForNode(GFNode *n);  // will return n->userInfo->@"name" if set, else p->attributes->@"name" if set, else __ClassNameForNode (private function)
+void GFNameForPort(QCPort *p);  // will return p->userInfo->@"name" if set, else p->attributes->@"name" if set, else p->key
+void GFSetDebugMessageCallback(void);   // takes 2 function pointer args
+void GFSetLogMessageCallback(void); // takes 2 function pointer args
 void GFThrowException(void);
 
-void QCAddCompositionTrackToMovie(void);
-void QCAddXMLElementsToStructure(void);
-void QCAppendCompositionSampleToTrack(void);
-void QCCompositionCompliesToProtocol(void);
+int QCAddCompositionTrackToMovie(void); // returns 0 (14.4.1)
+void QCAddXMLElementsToStructure(void); // returns void, takes 2 object-ish args
+int QCAppendCompositionSampleToTrack(void); // returns 0 (14.4.1)
+BOOL QCCompositionCompliesToProtocol(QCComposition *composition, NSString *protocol); // not sure about second arg
 void QCCompositionFromData(void);
 void QCCompositionFromFile(void);
-void QCCompositionFromMovieFile(void);
+int QCCompositionFromMovieFile(void);  // returns nil (14.4.1)
 void QCCompositionFromPatch(void);
 void QCCompositionToData(void);
 void QCCompositionToFile(void);
 void QCCompositionToMovieFile(void);
-void QCCompositionsFromMovieFile(void);
+int QCCompositionsFromMovieFile(void);  // returns nil (14.4.1)
 void QCComputeAspectRatioBounds(void);
 void QCComputeProportionalBounds(void);
-void QCCountCompositionTracksInMovie(void);
+int QCCountCompositionTracksInMovie(void);  // returns 0 (14.4.1)
 void QCDataFromComposition(void);
-void QCFileIsComposition(void);
-void QCGLExtensionSupported(void);
+BOOL QCFileIsComposition(NSString *path);   // this probably accepts NSURL too - it just does -pathExtension to check for qtz or xml
+BOOL QCGLExtensionSupported(id cglContext, const char *extension);
 
 void QCGLMakeTransformationMatrix(CGFloat*,CGFloat xRotation,CGFloat yRotation,CGFloat zRotation,CGFloat xTranslation,CGFloat yTranslation,CGFloat zTranslation);
 
-void QCGetCompositionTrackAtIndex(void);
-void QCGetIndexedColorSpace(void);
+int QCGetCompositionTrackAtIndex(void); // returns 0 (14.4.1)
+
+/* possible spaces returned:
+    kCGColorSpaceGenericGray
+    kCGColorSpaceGenericCMYK
+    kCGColorSpaceGenericRGB
+    kCGColorSpaceGenericRGBLinear
+    the main display's colorspace
+    others ?
+ */
+CGColorSpaceRef QCGetIndexedColorSpace(int index); // indexes are 0 - 12 or so
+
 double QCHostTime(void);
 void QCInfoFromComposition(void);
 
-void QCMD5FromData(void);
-void QCMD5FromString(void);
-void QCMD5ToData(void);
-void QCMD5ToString(void);
-void QCMD5WithBytes(void);
-void QCMD5WithColorSpace(void);
-void QCMD5WithDoubles(void);
-void QCMD5WithIntegers(void);
-void QCMD5WithObject(void);
-void QCMD5WithPointer(void);
-void QCMD5WithString(void);
+typedef struct {
+    unsigned char md5sum[16];
+} QCMD5;
 
+QCMD5 QCMD5FromData(NSData *data);  // this just shuttles around 16 bytes of md5sum data in an NSData (doesn't hash the data)
+QCMD5 QCMD5FromString(NSString *string); // parses string for md5 data (doesn't hash the string)
+QCMD5 QCMD5ToData(void);
+QCMD5 QCMD5ToString(void);
+QCMD5 QCMD5WithBytes(const void *data, CC_LONG len);    // args sent to CC_MD5 more or less as-is
+QCMD5 QCMD5WithColorSpace(void);
+QCMD5 QCMD5WithDoubles(void);
+QCMD5 QCMD5WithIntegers(void);
+QCMD5 QCMD5WithObject(void);
+QCMD5 QCMD5WithPointer(void);
+QCMD5 QCMD5WithString(NSString *string);    // hashes string
+
+// TODO: probably make a QC matrix type rather than CGFloat[16]?
 void QCMatrix_Clear(CGFloat[16]);
 void QCMatrix_ConcatenateWithMatrix(void);
 void QCMatrix_Copy(void);
@@ -87,8 +102,8 @@ void QCPatchToFlattenedComposition(void);
 
 void QCPathFromState(void);
 
-void QCProFX(void);
-void QCProFXRegisterAllocationCallbacks(void);
+void QCProFX(void); // takes void, returns void
+void QCProFXRegisterAllocationCallbacks(void); // takes 2 function pointer args, QCImagePixelBuffer alloc and dealloc
 
 void QCQuaternion_Add(void);
 void QCQuaternion_Clear(QCVector4*);
@@ -133,11 +148,11 @@ void QCVector_Substract(QCVector3 *u, QCVector3 *v, QCVector3 *result);	// Not a
 
 void QCVisualizerIPCClient_End(void);
 void QCVisualizerIPCClient_GetAudioInformation(void);
-void QCVisualizerIPCClient_IsRunning(void);
-void QCVisualizerIPCClient_Start(void);
-void QCVisualizerIPCServer_End(void);
-void QCVisualizerIPCServer_HasClients(void);
-void QCVisualizerIPCServer_IsRunning(void);
+BOOL QCVisualizerIPCClient_IsRunning(void);
+BOOL QCVisualizerIPCClient_Start(void);
+uint32_t QCVisualizerIPCServer_End(void);   // returns __runningCount (0 when none left), maybe by accident
+BOOL QCVisualizerIPCServer_HasClients(void);
+BOOL QCVisualizerIPCServer_IsRunning(void);
 void QCVisualizerIPCServer_SendAudioInformation(void);
 void QCVisualizerIPCServer_SendTrackInformation(void);
 void QCVisualizerIPCServer_Start(void);

@@ -1,5 +1,5 @@
 #import "QCNetworkPatchUI.h"
 
 @interface QCNetworkSynchronizerUI : QCNetworkPatchUI
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 @end

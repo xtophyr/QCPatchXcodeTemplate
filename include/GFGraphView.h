@@ -74,7 +74,7 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (NSRect)rectForPage:(NSInteger)page;
 - (void)setBoundsOrigin:(NSPoint)fp8;
 - (void)setBoundsSize:(NSSize)fp8;
-- (void)viewWillMoveToWindow:(id)fp8;
+- (void)viewWillMoveToWindow:(NSWindow*)newWindow;
 - (void)viewDidMoveToWindow;
 
 @end
@@ -121,11 +121,11 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 
 @interface GFGraphView (Private)
 + (id)_noteAttributes;
-- (void)_editNoteAtIndex:(NSUInteger)fp8;
-- (id)_menuForNote:(NSUInteger)fp8;
+- (void)_editNoteAtIndex:(NSUInteger)noteIndex;
+- (id)_menuForNote:(NSUInteger)noteIndex;
 - (void)_setUndoManager:(NSUndoManager*)undoManager;
 - (NSPoint)_centerPoint;
-- (void)_setCenterPoint:(NSPoint)fp8;
+- (void)_setCenterPoint:(NSPoint)centerPoint;
 - (NSPoint)_pastePoint;
 - (void)_startTooltips;
 - (void)_showTooltip;

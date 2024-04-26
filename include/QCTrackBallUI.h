@@ -10,7 +10,7 @@
 	IBOutlet NSSlider *frictionSlider;	// 40 = 0x28
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)updateTracking:(id)fp8;
 - (void)updateAutorotation:(id)fp8;

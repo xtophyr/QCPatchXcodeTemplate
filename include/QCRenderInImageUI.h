@@ -8,7 +8,7 @@
 	IBOutlet NSButton *feedbackButton;	// 36 = 0x24
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)updateFormat:(id)fp8;
 - (void)updateDepth:(id)fp8;

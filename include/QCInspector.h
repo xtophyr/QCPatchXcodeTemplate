@@ -16,7 +16,7 @@
 + (BOOL)accessInstanceVariablesDirectly;
 
 // Determines the XIB name to load for the view.
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 
 - (id)initWithBundle:(NSBundle*)bundle nibName:(NSString*)nibName;
 

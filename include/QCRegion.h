@@ -1,3 +1,6 @@
+// _region is a quite likely a CGSRegionRef, a scanline-coherent shape object based on "Scanline Coherent Shape Algebra"
+// used mainly in CoreGraphics framework and in the WindowServer/SkyLight.  It's a CF Object.  All SPI there.
+
 @interface QCRegion : NSObject
 {
 	CGRect _bounds;	// 4 = 0x4

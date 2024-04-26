@@ -6,7 +6,7 @@
 	IBOutlet NSPopUpButton *alignmentVMenu;	// 40 = 0x28
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)didLoadNib;
 - (void)_updateText:(id)fp8;
 - (void)setupViewForPatch:(id)fp8;

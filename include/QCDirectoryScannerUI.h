@@ -7,7 +7,7 @@
 	IBOutlet NSPopUpButton *typeMenu;	// 32 = 0x20
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)updateRecursive:(id)fp8;
 - (void)updateType:(id)fp8;

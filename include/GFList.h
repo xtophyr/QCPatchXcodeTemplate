@@ -1,3 +1,14 @@
+// Flags (incomplete)
+// 0x1
+// 0x2
+// 0x4
+// 0x8 -> retain (flag unset) vs copy (flag set) of values
+// 0x10
+// 0x20
+// 0x40 -> kCFAllocator vs malloc
+// 0x102 (?) is tested against sometimes
+// sometimees _flags is AND'd with 0x42, and then checked for 0x2, if it fails, inconsistent state exception
+
 @interface GFList : NSObject <NSCopying, NSFastEnumeration>
 {
 	NSUInteger _flags;	// 4 = 0x4

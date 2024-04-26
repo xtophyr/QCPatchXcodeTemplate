@@ -7,7 +7,7 @@
 	IBOutlet NSTextField *stacksField;	// 32 = 0x20
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)update:(id)fp8;
 

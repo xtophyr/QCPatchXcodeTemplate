@@ -6,7 +6,7 @@
 	IBOutlet NSPopUpButton *scaleMenu;	// 28 = 0x1c
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)updateScale:(id)fp8;
 @end

@@ -10,7 +10,7 @@
 	IBOutlet NSTextField *formatField;	// 44 = 0x2c
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)didLoadNib;
 - (void)_configureFormatEditor;
 - (void)setupViewForPatch:(id)fp8;

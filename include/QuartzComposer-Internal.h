@@ -1,5 +1,7 @@
-extern void *QuartzComposerVersionNumber; // Not NSNumber, NSString, or even an objc class ...
-extern void *QuartzComposerVersionString; // Not NSString, any objc class, C-string ...
+extern void *QuartzComposerVersionNumber;   // 64-bit number, 0x4065 0000 0000 0000 currently (unsure how to interpret)
+                                            // printf("version number: %p\n", *QuartzComposerVersionNumber);
+extern void *QuartzComposerVersionString;   // C string, via printf("version string: [%s]\n", &QuartzComposerVersionString);
+                                            // currently "@(#)PROGRAM:QuartzComposer  PROJECT:QuartzComposer-168\n"
 
 #import "GLSLParameterInfo.h"
 #import "QCAgeProfileView.h"

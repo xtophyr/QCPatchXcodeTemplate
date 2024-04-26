@@ -7,7 +7,7 @@
 	IBOutlet NSButton *continuousButton;	// 32 = 0x20
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)updateFormat:(id)fp8;
 - (void)updateContinuous:(id)fp8;

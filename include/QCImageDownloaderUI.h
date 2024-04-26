@@ -7,7 +7,7 @@
 	IBOutlet NSButton *syncButton;	// 32 = 0x20
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)updateCache:(id)fp8;
 - (void)updateSync:(id)fp8;

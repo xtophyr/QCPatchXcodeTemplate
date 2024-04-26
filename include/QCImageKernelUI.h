@@ -12,14 +12,15 @@
 	IBOutlet NSButton *advancedModeButton;	// 44 = 0x2c
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)resetView;
 - (void)changeMode:(id)fp8;
-- (CGFloat)splitView:(id)fp8 constrainSplitPosition:(CGFloat)fp12 ofSubviewAt:(NSInteger)fp16;
-- (BOOL)splitView:(id)fp8 canCollapseSubview:(id)fp12;
-- (CGFloat)splitView:(id)fp8 constrainMinCoordinate:(CGFloat)fp12 ofSubviewAt:(NSInteger)fp16;
-- (CGFloat)splitView:(id)fp8 constrainMaxCoordinate:(CGFloat)fp12 ofSubviewAt:(NSInteger)fp16;
-- (BOOL)splitView:(id)fp8 shouldCollapseSubview:(id)fp12 forDoubleClickOnDividerAtIndex:(NSInteger)fp16;
+/* NSSplitViewDelegate stuff */
+- (CGFloat)splitView:(NSSplitView*)splitView constrainSplitPosition:(CGFloat)proposedPosition ofSubviewAt:(NSInteger)dividerIndex;
+- (BOOL)splitView:(NSSplitView*)splitView canCollapseSubview:(NSView*)subview;
+- (CGFloat)splitView:(NSSplitView*)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex;
+- (CGFloat)splitView:(NSSplitView*)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex;
+- (BOOL)splitView:(NSSplitView*)splitView shouldCollapseSubview:(NSView*)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex;
 
 @end

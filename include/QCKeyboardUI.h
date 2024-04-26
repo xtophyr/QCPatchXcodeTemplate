@@ -8,7 +8,7 @@
 	IBOutlet QCKeyboardTableView *tableView;	// 28 = 0x1c
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)addKey:(id)fp8;
 - (void)removeKey:(id)fp8;

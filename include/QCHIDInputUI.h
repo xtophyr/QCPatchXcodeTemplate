@@ -18,7 +18,7 @@
 	CFRunLoopSourceRef _runLoopSource;	// 56 = 0x38
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)_updateUI;
 - (void)_setupUI;
 - (void)setupViewForPatch:(id)fp8;

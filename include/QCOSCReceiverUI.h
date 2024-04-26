@@ -2,5 +2,5 @@
 #import "QCOSCPatchUI.h"
 
 @interface QCOSCReceiverUI : QCOSCPatchUI
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 @end

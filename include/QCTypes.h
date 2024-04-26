@@ -24,6 +24,8 @@ typedef struct _BackgroundInfo {
 
 // This is private (but publicly declared in darwin source)
 //typedef struct __CFRuntimeBase CFRuntimeBase;
+// Note: there's a trick with CFUUID to get CFRuntimeBase (at least the size)
+// See https://gist.github.com/NSProgrammer/8c2ce755d15777e62079788a7d788394
 
 // until CFRuntimeBase is defined, we just use an anonymous struct
 struct _QCC3DMesh;/* {

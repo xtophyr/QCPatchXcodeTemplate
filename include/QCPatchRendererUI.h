@@ -14,7 +14,7 @@
 	IBOutlet NSPopUpButton *protocolMenu;	// 60 = 0x3c
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)_setup:(id)fp8;
 - (void)setupViewForPatch:(id)fp8;
 - (void)setExecution:(id)fp8;
@@ -24,7 +24,7 @@
 - (void)removeInput:(id)fp8;
 - (void)addOutput:(id)fp8;
 - (void)removeOutput:(id)fp8;
-- (NSInteger)numberOfRowsInTableView:(NSTableView*)fp8;
-- (id)tableView:(NSTableView*)fp8 objectValueForTableColumn:(NSTableColumn*)fp12 row:(NSInteger)fp16;
+- (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView;
+- (id)tableView:(NSTableView*)tableView objectValueForTableColumn:(NSTableColumn*)tableColumn row:(NSInteger)row;
 
 @end

@@ -1,5 +1,5 @@
 #import "QCInspector.h"
 
 @interface QCCore3DLoaderUI : QCInspector
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 @end

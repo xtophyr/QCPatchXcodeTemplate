@@ -9,7 +9,7 @@
 	IBOutlet QCInterpolationView *splineView;	// 32 = 0x20
 }
 
-+ (id)viewNibName;
++ (NSString*)viewNibName;
 - (void)setupViewForPatch:(id)fp8;
 - (void)resetView;
 - (void)updateInterpolation:(id)fp8;

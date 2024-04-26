@@ -1,4 +1,21 @@
-// TODO: need to figure out what the type enum is
+// _type field: (see QCArrayTypeSize())
+/*  most of these aren't used, so most of this is speculative.  signed/unsigned order is guessed and might be backwards.
+    QCArrayTypeSize() takes _type int, and returns the value in a table * 8, or 0 if it's greater than 0xB (table goes to 0xC)
+        64 bit:     32 bit:     (while 32 bit is dead, it leaks information about CGFloat-style size-changing types or pointers)
+    0:  0           0
+    1:  1           1   BOOL? // QCCounter uses this for its _last* Arrays
+    2:  1           1   uint8_t?
+    3:  1           1   int8_t?
+    4:  2           2   uint16_t?
+    5:  2           2   int16_t?
+    6:  4           4   uint32_t? // QCCounter uses this for its _value Array
+    7:  4           4   int32_t?
+    8:  8           4   CGFloat?
+    9:  8           4   CGFloat?
+    A:  4           4   float?
+    B:  8           8   // double -- (QCSmooth, QCMouseInteraction)
+    C:  8           4   // probably pointer -- QCImagePort_Cache uses type 0xc
+ */
 
 @interface QCArray : NSObject
 {

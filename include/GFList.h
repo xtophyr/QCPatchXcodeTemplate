@@ -6,7 +6,7 @@
 // 0x10
 // 0x20
 // 0x40 -> kCFAllocator vs malloc
-// 0x102 (?) is tested against sometimes
+// 0x102 (?) is tested against sometimes to drive retain/release messages around mutations
 // sometimees _flags is AND'd with 0x42, and then checked for 0x2, if it fails, inconsistent state exception
 
 @interface GFList : NSObject <NSCopying, NSFastEnumeration>
@@ -28,7 +28,7 @@
 - (id)initWithList:(GFList *)list;
 - (id)initWithObjects:(id)fp8 keys:(id)fp12 optionFlags:(NSUInteger)flags;
 - (id)copyWithZone:(NSZone *)zone;
-- (NSUInteger)optionFlags;
+- (NSUInteger)optionFlags;  // same as -flags
 - (NSUInteger)count;
 - (NSUInteger)flags;
 - (void)setObject:(id)object forKey:(id)key;

@@ -1,3 +1,5 @@
+// This appears to be absent in 14.4.1
+
 @interface GFDictionaryEnumerator : NSObject
 {
 	id _keyBuffer[32];	// 4 = 0x4

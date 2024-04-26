@@ -1,3 +1,5 @@
+// This appears to be absent in 14.4.1
+
 @interface GFSetEnumerator : NSObject
 {
 	id _objectBuffer[32];	// 4 = 0x4

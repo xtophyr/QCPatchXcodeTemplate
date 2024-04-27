@@ -142,20 +142,25 @@ typedef struct {
 	unsigned char ptrHasChanged;
 	void *savePointer;
 	void *unused[4];
-} CDAnonymousStruct2;
+} CDAnonymousStruct2; // related to QCArray and QCArrayBuffer
 
 typedef struct {
-	float x;
-	float y;
-	float z;
+	CGFloat x;
+    CGFloat y;
+    CGFloat z;
 } QCVector3;
+
+// TODO: There are many possible variations of this, maybe union a few useful ones (same for vectors)
+typedef struct {
+    double m[16];
+} QCMatrix;
 
 typedef struct {
 	unsigned char _field1;
 	int _field2;
 	int _field3;
 	void *_field4[4];
-} CDAnonymousStruct5;
+} CDAnonymousStruct5; // related to QCArrayTexture3D
 
 typedef struct {
 	float _field1;
@@ -181,7 +186,7 @@ typedef struct {
 	float _field21;
 	float _field22;
 	float _field23;
-} CDAnonymousStruct7;
+} CDAnonymousStruct7; // related to QCParticleSystem
 
 typedef struct {
 	double _field1;
@@ -216,7 +221,7 @@ typedef struct {
 	} _field4;
 	char _field5;
 	char _field6;
-} CDAnonymousStruct9;
+} CDAnonymousStruct9; // related to QCKeyFrameList
 
 typedef struct {
 	float x;
@@ -230,5 +235,5 @@ typedef struct {
 	unsigned char wasEnabled;
 	int boundTexture;
 	void *unused[4];
-} CDAnonymousStruct12;
+} CDAnonymousStruct12; // related to QCImagePort_Cache, QCPlugInInputImage, and QCImageTextureBuffer
 

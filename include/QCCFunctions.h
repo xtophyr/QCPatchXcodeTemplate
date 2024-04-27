@@ -72,18 +72,18 @@ QCMD5Sum QCMD5WithString(NSString *string);    // hashes string
 void QCMatrix_Clear(QCMatrix *m);   // initializes to identity matrix (4x4)
 void QCMatrix_SetIdentity(QCMatrix *m); // same as above, added some time after SSDK was dumped
 void QCMatrix_ConcatenateWithMatrix(void);
-void QCMatrix_Copy(QCMatrix *source, QCMatrix *dest);   // copies source to dest
-void QCMatrix_EqualsMatrix(void); // added some time after SSDK was dumped
+void QCMatrix_Copy(const QCMatrix *source, QCMatrix *dest);   // copies source to dest
+BOOL QCMatrix_EqualsMatrix(const QCMatrix *x, const QCMatrix *y); // added some time after SSDK was dumped
 double QCMatrix_Determinant(QCMatrix *matrix); // returns the determinant of matrix
 void QCMatrix_FullDeterminant(void); // added some time after SSDK was dumped
 void QCMatrix_GetRotationAngles(QCMatrix *matrix, CGFloat *x, CGFloat *y, CGFloat *z);
 void QCMatrix_GetRotationAxisAndAngle(void);
-void QCMatrix_GetVectorW(QCMatrix *m, QCVector3 *vec); // sets vec to 4th row of matrix (omits last column)
-void QCMatrix_GetVectorX(QCMatrix *m, QCVector3 *vec); // sets vec to 1st row of matrix (omits last column)
-void QCMatrix_GetVectorY(QCMatrix *m, QCVector3 *vec); // sets vec to 2nd row of matrix (omits last column)
-void QCMatrix_GetVectorZ(QCMatrix *m, QCVector3 *vec); // sets vec to 3rd row of matrix (omits last column)
+void QCMatrix_GetVectorW(const QCMatrix *m, QCVector3 *vec); // sets vec to 4th row of matrix (omits last column)
+void QCMatrix_GetVectorX(const QCMatrix *m, QCVector3 *vec); // sets vec to 1st row of matrix (omits last column)
+void QCMatrix_GetVectorY(const QCMatrix *m, QCVector3 *vec); // sets vec to 2nd row of matrix (omits last column)
+void QCMatrix_GetVectorZ(const QCMatrix *m, QCVector3 *vec); // sets vec to 3rd row of matrix (omits last column)
 void QCMatrix_Invert(void); // added some time after SSDK was dumped
-BOOL QCMatrix_IsIdentity(QCMatrix *matrix); // returns true iff matrix is identity matrix
+BOOL QCMatrix_IsIdentity(const QCMatrix *matrix); // returns true iff matrix is identity matrix
 void QCMatrix_MultiplyByMatrix(CGFloat left[16], CGFloat right[16], CGFloat product[16]);
 void QCMatrix_Negate(void);
 void QCMatrix_Project(void); // added some time after SSDK was dumped

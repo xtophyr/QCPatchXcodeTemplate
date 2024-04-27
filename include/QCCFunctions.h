@@ -53,36 +53,41 @@ CGColorSpaceRef QCGetIndexedColorSpace(int index); // indexes are 0 - 12 or so
 double QCHostTime(void);
 void QCInfoFromComposition(void);
 
-typedef struct {
-    unsigned char md5sum[16];
-} QCMD5;
+QCMD5Sum QCMD5FromData(NSData *data);  // this just shuttles around 16 bytes of md5sum data in an NSData (doesn't hash the data)
+QCMD5Sum QCMD5FromString(NSString *string); // parses string for md5 data (doesn't hash the string)
+void QCMD5ListToString(void); // added some time after SSDK was dumped
+QCMD5Sum QCMD5ToData(void);
+QCMD5Sum QCMD5ToString(void);
+QCMD5Sum QCMD5WithBytes(const void *data, CC_LONG len);    // args sent to CC_MD5 more or less as-is
+QCMD5Sum QCMD5WithColorSpace(void);
+QCMD5Sum QCMD5WithDoubles(void);
+QCMD5Sum QCMD5WithIntegers(void);
+QCMD5Sum QCMD5WithObject(void);
+void QCMD5WithOptions(void); // added some time after SSDK was dumped
+QCMD5Sum QCMD5WithPointer(void);
+QCMD5Sum QCMD5WithString(NSString *string);    // hashes string
 
-QCMD5 QCMD5FromData(NSData *data);  // this just shuttles around 16 bytes of md5sum data in an NSData (doesn't hash the data)
-QCMD5 QCMD5FromString(NSString *string); // parses string for md5 data (doesn't hash the string)
-QCMD5 QCMD5ToData(void);
-QCMD5 QCMD5ToString(void);
-QCMD5 QCMD5WithBytes(const void *data, CC_LONG len);    // args sent to CC_MD5 more or less as-is
-QCMD5 QCMD5WithColorSpace(void);
-QCMD5 QCMD5WithDoubles(void);
-QCMD5 QCMD5WithIntegers(void);
-QCMD5 QCMD5WithObject(void);
-QCMD5 QCMD5WithPointer(void);
-QCMD5 QCMD5WithString(NSString *string);    // hashes string
+// TODO: should probably break this out into a separate header with better documentation
 
-// TODO: probably make a QC matrix type rather than CGFloat[16]?
-void QCMatrix_Clear(CGFloat[16]);
+void QCMatrix_Clear(QCMatrix *m);   // initializes to identity matrix (4x4)
+void QCMatrix_SetIdentity(QCMatrix *m); // same as above, added some time after SSDK was dumped
 void QCMatrix_ConcatenateWithMatrix(void);
-void QCMatrix_Copy(void);
-void QCMatrix_Determinant(void);
-void QCMatrix_GetRotationAngles(CGFloat[16], CGFloat *x, CGFloat *y, CGFloat *z);
+void QCMatrix_Copy(QCMatrix *source, QCMatrix *dest);   // copies source to dest
+void QCMatrix_EqualsMatrix(void); // added some time after SSDK was dumped
+double QCMatrix_Determinant(QCMatrix *matrix); // returns the determinant of matrix
+void QCMatrix_FullDeterminant(void); // added some time after SSDK was dumped
+void QCMatrix_GetRotationAngles(QCMatrix *matrix, CGFloat *x, CGFloat *y, CGFloat *z);
 void QCMatrix_GetRotationAxisAndAngle(void);
-void QCMatrix_GetVectorW(void);
-void QCMatrix_GetVectorX(void);
-void QCMatrix_GetVectorY(void);
-void QCMatrix_GetVectorZ(void);
-void QCMatrix_IsIdentity(void);
+void QCMatrix_GetVectorW(QCMatrix *m, QCVector3 *vec); // sets vec to 4th row of matrix (omits last column)
+void QCMatrix_GetVectorX(QCMatrix *m, QCVector3 *vec); // sets vec to 1st row of matrix (omits last column)
+void QCMatrix_GetVectorY(QCMatrix *m, QCVector3 *vec); // sets vec to 2nd row of matrix (omits last column)
+void QCMatrix_GetVectorZ(QCMatrix *m, QCVector3 *vec); // sets vec to 3rd row of matrix (omits last column)
+void QCMatrix_Invert(void); // added some time after SSDK was dumped
+BOOL QCMatrix_IsIdentity(QCMatrix *matrix); // returns true iff matrix is identity matrix
 void QCMatrix_MultiplyByMatrix(CGFloat left[16], CGFloat right[16], CGFloat product[16]);
 void QCMatrix_Negate(void);
+void QCMatrix_Project(void); // added some time after SSDK was dumped
+void QCMatrix_RotateQuaternion(void); // added some time after SSDK was dumped
 void QCMatrix_RotateVector(void);
 void QCMatrix_SetRotationAroundAxisX(void);
 void QCMatrix_SetRotationAroundAxisY(void);
@@ -93,6 +98,7 @@ void QCMatrix_SetRotationFromVectors(void);
 void QCMatrix_SetScale(void);
 void QCMatrix_SetScaleUniform(void);
 void QCMatrix_SetTranslation(void);
+void QCMatrix_TransformQuaternion(void); // added some time after SSDK was dumped
 void QCMatrix_TransformVector(void);
 
 void QCPatchFromComposition(void);
@@ -100,51 +106,53 @@ void QCPatchFromCompositionWithOptions(void);
 void QCPatchToComposition(void);
 void QCPatchToFlattenedComposition(void);
 
-void QCPathFromState(void);
-
 void QCProFX(void); // takes void, returns void
 void QCProFXRegisterAllocationCallbacks(void); // takes 2 function pointer args, QCImagePixelBuffer alloc and dealloc
 
-void QCQuaternion_Add(void);
+void QCQuaternion_Add(void); // not used in QC
 void QCQuaternion_Clear(QCVector4*);
-void QCQuaternion_Conjugate(void);
-void QCQuaternion_Copy(void);
-void QCQuaternion_Divide(void);
-void QCQuaternion_Dot(void);
-void QCQuaternion_Exp(void);
+void QCQuaternion_Conjugate(void); // not used in QC
+void QCQuaternion_Copy(void); // not used in QC
+void QCQuaternion_Divide(void); // not used in QC
+void QCQuaternion_Dot(void); // not used in QC
+void QCQuaternion_Exp(void); // not used in QC
 void QCQuaternion_GetMatrix(void);
-void QCQuaternion_GetRotationAngles(void);
+void QCQuaternion_GetRotationAngles(void); // not used in QC
 void QCQuaternion_GetRotationAxisAndAngle(void);
-void QCQuaternion_Inverse(void);
-void QCQuaternion_Length(void);
-void QCQuaternion_LinearInterpolation(void);
+void QCQuaternion_Inverse(void); // not used in QC
+void QCQuaternion_Length(void); // not used in QC
+void QCQuaternion_LinearInterpolation(void); // not used in QC
 void QCQuaternion_Log(void);
-void QCQuaternion_LogDifference(void);
+void QCQuaternion_LogDifference(void); // not used in QC
 void QCQuaternion_Multiply(void);
 void QCQuaternion_Normalize(void);
-void QCQuaternion_ScaleAngle(void);
+void QCQuaternion_ScaleAngle(void); // not used in QC
 void QCQuaternion_SetFromMatrix(void);
-void QCQuaternion_SetFromRotationAngles(void);
-void QCQuaternion_SetFromRotationAxisAndAngle(void);
-void QCQuaternion_SetFromVectors(void);
-void QCQuaternion_SphericalLinearInterpolation(void);
-void QCQuaternion_Square(void);
-void QCQuaternion_SquareRoot(void);
-void QCQuaternion_Substract(void);	// Not actually used in QC (!)
+void QCQuaternion_SetFromRotationAngles(void); // not used in QC
+void QCQuaternion_SetFromRotationAxisAndAngle(void); // used in QCTrackBall
+void QCQuaternion_SetFromVectors(void); // not used in QC
+void QCQuaternion_SphericalLinearInterpolation(void); // not used in QC
+void QCQuaternion_Square(void); // not used in QC
+void QCQuaternion_SquareRoot(void); // not used in QC
+void QCQuaternion_Substract(void);	// not used in QC
 
 void QCResolveAliasPath(void);
 void QCRestorePatchInputParameters(void);
 void QCSavePatchInputParameters(void);
 void QCStateFromPath(void);
+void QCPathFromState(void);
 
-void QCVector_Add(QCVector3 *u, QCVector3 *v, QCVector3 *result);	// Not actually used in QC (!)
+// need to verify Vec3 vs Vec4 here
+void QCVector_Add(QCVector3 *u, QCVector3 *v, QCVector3 *result);	// not used in QC
 void QCVector_CrossProduct(QCVector3 *u, QCVector3 *v, QCVector3 *result);
 double QCVector_DotProduct(QCVector3 *u, QCVector3 *v);
+void QCVector_EqualsVector(void); // added some time after SSDK was dumped -- not used in QC
 double QCVector_Length(QCVector3 *vector);
-void QCVector_LinearInterpolation(void);	// Not actually used in QC (!)
-void QCVector_Normalize(QCVector3 *vector);	// Not actually used in QC (!)
+void QCVector_LinearInterpolation(void);	// not used in QC
+void QCVector_Make(void); // added some time after SSDK was dumped -- not used in QC
+void QCVector_Normalize(QCVector3 *vector);	// not used in QC
 void QCVector_Scale(CGFloat scale, QCVector3 *vector, QCVector3 *result);
-void QCVector_Substract(QCVector3 *u, QCVector3 *v, QCVector3 *result);	// Not actually used in QC (!)
+void QCVector_Substract(QCVector3 *u, QCVector3 *v, QCVector3 *result);	// not used in QC
 
 void QCVisualizerIPCClient_End(void);
 void QCVisualizerIPCClient_GetAudioInformation(void);

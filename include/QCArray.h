@@ -1,6 +1,6 @@
 // _type field: (see QCArrayTypeSize())
 /*  most of these aren't used, so most of this is speculative.  signed/unsigned order is guessed and might be backwards.
-    QCArrayTypeSize() takes _type int, and returns the value in a table * 8, or 0 if it's greater than 0xB (table goes to 0xC)
+    QCArrayTypeSize() takes _type int, and returns the value in a table, or 0 if it's greater than 0xB (table goes to 0xC)
         64 bit:     32 bit:     (while 32 bit is dead, it leaks information about CGFloat-style size-changing types or pointers)
     0:  0           0
     1:  1           1   BOOL? // QCCounter uses this for its _last* Arrays

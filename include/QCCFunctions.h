@@ -53,6 +53,7 @@ CGColorSpaceRef QCGetIndexedColorSpace(int index); // indexes are 0 - 12 or so
 double QCHostTime(void);
 void QCInfoFromComposition(void);
 
+// MD5s are used as a key for QCCache.  This is generally an abomination.
 QCMD5Sum QCMD5FromData(NSData *data);  // this just shuttles around 16 bytes of md5sum data in an NSData (doesn't hash the data)
 QCMD5Sum QCMD5FromString(NSString *string); // parses string for md5 data (doesn't hash the string)
 void QCMD5ListToString(void); // added some time after SSDK was dumped

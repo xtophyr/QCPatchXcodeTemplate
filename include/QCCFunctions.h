@@ -142,17 +142,17 @@ void QCSavePatchInputParameters(void);
 void QCStateFromPath(void);
 void QCPathFromState(void);
 
-// need to verify Vec3 vs Vec4 here
-void QCVector_Add(QCVector3 *u, QCVector3 *v, QCVector3 *result);	// not used in QC
-void QCVector_CrossProduct(QCVector3 *u, QCVector3 *v, QCVector3 *result);
-double QCVector_DotProduct(QCVector3 *u, QCVector3 *v);
-void QCVector_EqualsVector(void); // added some time after SSDK was dumped -- not used in QC
-double QCVector_Length(QCVector3 *vector);
-void QCVector_LinearInterpolation(void);	// not used in QC
-void QCVector_Make(void); // added some time after SSDK was dumped -- not used in QC
+// only Vec3 here -- vec4 is probably just QCQuaternion?
+void QCVector_Add(const QCVector3 *u, const QCVector3 *v, QCVector3 *result);	// not used in QC
+void QCVector_CrossProduct(const QCVector3 *u, const QCVector3 *v, QCVector3 *result);
+double QCVector_DotProduct(const QCVector3 *u, const QCVector3 *v);
+BOOL QCVector_EqualsVector(const QCVector3 *a, const QCVector3 *b); // added some time after SSDK was dumped -- not used in QC
+double QCVector_Length(const QCVector3 *vector);
+void QCVector_LinearInterpolation(const QCVector3 *a, const QCVector3 *b, double alpha, QCVector3 *result);	// not used in QC
+QCVector3 QCVector_Make(double x, double y, double z); // added some time after SSDK was dumped -- not used in QC
 void QCVector_Normalize(QCVector3 *vector);	// not used in QC
-void QCVector_Scale(CGFloat scale, QCVector3 *vector, QCVector3 *result);
-void QCVector_Substract(QCVector3 *u, QCVector3 *v, QCVector3 *result);	// not used in QC
+void QCVector_Scale(CGFloat scale, const QCVector3 *vector, QCVector3 *result);
+void QCVector_Substract(const QCVector3 *u, const QCVector3 *v, QCVector3 *result);	// not used in QC
 
 void QCVisualizerIPCClient_End(void);
 void QCVisualizerIPCClient_GetAudioInformation(void);

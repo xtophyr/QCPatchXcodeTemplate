@@ -151,7 +151,7 @@ BOOL QCVector_EqualsVector(const QCVector3 *a, const QCVector3 *b); // added som
 double QCVector_Length(const QCVector3 *vector);
 void QCVector_LinearInterpolation(const QCVector3 *a, const QCVector3 *b, double alpha, QCVector3 *result);	// not used in QC
 QCVector3 QCVector_Make(double x, double y, double z); // added some time after SSDK was dumped -- not used in QC
-void QCVector_Normalize(QCVector3 *vector);	// not used in QC
+void QCVector_Normalize(const QCVector3 *vec, QCVector3 *result);	// not used in QC
 void QCVector_Scale(CGFloat scale, const QCVector3 *vector, QCVector3 *result);
 void QCVector_Substract(const QCVector3 *u, const QCVector3 *v, QCVector3 *result);	// not used in QC
 

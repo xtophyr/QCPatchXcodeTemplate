@@ -94,7 +94,7 @@
 - (void)enableNotifications;
 - (id)debugPath;
 - (id)_getUserInfo:(id)fp8;
-- (void)_logMessage:(NSString*)format, ... NS_FORMAT_FUNCTION(1,2);
+- (void)_logMessage:(NSString*)format; // this one doesn't handle format strings
 - (id)_inputPorts;
 - (id)_outputPorts;
 - (id)_baseKey;

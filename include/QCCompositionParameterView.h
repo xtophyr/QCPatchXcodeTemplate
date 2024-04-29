@@ -1,4 +1,10 @@
-
+typedef struct __QCCompositionParameterViewPrivate {   // 0x28 = 40 bytes
+    // offset 0x00
+    // offset 0x08
+    // offset 0x10
+    // offset 0x18
+    // offset 0x20
+} QCCompositionParameterViewPrivate;
 
 @interface QCCompositionParameterView : NSView
 {

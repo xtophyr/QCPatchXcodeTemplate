@@ -1,4 +1,10 @@
-
+typedef struct __QCCompositionLayerPrivate {   // 0x90 = 144 bytes
+    // offset 0x10 is renderingContext
+    // offset 0x38 is double, mouseLocationX, set by -setMouseLocation
+    // offset 0x40 is double, mouseLocationY, set by -setMouseLocation
+    // offset 0x70 is double, aspectRatioW
+    // offset 0x78 is double, aspectRatioH
+} QCCompositionLayerPrivate;
 
 
 
@@ -57,5 +63,7 @@
 - (id)valueForKeyPath:(id)fp8;
 - (void)setObservationInfo:(void *)fp8;
 - (void *)observationInfo;
+// FIXME: there are new methods here now - mouseLocation, setMouseLocation, event, etc
+// TODO: re-class-dump this class.
 
 @end

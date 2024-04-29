@@ -1,3 +1,19 @@
+typedef struct __QCRendererPrivateStruct {   // 0x58 = 88 bytes
+    // offset 0x00 is QCComposition* returned by -composition
+    // offset 0x08 is QCPatch* returned by -patch
+    // offset 0x10 is QCContext* returned by -renderingContext
+    // offset 0x18
+    // offset 0x20
+    // offset 0x28
+    // offset 0x30
+    // offset 0x38
+    // offset 0x40 - 0x40 and 0x44 are used together, may hold an opengl resource
+    // offset 0x44 -
+    // offset 0x48 - is set to 1 in initWithComposition:colorSpace:
+    // offset 0x50 is void * "ObservationInfo"
+    // offset 0x58
+} QCRendererPrivateStruct;
+
 @interface QCRenderer : NSObject <QCCompositionRenderer>
 {
 	void *_QCRendererPrivate;	// 4 = 0x4

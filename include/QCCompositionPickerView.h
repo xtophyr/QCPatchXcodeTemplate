@@ -1,6 +1,15 @@
 extern NSString * const QCCompositionPickerViewDidSelectCompositionNotification;
 extern NSString * const QCCompositionPickerViewWillSelectCompositionNotification;
 
+typedef struct __QCCompositionPickerViewPrivate {   // 0x30 = 48 bytes
+    // offset 0x00
+    // offset 0x08
+    // offset 0x10
+    // offset 0x18 - id delegate
+    // offset 0x20
+    // offset 0x28
+} QCCompositionPickerViewPrivate;
+
 @interface QCCompositionPickerView : NSView
 {
 	void *_QCCompositionPickerViewPrivate;	// 80 = 0x50

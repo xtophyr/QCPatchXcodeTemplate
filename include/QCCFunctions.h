@@ -1,21 +1,25 @@
 // TODO: these aren't really void (void) functions -- need to spend some time working out what they really take/return.
 // TODO: find functions added in 10.6 (this probably isn't important in 2024...  there may be new functions added though)
 
+typedef void (*MessageCallback)(NSString *_Nullable nodeIdentifier, NSString * _Nonnull formatString, void * _Nullable refCon);
+
 NSMutableArray* GFArrayFromArgumentList(void); // I think this takes var args
 NSArray *GFBacktrace(void);
-void GFDebug(NSString *formatString, ...);
+void GFDebug(NSString *formatString, va_list args);
 NSInteger GFDebuggingLevel(void);	// returns UserDefaults value GFDebuggingLevel
 void GFException(NSString *debugFormatString, NSString *exceptionFormatString, ...); // takes 2 integer args and some var-args stuff
-void GFFilterStringsWithKeywords(void);
-void GFGetDebugMessageCallback(void);   // takes 2 nullable args to return 2 function pointers (callback, refcon)
-void GFGetLogMessageCallback(void);     // takes 2 nullable args to return 2 function pointers (callback, refcon)
-void GFKeywordsFromSearchString(void);
+void GFGetDebugMessageCallback(MessageCallback *cb, void *ctx);   // takes 2 nullable args to return 2 pointers (callback, ctx)
+void GFGetLogMessageCallback(MessageCallback *cb, void *ctx);     // takes 2 nullable args to return 2 pointers (callback, ctx)
 void GFLog(NSString*format, ...);
+void GFSetDebugMessageCallback(MessageCallback *cb, void *ctx);
+void GFSetLogMessageCallback(MessageCallback *cb, void *ctx);
+void GFThrowException(void);
+
+void GFFilterStringsWithKeywords(void);
+void GFKeywordsFromSearchString(void);
 void GFNameForNode(GFNode *n);  // will return n->userInfo->@"name" if set, else p->attributes->@"name" if set, else __ClassNameForNode (private function)
 void GFNameForPort(QCPort *p);  // will return p->userInfo->@"name" if set, else p->attributes->@"name" if set, else p->key
-void GFSetDebugMessageCallback(void);   // takes 2 function pointer args
-void GFSetLogMessageCallback(void); // takes 2 function pointer args
-void GFThrowException(void);
+
 
 int QCAddCompositionTrackToMovie(void); // returns 0 (14.4.1)
 void QCAddXMLElementsToStructure(void); // returns void, takes 2 object-ish args

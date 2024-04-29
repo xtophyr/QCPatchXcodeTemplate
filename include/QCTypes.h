@@ -2,24 +2,18 @@
 
 @class QCArrayBufferObject, QCArray, QCStream;
 
-struct GFNodeInfo {
-	NSString *_field1;
-	id _field2;
-	SEL _field3;
-	SEL _field4;
-	id _field5;
-	NSDictionary *_field6;
-};
+// FIXME: are the floats still float in 64-bit, or are they doubles now?
+// FIXME: are the ints still ints, or are they longs now?
 
 struct QCResourceInfo;
 
 typedef struct _BackgroundInfo {
-	NSColor *_field1;
-	unsigned int _field2;
-	float _field3;
-	float _field4;
-	unsigned int _field5;
-	char _field6;
+	NSColor *_field1;       // 0x00
+	unsigned int _field2;   // 0x08
+	float _field3;          //
+	float _field4;          //
+	unsigned int _field5;   //
+	char _field6;           //
 } BackgroundInfo;
 
 // This is private (but publicly declared in darwin source)

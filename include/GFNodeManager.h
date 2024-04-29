@@ -1,13 +1,22 @@
 extern NSString * const GFNodeManagerDidUpdateNotification;
 
+struct GFNodeInfo {
+    NSString *fullName;     // 0x00 name class[:identifier] (e.g., @"QCTimeLine" or @"QCStringFormat:printer" or @"/units to pixels")
+    id constructor;         // 0x08 "constructor" class (e.g., QCStringFormat) - can be a not-patch, like QCNodeManager for virtual patches
+    SEL instantiate;        // 0x10 instantiate selector e.g. @selector(newWithIdentifier:) - sent to constructor
+    SEL attributes;         // 0x18 attributes selector e.g. @selector(_publicAttributesWithIdentifier:) - sent to constructor
+    NSString *identifier;   // 0x20 "path" or identifier (e.g., @"key" for QCStructureMember:Key) or CIFilterClassName or composition path for virtual patches
+    NSDictionary *_field6;  // 0x28 always null? maybe "info"?
+}; // info about a single patch/node (including virtual patches)
+
 @interface GFNodeManager : NSObject
 {
-	NSString *_namespace;	// 4 = 0x4
-	pthread_mutex_t _mutex;	// 8 = 0x8
-	CFDictionaryRef _registry;	// 52 = 0x34
-	NSUInteger _infoListSize;	// 56 = 0x38
-	struct GFNodeInfo *_infoList;	// 60 = 0x3c
-	void *_unused[4];	// 64 = 0x40
+	NSString *_namespace;	    // 8 = 0x8
+	pthread_mutex_t _mutex;	    // 16 = 0x10
+	CFDictionaryRef _registry;	// 80 = 0x50
+	NSUInteger _infoListSize;	//  88 = 0x58   // number of elements in _infoList (allocated, not necessarily used)
+	struct GFNodeInfo *_infoList;	// 96 = 0x60
+	void *_unused[4];	        // 104 = 0x68
 }
 
 + (void)initialize;

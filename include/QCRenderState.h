@@ -10,9 +10,9 @@
 	void *_unused[4];	// 12 = 0xc
 }
 
-- (id)initWithContext:(id)fp8 patch:(id)fp12;
+- (id)initWithContext:(QCContext* _Nonnull)context patch:(QCPatch*_Nonnull)patch;
 - (void)dealloc;
-- (id)patch;
-- (id)context;
+- (QCPatch*)patch;
+- (QCContext*)context;
 
 @end

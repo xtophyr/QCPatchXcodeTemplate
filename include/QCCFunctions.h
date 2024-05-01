@@ -13,8 +13,8 @@ NSInteger GFDebuggingLevel(void);    // returns UserDefaults value GFDebuggingLe
 void GFDebug(NSString *formatString, ...);
 void GFLog  (NSString *formatString, ...);
 
-void GFGetDebugMessageCallback(MessageCallback * _Nullable cb, void * _Nullable ctx);   // safe to pass null for either
-void GFGetLogMessageCallback  (MessageCallback * _Nullable cb, void * _Nullable ctx);   // safe to pass null for either
+void GFGetDebugMessageCallback(MessageCallback **_Nullable cb, void **_Nullable ctx);   // safe to pass null for either
+void GFGetLogMessageCallback  (MessageCallback **_Nullable cb, void **_Nullable ctx);   // safe to pass null for either
 void GFSetDebugMessageCallback(MessageCallback * _Nullable cb, void * _Nullable ctx);   // safe to pass null for either (callback will be skipped)
 void GFSetLogMessageCallback  (MessageCallback * _Nullable cb, void * _Nullable ctx);   // safe to pass null for either (callback will be skipped)
 

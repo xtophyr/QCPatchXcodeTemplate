@@ -5,18 +5,25 @@ typedef void (*MessageCallback)(NSString *_Nullable nodeIdentifier, NSString * _
 
 NSMutableArray* GFArrayFromArgumentList(void); // I think this takes var args
 NSArray *GFBacktrace(void);
-void GFDebug(NSString *formatString, va_list args);
-NSInteger GFDebuggingLevel(void);	// returns UserDefaults value GFDebuggingLevel
+
+NSInteger GFDebuggingLevel(void);    // returns UserDefaults value GFDebuggingLevel
+
+/* GFLog and GFDebug are essentally the same, Debug messages go to the Debug Message Callback
+    while Log messages go to the Log Message Callback. */
+void GFDebug(NSString *formatString, ...);
+void GFLog  (NSString *formatString, ...);
+
+void GFGetDebugMessageCallback(MessageCallback * _Nullable cb, void * _Nullable ctx);   // safe to pass null for either
+void GFGetLogMessageCallback  (MessageCallback * _Nullable cb, void * _Nullable ctx);   // safe to pass null for either
+void GFSetDebugMessageCallback(MessageCallback * _Nullable cb, void * _Nullable ctx);   // safe to pass null for either (callback will be skipped)
+void GFSetLogMessageCallback  (MessageCallback * _Nullable cb, void * _Nullable ctx);   // safe to pass null for either (callback will be skipped)
+
+// these aren't quite right yet.
 void GFException(NSString *debugFormatString, NSString *exceptionFormatString, ...); // takes 2 integer args and some var-args stuff
-void GFGetDebugMessageCallback(MessageCallback *cb, void *ctx);   // takes 2 nullable args to return 2 pointers (callback, ctx)
-void GFGetLogMessageCallback(MessageCallback *cb, void *ctx);     // takes 2 nullable args to return 2 pointers (callback, ctx)
-void GFLog(NSString*format, ...);
-void GFSetDebugMessageCallback(MessageCallback *cb, void *ctx);
-void GFSetLogMessageCallback(MessageCallback *cb, void *ctx);
 void GFThrowException(void);
 
-void GFFilterStringsWithKeywords(void);
-void GFKeywordsFromSearchString(void);
+BOOL GFFilterStringsWithKeywords(NSArray<NSString*> *strings, NSArray<NSString*> *keywords);
+id GFKeywordsFromSearchString(id something);
 void GFNameForNode(GFNode *n);  // will return n->userInfo->@"name" if set, else p->attributes->@"name" if set, else __ClassNameForNode (private function)
 void GFNameForPort(QCPort *p);  // will return p->userInfo->@"name" if set, else p->attributes->@"name" if set, else p->key
 

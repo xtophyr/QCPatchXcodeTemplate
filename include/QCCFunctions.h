@@ -4,7 +4,7 @@
 typedef void (*MessageCallback)(NSString *_Nullable nodeIdentifier, NSString * _Nonnull formatString, void * _Nullable refCon);
 
 NSMutableArray* GFArrayFromArgumentList(void); // I think this takes var args
-NSArray *GFBacktrace(void);
+NSArray* GFBacktrace(void);
 
 NSInteger GFDebuggingLevel(void);    // returns UserDefaults value GFDebuggingLevel
 
@@ -25,8 +25,8 @@ void GFThrowException(id object, SEL selector, NSExceptionName name, NSString *m
 
 BOOL GFFilterStringsWithKeywords(NSArray<NSString*> *strings, NSArray<NSString*> *keywords);
 id GFKeywordsFromSearchString(id something);
-void GFNameForNode(GFNode *n);  // will return n->userInfo->@"name" if set, else p->attributes->@"name" if set, else __ClassNameForNode (private function)
-void GFNameForPort(QCPort *p);  // will return p->userInfo->@"name" if set, else p->attributes->@"name" if set, else p->key
+NSString* GFNameForNode(GFNode *n);  // will return n->userInfo->@"name" if set, else p->attributes->@"name" if set, else __ClassNameForNode (private function)
+NSString* GFNameForPort(QCPort *p);  // will return p->userInfo->@"name" if set, else p->attributes->@"name" if set, else p->key
 
 
 int QCAddCompositionTrackToMovie(void); // returns 0 (14.4.1)
@@ -37,14 +37,14 @@ void QCCompositionFromData(void);
 void QCCompositionFromFile(void);
 int QCCompositionFromMovieFile(void);  // returns nil (14.4.1)
 void QCCompositionFromPatch(void);
-void QCCompositionToData(void);
+NSData* QCCompositionToData(NSDictionary *compositionDictionary); // serializes a filtered copy of compositionDictionary
 void QCCompositionToFile(void);
 void QCCompositionToMovieFile(void);
 int QCCompositionsFromMovieFile(void);  // returns nil (14.4.1)
 void QCComputeAspectRatioBounds(void);
 void QCComputeProportionalBounds(void);
 int QCCountCompositionTracksInMovie(void);  // returns 0 (14.4.1)
-void QCDataFromComposition(void);
+void QCDataFromComposition(void); // "deprecated" form of QCCompositionToData
 BOOL QCFileIsComposition(NSString *path);   // this probably accepts NSURL too - it just does -pathExtension to check for qtz or xml
 BOOL QCGLExtensionSupported(id cglContext, const char *extension);
 
@@ -62,8 +62,10 @@ int QCGetCompositionTrackAtIndex(void); // returns 0 (14.4.1)
  */
 CGColorSpaceRef QCGetIndexedColorSpace(int index); // indexes are 0 - 12 or so
 
+/* returns mach_absolute_time() with the usual mach_timebase_info fixups (scale by numer/denom) */
 double QCHostTime(void);
-void QCInfoFromComposition(void);
+/* filters compositionDictionary, removing some internal keys.  returns a new dict, leaves the original unmodified. */
+NSDictionary* QCInfoFromComposition(NSDictionary*compositionDictionary);
 
 // MD5s are used as a key for QCCache.  This is generally an abomination.
 QCMD5Sum QCMD5FromData(NSData *data);  // this just shuttles around 16 bytes of md5sum data in an NSData (doesn't hash the data)
@@ -126,28 +128,28 @@ void QCQuaternion_Add(const QCVector4 *u, const QCVector4 *v, QCVector4 *result)
 void QCQuaternion_Clear(QCVector4 *vec);    // sets vec to  0,0,0,1
 void QCQuaternion_Conjugate(const QCVector4 *source, QCVector4 *dest); // not used in QC, copies source to dest and flips the sign on x, y, and z (not w)
 void QCQuaternion_Copy(const QCVector4 *source, QCVector4 *dest); // not used in QC, copies source to dest
-void QCQuaternion_Divide(void); // not used in QC
-void QCQuaternion_Dot(void); // not used in QC
-void QCQuaternion_Exp(void); // not used in QC
+void QCQuaternion_Divide(const QCVector4 *u, const QCVector4 *v, QCVector4 *result); // not used in QC
+double QCQuaternion_Dot(const QCVector4 *u, const QCVector4 *v); // not used in QC
+void QCQuaternion_Exp(const QCVector4 *u, QCVector4 *result); // not used in QC
 void QCQuaternion_GetMatrix(void);
 void QCQuaternion_GetRotationAngles(void); // not used in QC
-void QCQuaternion_GetRotationAxisAndAngle(void);
-void QCQuaternion_Inverse(void); // not used in QC
-void QCQuaternion_Length(void); // not used in QC
-void QCQuaternion_LinearInterpolation(void); // not used in QC
-void QCQuaternion_Log(void);
-void QCQuaternion_LogDifference(void); // not used in QC
-void QCQuaternion_Multiply(void);
-void QCQuaternion_Normalize(void);
-void QCQuaternion_ScaleAngle(void); // not used in QC
-void QCQuaternion_SetFromMatrix(void);
-void QCQuaternion_SetFromRotationAngles(void); // not used in QC
-void QCQuaternion_SetFromRotationAxisAndAngle(void); // used in QCTrackBall
+void QCQuaternion_GetRotationAxisAndAngle(const QCVector4 *u, QCVector3 *axis, double *degrees);
+void QCQuaternion_Inverse(const QCVector4 *u, QCVector4 *result); // not used in QC
+double QCQuaternion_Length(const QCVector4 *u); // not used in QC
+void QCQuaternion_LinearInterpolation(const QCVector4 *a, const QCVector4 *b, double alpha, QCVector4 *result); // not used in QC
+void QCQuaternion_Log(const QCVector4 *u, QCVector4 *result);
+void QCQuaternion_LogDifference(const QCVector4 *u, const QCVector4 *scale, QCVector4 *result); // not used in QC (unsure of scale arg)
+void QCQuaternion_Multiply(const QCVector4 *u, const QCVector4 *v, QCVector4 *result);
+void QCQuaternion_Normalize(const QCVector4 *u, QCVector4 *result);
+void QCQuaternion_ScaleAngle(const QCVector4 *u, double scale, QCVector4 *result); // not used in QC
+void QCQuaternion_SetFromMatrix(QCVector4 *result, const QCMatrix *m);
+void QCQuaternion_SetFromRotationAngles(QCVector4 *result, double xDegrees, double yDegrees, double zDegrees); // not used in QC
+void QCQuaternion_SetFromRotationAxisAndAngle(QCVector4 *result, const QCVector3 *axis, double degrees); // used in QCTrackBall
 void QCQuaternion_SetFromVectors(void); // not used in QC
-void QCQuaternion_SphericalLinearInterpolation(void); // not used in QC
-void QCQuaternion_Square(void); // not used in QC
-void QCQuaternion_SquareRoot(void); // not used in QC
-void QCQuaternion_Substract(void);	// not used in QC
+void QCQuaternion_SphericalLinearInterpolation(const QCVector4 *a, const QCVector4 *b, double alpha, QCVector4 *result); // not used in QC
+void QCQuaternion_Square(const QCVector4 *u, QCVector4 *result); // not used in QC
+void QCQuaternion_SquareRoot(const QCVector4 *u, QCVector4 *result); // not used in QC
+void QCQuaternion_Substract(const QCVector4 *u, const QCVector4 *v, QCVector4 *result);	// not used in QC
 
 void QCResolveAliasPath(void);
 void QCRestorePatchInputParameters(void);

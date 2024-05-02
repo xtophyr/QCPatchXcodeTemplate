@@ -18,6 +18,8 @@ void GFGetLogMessageCallback  (MessageCallback *_Nullable cb, void **_Nullable c
 void GFSetDebugMessageCallback(MessageCallback _Nullable cb,  void * _Nullable ctx);   // safe to pass null for either (callback will be skipped)
 void GFSetLogMessageCallback  (MessageCallback _Nullable cb,  void * _Nullable ctx);   // safe to pass null for either (callback will be skipped)
 
+/*  GFException unconditionally throws an exception.  The message will include a backtrace from GFBacktrace() if GFDebuggingLevel() is non-zero.
+    GFThrowException calls GFException, and prefixes the message with the object class name and selector string */
 void GFException(NSExceptionName name, NSString *messageFormatString, ...); // raises/throws an exception
 void GFThrowException(id object, SEL selector, NSExceptionName name, NSString *messageFormatString, ...); // raises/throws an exception decorated with object's class and selector to look like a message send (e.g., +[NSObject someClassMethod:])
 

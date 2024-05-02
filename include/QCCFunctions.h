@@ -18,9 +18,8 @@ void GFGetLogMessageCallback  (MessageCallback *_Nullable cb, void **_Nullable c
 void GFSetDebugMessageCallback(MessageCallback _Nullable cb,  void * _Nullable ctx);   // safe to pass null for either (callback will be skipped)
 void GFSetLogMessageCallback  (MessageCallback _Nullable cb,  void * _Nullable ctx);   // safe to pass null for either (callback will be skipped)
 
-// these aren't quite right yet.
-void GFException(NSString *debugFormatString, NSString *exceptionFormatString, ...); // takes 2 integer args and some var-args stuff
-void GFThrowException(void);
+void GFException(NSExceptionName name, NSString *messageFormatString, ...); // raises/throws an exception
+void GFThrowException(id object, SEL selector, NSExceptionName name, NSString *messageFormatString, ...); // raises/throws an exception decorated with object's class and selector to look like a message send (e.g., +[NSObject someClassMethod:])
 
 BOOL GFFilterStringsWithKeywords(NSArray<NSString*> *strings, NSArray<NSString*> *keywords);
 id GFKeywordsFromSearchString(id something);
@@ -68,15 +67,15 @@ void QCInfoFromComposition(void);
 QCMD5Sum QCMD5FromData(NSData *data);  // this just shuttles around 16 bytes of md5sum data in an NSData (doesn't hash the data)
 QCMD5Sum QCMD5FromString(NSString *string); // parses string for md5 data (doesn't hash the string)
 void QCMD5ListToString(void); // added some time after SSDK was dumped
-QCMD5Sum QCMD5ToData(void);
-QCMD5Sum QCMD5ToString(void);
+NSData* QCMD5ToData(const void *bytes, NSUInteger length);
+NSString* QCMD5ToString(QCMD5Sum * _Nullable md5);
 QCMD5Sum QCMD5WithBytes(const void *data, CC_LONG len);    // args sent to CC_MD5 more or less as-is
-QCMD5Sum QCMD5WithColorSpace(void);
+QCMD5Sum QCMD5WithColorSpace(CGColorSpaceRef cs);
 QCMD5Sum QCMD5WithDoubles(void);
 QCMD5Sum QCMD5WithIntegers(void);
 QCMD5Sum QCMD5WithObject(void);
 void QCMD5WithOptions(void); // added some time after SSDK was dumped
-QCMD5Sum QCMD5WithPointer(void);
+QCMD5Sum QCMD5WithPointer(void *ptr);
 QCMD5Sum QCMD5WithString(NSString *string);    // hashes string
 
 // TODO: should probably break this out into a separate header with better documentation
@@ -121,10 +120,10 @@ void QCPatchToFlattenedComposition(void);
 void QCProFX(void); // takes void, returns void
 void QCProFXRegisterAllocationCallbacks(void); // takes 2 function pointer args, QCImagePixelBuffer alloc and dealloc
 
-void QCQuaternion_Add(void); // not used in QC
-void QCQuaternion_Clear(QCVector4*);
-void QCQuaternion_Conjugate(void); // not used in QC
-void QCQuaternion_Copy(void); // not used in QC
+void QCQuaternion_Add(const QCVector4 *u, const QCVector4 *v, QCVector4 *result); // not used in QC
+void QCQuaternion_Clear(QCVector4 *vec);    // sets vec to  0,0,0,1
+void QCQuaternion_Conjugate(const QCVector4 *source, QCVector4 *dest); // not used in QC, copies source to dest and flips the sign on x, y, and z (not w)
+void QCQuaternion_Copy(const QCVector4 *source, QCVector4 *dest); // not used in QC, copies source to dest
 void QCQuaternion_Divide(void); // not used in QC
 void QCQuaternion_Dot(void); // not used in QC
 void QCQuaternion_Exp(void); // not used in QC

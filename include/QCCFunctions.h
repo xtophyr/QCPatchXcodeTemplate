@@ -3,7 +3,12 @@
 
 typedef void (*MessageCallback)(NSString *_Nullable nodeIdentifier, NSString * _Nonnull formatString, void * _Nullable refCon);
 
-NSMutableArray* GFArrayFromArgumentList(void); // I think this takes var args
+// This is used by QCStructure -initWithMembers: and -initWithMembersAndKeys:
+// builds an NSMutableArray filled with first, and then the items in list.  list is nil-terminated.
+// There might be a special mode where small integers are also used (the code checks against list against 0x28).
+NSMutableArray* GFArrayFromArgumentList(id first, id *list);
+
+
 NSArray* GFBacktrace(void);
 
 NSInteger GFDebuggingLevel(void);    // returns UserDefaults value GFDebuggingLevel

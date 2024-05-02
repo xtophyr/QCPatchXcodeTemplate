@@ -1,6 +1,6 @@
 @interface QCPlugIn : NSObject
 {
-	void *_private;	// 4 = 0x4
+	void *_private; // QCPatch *patch
 }
 
 + (id)allocWithZone:(NSZone *)zone;
@@ -11,7 +11,7 @@
 + (int)timeMode;
 + (id)plugInKeys;
 - (void)dealloc;
-- (void)_setPatch:(id)fp8;
+- (void)_setPatch:(QCPatch*)patch;
 - (QCPatch*)patch;
 - (BOOL)startExecution:(QCOpenGLContext*)context;
 - (void)enableExecution:(QCOpenGLContext*)context;

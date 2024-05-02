@@ -11,13 +11,13 @@
 }
 
 + (void)setup;
-+ (NSInteger)numberOfRowsInTableView:(NSTableView*)fp8;
-+ (id)tableView:(NSTableView*)fp8 objectValueForTableColumn:(NSTableColumn*)fp12 row:(NSInteger)fp16;
++ (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView;
++ (id)tableView:(NSTableView*)tableView objectValueForTableColumn:(NSTableColumn*)column row:(NSInteger)row;
 + (void)doubleClick:(id)fp8;
 + (void)addPatch:(id)fp8;
 + (void)removePatch:(id)fp8;
 + (void)didUpdatePatchRendering:(id)fp8;
 - (id)initWithPatch:(id)fp8;
-- (void)windowWillClose:(id)fp8;
+- (void)windowWillClose:(NSNotification *)notification;
 
 @end

@@ -20,7 +20,7 @@ typedef struct __QCCompositionPickerViewPrivate {   // 0x30 = 48 bytes
 - (void)_windowDidOrderOnScreen:(id)fp8;
 - (void)_appActive:(id)fp8;
 - (void)_appInactive:(id)fp8;
-- (void)_windowWillClose:(id)fp8;
+- (void)_windowWillClose:(NSNotification *)notification;
 - (void)viewDidMoveToWindow;
 - (BOOL)acceptsFirstMouse:(NSEvent*)theEvent;
 - (BOOL)acceptsFirstResponder;

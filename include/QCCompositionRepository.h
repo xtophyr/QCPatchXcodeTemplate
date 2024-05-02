@@ -24,8 +24,8 @@ extern NSString * const QCCompositionProtocolScreenSaver;
 + (id)defaultSortDescriptors;
 + (id)identityComposition;
 + (id)sharedCompositionRepository;
-+ (id)sharedCompositionRepository:(BOOL)fp8;
-+ (id)sharedCompositionRepositoryWithOptions:(id)fp8;
++ (id)sharedCompositionRepository:(BOOL)noAutoUpdate; // calls -...WithOptions: with @"noAutoUpdate" key set
++ (id)sharedCompositionRepositoryWithOptions:(NSDictionary*)options;
 + (id)sharedCompositionRepositoryWithRequiredProtocol:(id)fp8;
 - (id)_cacheFileName;
 - (BOOL)_writeCacheFile:(id)fp8;

@@ -21,12 +21,12 @@
 - (id)init;
 - (void)dealloc;
 - (void)cancelOperation:(id)fp8;
-- (void)windowWillClose:(id)fp8;
+- (void)windowWillClose:(NSNotification *)notification;
 - (void)show;
 - (void)hide;
 - (BOOL)isVisible;
 - (void)__invalidateInspector:(id)fp8;
-- (void)setGraphEditor:(id)fp8;
+- (void)setGraphEditor:(GFGraphEditor*)graphEditor;
 - (id)graphEditor;
 
 @end

@@ -3,15 +3,15 @@ extern NSString * const QCCompositionPickerPanelWillSelectCompositionNotificatio
 
 @interface QCCompositionPickerPanel : NSPanel
 {
-	void *_private;	// 132 = 0x84
+	void *_private;	// NSView *compositionPickerView
 }
 
 + (id)allocWithZone:(NSZone *)zone;
 + (id)sharedCompositionPickerPanel;
 - (id)compositionPickerView;
-- (void)_willSelectComposition:(id)fp8;
-- (void)_didSelectComposition:(id)fp8;
-- (id)initWithContentRect:(NSRect)fp8;
+- (void)_willSelectComposition:(NSNotification *)notification;
+- (void)_didSelectComposition:(NSNotification *)notification;
+- (id)initWithContentRect:(NSRect)rect;
 - (BOOL)canBecomeKeyWindow;
 
 @end

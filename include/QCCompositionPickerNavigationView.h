@@ -8,8 +8,8 @@
 }
 
 - (void)update;
-- (id)initWithFrame:(NSRect)fp8 andController:(id)fp24;
-- (void)setHidden:(BOOL)fp8;
+- (id)initWithFrame:(NSRect)frame andController:(id)fp24;
+- (void)setHidden:(BOOL)hidden;
 - (void)dealloc;
 
 @end

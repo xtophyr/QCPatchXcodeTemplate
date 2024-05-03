@@ -1,4 +1,4 @@
-/* compabibilities:
+/* compatibilities:
  *   * QCPixelFormatCompatibility_CGImage
  *   * QCPixelFormatCompatibility_CGBitmapContext
  *   * QCPixelFormatCompatibility_CIImage

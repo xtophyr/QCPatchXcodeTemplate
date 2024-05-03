@@ -15,8 +15,8 @@ NSInteger GFDebuggingLevel(void);    // returns UserDefaults value GFDebuggingLe
 
 /* GFLog and GFDebug are essentally the same, Debug messages go to the Debug Message Callback
     while Log messages go to the Log Message Callback. */
-void GFDebug(NSString *formatString, ...);
-void GFLog  (NSString *formatString, ...);
+void GFDebug(NSString *formatString, ...) NS_FORMAT_FUNCTION(1,2) NS_NO_TAIL_CALL;
+void GFLog  (NSString *formatString, ...) NS_FORMAT_FUNCTION(1,2) NS_NO_TAIL_CALL;
 
 void GFGetDebugMessageCallback(MessageCallback *_Nullable cb, void **_Nullable ctx);   // safe to pass null for either
 void GFGetLogMessageCallback  (MessageCallback *_Nullable cb, void **_Nullable ctx);   // safe to pass null for either

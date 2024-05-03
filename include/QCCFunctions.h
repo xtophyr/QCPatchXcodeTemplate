@@ -174,13 +174,13 @@ void QCVector_Normalize(const QCVector3 *vec, QCVector3 *result);	// not used in
 void QCVector_Scale(CGFloat scale, const QCVector3 *vector, QCVector3 *result);
 void QCVector_Substract(const QCVector3 *u, const QCVector3 *v, QCVector3 *result);	// not used in QC
 
-void QCVisualizerIPCClient_End(void);
-void QCVisualizerIPCClient_GetAudioInformation(void);
+void QCVisualizerIPCClient_End(void); // void / void
+void *QCVisualizerIPCClient_GetAudioInformation(void); // return type to be determined, can be NULL
 BOOL QCVisualizerIPCClient_IsRunning(void);
 BOOL QCVisualizerIPCClient_Start(void);
 uint32_t QCVisualizerIPCServer_End(void);   // returns __runningCount (0 when none left), maybe by accident
 BOOL QCVisualizerIPCServer_HasClients(void);
 BOOL QCVisualizerIPCServer_IsRunning(void);
-void QCVisualizerIPCServer_SendAudioInformation(void);
-void QCVisualizerIPCServer_SendTrackInformation(void);
-void QCVisualizerIPCServer_Start(void);
+void QCVisualizerIPCServer_SendAudioInformation(void *); // argument type to be determined, maybe 7 uint64_t's in size
+void QCVisualizerIPCServer_SendTrackInformation(void *); // some CF type that can be CFRetained/CFReleased and posted as a notification
+BOOL QCVisualizerIPCServer_Start(void); // returns non-zero on success, 0 on failure

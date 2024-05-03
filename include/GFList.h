@@ -24,7 +24,7 @@
 + (id)list;
 - (id)init;
 - (id)initWithCapacity:(NSUInteger)capacity; // capacity is initial capacity, the list resizes upward as needed.
-- (id)initWithCapacity:(NSUInteger)capacity optionFlags:(NSUInteger)flags;
+- (id)initWithCapacity:(NSUInteger)capacity optionFlags:(NSUInteger)flags NS_DESIGNATED_INITIALIZER;
 - (void)dealloc;
 - (id)initWithList:(GFList *)list;
 - (id)initWithObjects:(id)fp8 keys:(id)fp12 optionFlags:(NSUInteger)flags;
@@ -34,7 +34,7 @@
 - (NSUInteger)flags;
 - (void)setObject:(id)object forKey:(id)key;
 - (void)insertObject:(id)object atIndex:(NSUInteger)index forKey:(id)key;
-- (void)addObject:(id)object forKey:(NSString *)key;
+- (void)addObject:(id)object forKey:(NSString *)key;    // insertObject:object atIndex:_count forKey:key
 - (void)addEntriesFromList:(GFList*)list;
 - (void)addEntriesFromDictionary:(NSDictionary*)dictionary;
 - (void)removeAllObjects;
@@ -67,5 +67,10 @@
 - (const id *)_values;
 - (const id *)_keys;
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)objects count:(NSUInteger)count;
+
+// follows standard NSEnumerationOptions semantics - concurrent, forward, reverse
+// if there are fewer than 32 items in the list, concurrent enumeration is silently downgraded serial
+// TODO: figure out the block signature (probably returns void, takes key and object)
+- (void)enumerateKeysAndObjectsWithOptions:(NSEnumerationOptions)options usingBlock:(CDUnknownBlockType)block; // added since SSDK was dumped
 
 @end

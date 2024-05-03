@@ -2,6 +2,10 @@
 
 extern NSString * const GFPortsLayoutDidChangeNotification;
 
+/* GFPort flags:  These are used in hundreds of places, so it'll probably take a while to catalog everything
+ 0x80000 - is OR'd in various mesh-centric functions -[QCMeshRenderer execute:time:arguments:], QCStreamManager, 
+ */
+
 @interface GFPort : NSObject <GFBase>
 {
 	NSUInteger _flags;	// 4 = 0x4

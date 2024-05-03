@@ -15,7 +15,7 @@
 	NSSize _savedMinSize;	// 72 = 0x48
 }
 
-+ (id)viewNibName;
++ (NSString *)viewNibName;
 - (void)didLoadNib;
 - (void)_updateUI;
 - (BOOL)settingsVisible;

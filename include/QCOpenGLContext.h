@@ -1,6 +1,28 @@
 
 #import "QCGraphicsContext.h"
 
+// TODO: this struct is also in QCTypes, can probably get moved to here?
+typedef struct _BackgroundInfo {
+    id _field1;
+    unsigned int _field2;
+    float _field3;
+    float _field4;
+    unsigned long long _field5;
+    char _field6;
+} BackgroundInfo;
+
+typedef struct _GLMatrices {
+    double _field1[16];
+    double _field2[16];
+    int _field3[4];
+    int _field4[4];
+    CGRect _field5;
+} GLMatrices;
+
+/*
+ QCOpenGLContext _flags:
+ */
+
 @class QCCGLContext;
 
 @interface QCOpenGLContext : QCGraphicsContext
@@ -12,8 +34,8 @@
 	BOOL _mainThread;	// 162 = 0xa2
 	NSString *_outputImageKey;	// 164 = 0xa4
 	QCCGLContext *_ignoredContext;	// 168 = 0xa8
-	struct _BackgroundInfo *_backgroundInfo;	// 172 = 0xac
-	struct _GLMatrices *_matrices;	// 176 = 0xb0
+	BackgroundInfo *_backgroundInfo;	// 172 = 0xac
+	GLMatrices *_matrices;	// 176 = 0xb0
 	NSUInteger _flags;	// 180 = 0xb4
 	void *_unused3[1];	// 184 = 0xb8
 }
@@ -73,10 +95,13 @@
 - (void)didPopRenderState:(id)fp8;
 @end
 
+// this isn't in a category on 14.4.1 - as such, this is a cetrgory-free class in more modern times.
 @interface QCOpenGLContext (NSOpenGLContext)
 - (id)initWithNSOpenGLContext:(id)fp8 format:(id)fp12 options:(NSDictionary *)options;
 @end
+
 // XXX These methods don't appear in objcdump64... weird? (perhaps they're 32bit only because FCP is 32bit only?)
+#if 0
 @interface QCOpenGLContext (FCPImageExtensions)
 + (Class)imagePortClass;
 - (id)createPixelImageWithFormat:(int)fp8 baseAddress:(const void *)fp12 bytesPerRow:(unsigned int)fp16 releaseCallback:(void *)fp20 userInfo:(void *)fp24 pixelsWide:(unsigned int)fp28 pixelsHigh:(unsigned int)fp32 flipped:(BOOL)fp36;
@@ -91,3 +116,4 @@
 - (BOOL)getPixelsFromImage:(id)fp8 outBaseAddress:(const void **)fp12 outBytesPerRow:(unsigned int *)fp16;
 - (BOOL)textureFromImage:(id)fp8 outName:(unsigned int *)fp12 outFlipped:(char *)fp16;
 @end
+#endif

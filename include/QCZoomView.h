@@ -12,8 +12,8 @@
 - (void)scrollWheel:(id)fp8;
 - (BOOL)autoscroll:(id)fp8;
 - (void)viewDidMoveToSuperview;
-- (NSRect)maxBounds;
-- (NSRect)selectionBounds;
+- (NSRect)maxBounds;        // NSInternalInconsistencyException : "Function not implemented"
+- (NSRect)selectionBounds;  // NSInternalInconsistencyException : "Function not implemented"
 - (BOOL)allowsNonSquareZooming;
 - (CGFloat)resizeHotzoneWidth;
 - (CGFloat)incrementalZoomAmount;

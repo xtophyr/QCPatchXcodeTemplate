@@ -16,7 +16,7 @@
 + (BOOL)accessInstanceVariablesDirectly;
 
 // Determines the XIB name to load for the view.
-+ (NSString*)viewNibName;
++ (NSString*)viewNibName;   // NSInternalInconsistencyException : Function not implemented (subclasses must override)
 
 - (id)initWithBundle:(NSBundle*)bundle nibName:(NSString*)nibName;
 

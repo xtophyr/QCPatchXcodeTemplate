@@ -23,7 +23,7 @@ typedef struct __QCRendererPrivateStruct {   // 0x58 = 88 bytes
 + (id)_createAndRegisterUniqueContextForCGLContext:(CGLContextObj)context contextOwner:(id)fp12 pixelFormat:(CGLPixelFormatObj)fp16 formatOwner:(id)fp20 colorSpace:(CGColorSpaceRef)fp24 options:(NSDictionary *)options;
 + (void)_unregisterUniqueContext:(id)fp8;
 - (id)initWithRenderingContext:(QCContext *)context patch:(QCPatch *)patch;
-- (id)init;
+- (id)init; // NSInternalInconsistencyException : Function not implemented
 - (id)initOffScreenWithPixelFormat:(NSOpenGLPixelFormat*)pixelFormat size:(NSSize)size colorSpace:(CGColorSpaceRef)colorSpace patch:(QCPatch*)patch;
 - (id)initWithCGLContext:(CGLContextObj)context pixelFormat:(CGLPixelFormatObj)pixelFormat colorSpace:(CGColorSpaceRef)colorSpace patch:(QCPatch*)patch;
 - (id)initWithComposition:(QCComposition*)composition colorSpace:(CGColorSpaceRef)colorSpace;

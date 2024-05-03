@@ -15,20 +15,20 @@
 @property (readonly,assign) NSUInteger elementSize;
 @property (readonly,assign) NSUInteger count;
 
-+ (BOOL)isCompatibleWithSource:(id)fp8 sourceMD5:(QCMD5Sum *)fp12;
-+ (id)createProviderWithSource:(id)fp8 options:(id)fp12;
++ (BOOL)isCompatibleWithSource:(id)fp8 sourceMD5:(QCMD5Sum *)fp12;  // NSInternalInconsistencyException : Function not implemented
++ (id)createProviderWithSource:(id)fp8 options:(id)fp12;    // NSInternalInconsistencyException : Function not implemented
 - (id)init;
 - (QCMD5Sum)providerMD5;
-- (NSUInteger)count;
-- (NSUInteger)elementSize;
-- (int)type;
+- (NSUInteger)count;        // NSInternalInconsistencyException : Function not implemented
+- (NSUInteger)elementSize;  // NSInternalInconsistencyException : Function not implemented
+- (int)type;                // NSInternalInconsistencyException : Function not implemented
 - (void)_setDefaultWidth:(NSUInteger)fp8;
 - (void)_setDefaultHeight:(NSUInteger)fp8;
 - (void)_setDefaultDepth:(NSUInteger)fp8;
 - (NSUInteger)pixelsWide;
 - (NSUInteger)pixelsHigh;
 - (NSUInteger)pixelsDeep;
-- (QCPixelFormat*)pixelFormat;
+- (QCPixelFormat*)pixelFormat;  // NSInternalInconsistencyException : Function not implemented
 - (BOOL)supportsConversion;
 - (id)sourceRepresentationType;
 - (id)sourceRepresentation;

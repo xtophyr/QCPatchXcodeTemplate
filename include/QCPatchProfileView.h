@@ -14,8 +14,8 @@
 - (id)initWithFrame:(NSRect)fp8;
 - (void)dealloc;
 - (void)drawRect:(NSRect)fp8;
-- (void)setSampleSize:(NSUInteger)fp8;
-- (void)addSample:(const double *)fp8;
+- (void)setSampleSize:(NSUInteger)fp8;  // NSInternalInconsistencyException : Function not implemented
+- (void)addSample:(const double *)fp8;  // NSInternalInconsistencyException : Function not implemented
 - (void)clearAllSamples;
 - (void)_didStart:(id)fp8;
 - (void)__addStats:(id)fp8;

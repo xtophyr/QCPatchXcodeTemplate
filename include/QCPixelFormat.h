@@ -11,29 +11,29 @@ extern NSString * const QCPixelFormatCompatibility_QuickTime;
 	void *_unused[4];	// 4 = 0x4
 }
 + (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
-+ (void)initialize;
-- (NSString*)name;
-- (NSArray*)compatibilities;
-- (int)pixelColorModel;
-- (int)pixelType;
-- (int)pixelAlpha;
-- (NSUInteger)pixelBlockWidth;
-- (NSUInteger)pixelBlockHeight;
-- (NSUInteger)bitsPerBlock;
-- (unsigned int)QTPixelFormat;
-- (GLuint)openGLInternalFormat;
-- (GLuint)openGLPixelFormat;
-- (GLuint)openGLPixelType;
-- (CIFormat)CIFormat;
-- (NSUInteger)CGBitsPerComponent;
-- (NSUInteger)CGBitsPerPixel;
-- (CGBitmapInfo)CGBitmapInfo;
-- (CGColorSpaceRef)defaultColorSpace;
-- (BOOL)isValidColorSpace:(CGColorSpaceRef)colorspace;
-- (BOOL)isSupportedOnContext:(QCCGLContext *)context;
-- (NSString*)description;
++ (void)initialize;                 //
+- (NSString*)name;                  //
+- (NSArray*)compatibilities;        //      These methods generally throw NSInternalInconsistency : "Function not implemented"
+- (int)pixelColorModel;             //      or 0, further enforcing that this is a pure virtual class.
+- (int)pixelType;                   //
+- (int)pixelAlpha;                  //
+- (NSUInteger)pixelBlockWidth;      //
+- (NSUInteger)pixelBlockHeight;     //
+- (NSUInteger)bitsPerBlock;         //
+- (unsigned int)QTPixelFormat;      //
+- (GLuint)openGLInternalFormat;     //
+- (GLuint)openGLPixelFormat;        //
+- (GLuint)openGLPixelType;          //
+- (CIFormat)CIFormat;               //
+- (NSUInteger)CGBitsPerComponent;   //
+- (NSUInteger)CGBitsPerPixel;       //
+- (CGBitmapInfo)CGBitmapInfo;       //
+- (CGColorSpaceRef)defaultColorSpace;//
+- (BOOL)isValidColorSpace:(CGColorSpaceRef)colorspace;  //
+- (BOOL)isSupportedOnContext:(QCCGLContext *)context;   //
+- (NSString*)description;           //
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
-- (cl_image_format)CLFormat;
+- (cl_image_format)CLFormat;        //
 #endif
 @end
 

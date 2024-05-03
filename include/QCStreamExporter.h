@@ -13,7 +13,7 @@
 + (id)exporterForStreamManager:(id)fp8;
 - (id)initWithStreamManager:(id)fp8;
 - (id)streamManager;
-- (id)supportedRepresentationTypes;
+- (id)supportedRepresentationTypes; // NSInternalInconsistencyException : "Function not implemented"
 - (id)createRepresentationOfType:(id)fp8 withProvider:(id)fp12 withCount:(NSUInteger)fp16 elementSize:(NSUInteger)fp20 type:(int)fp24 options:(id)fp28;
 - (NSString*)description;
 

@@ -24,6 +24,6 @@
 - (float)downloadProgress;
 - (void)cancelDownload;
 - (id)getDownloadedResource;
-- (id)createResourceWithDownloadedData:(id)fp8 sourceURL:(id)fp12;
+- (id)createResourceWithDownloadedData:(id)fp8 sourceURL:(id)fp12; // NSInternalInconsistencyException : Function not implemented
 - (void)cleanup:(QCOpenGLContext *)context;
 @end

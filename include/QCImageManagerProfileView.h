@@ -12,8 +12,8 @@
 
 - (id)initWithFrame:(NSRect)fp8;
 - (void)dealloc;
-- (void)setSampleSize:(NSUInteger)fp8;
-- (void)addSample:(const double *)fp8;
+- (void)setSampleSize:(NSUInteger)fp8;  // NSInternalInconsistencyException : Function not implemented
+- (void)addSample:(const double *)fp8;  // NSInternalInconsistencyException : Function not implemented
 - (void)_updateProfile;
 - (void)setImageManager:(id)fp8;
 - (id)imageManager;

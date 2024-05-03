@@ -14,7 +14,7 @@
 + (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (Class)portClassFromParameterInfo:(id)fp8;
 + (int)indicesType;
-+ (NSArray *)sourceTypes; // array of NSStrings*
++ (NSArray *)sourceTypes; // array of NSStrings* -- NSInternalInconsistencyException : Function not implemented (subclasses must override this)
 + (id)stateKeysWithIdentifier:(id)fp8;
 + (id)serializedStateKeysWithIdentifier:(id)fp8;
 - (BOOL)isSourceType:(NSString*)sourceType;
@@ -26,7 +26,7 @@
 - (void)setSource:(id)fp8 ofType:(NSString*)sourceType;
 - (id)sourceOfType:(NSString*)sourceType;
 - (id)compileStatusForSourceOfType:(NSString*)sourceType;
-- (NSDictionary*)compileSourceOfType:(NSString *)sourceType;
+- (NSDictionary*)compileSourceOfType:(NSString *)sourceType;    // NSInternalInconsistencyException : Function not implemented
 - (id)attributesForParameterPortWithInfo:(id)fp8 name:(NSString*)portName index:(NSUInteger)index;
 - (id)attributesForResultPortWithInfo:(id)fp8 name:(NSString*)portName index:(NSUInteger)index;
 - (BOOL)_updateTypes:(id)fp8 ports:(id)fp12 list:(id)fp16 direction:(int)fp20;

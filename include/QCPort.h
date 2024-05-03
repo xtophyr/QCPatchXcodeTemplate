@@ -25,7 +25,7 @@
 + (id)allocWithZone:(NSZone *)zone; // ensures there are only subclasses - this class cannot be instantiated directly.
 + (BOOL)accessInstanceVariablesDirectly;
 + (BOOL)automaticallyNotifiesObserversForKey:(id)fp8;
-+ (Class)baseClass;
++ (Class)baseClass;     // NSInternalInconsistencyException : Function not implemented
 - (id)initWithNode:(id)fp8 arguments:(NSDictionary*)args;
 - (void)dealloc;
 - (int)kind;
@@ -33,10 +33,10 @@
 - (void)_clearCachedKey;
 - (NSString *)key;
 - (void)portWillDeleteFromNode;
-- (id)value;
-- (BOOL)setValue:(id)fp8;
-- (BOOL)acceptValuesOfClass:(Class)fp8;
-- (Class)valueClass;
+- (id)value;                // NSInternalInconsistencyException : Function not implemented
+- (BOOL)setValue:(id)fp8;   // NSInternalInconsistencyException : Function not implemented
+- (BOOL)acceptValuesOfClass:(Class)fp8; // NSInternalInconsistencyException : Function not implemented
+- (Class)valueClass;        // NSInternalInconsistencyException : Function not implemented
 - (BOOL)canConnectToPort:(id)fp8;
 - (BOOL)takeValue:(id)fp8 fromPort:(id)fp12;
 - (QCPatch *)parentPatch;
@@ -44,8 +44,8 @@
 - (NSUInteger)_timestamp;
 - (void)willChangeValue;
 - (void)didChangeValue;
-- (id)stateValue;
-- (BOOL)setStateValue:(id)fp8;
+- (id)stateValue;               // NSInternalInconsistencyException : Function not implemented
+- (BOOL)setStateValue:(id)fp8;  // NSInternalInconsistencyException : Function not implemented
 - (NSDictionary*)state;
 - (BOOL)setState:(NSDictionary*)state;
 - (BOOL)_execute:(double)time arguments:(NSDictionary*)args;
@@ -71,11 +71,11 @@
 
 @interface QCPort (ParameterView)
 - (id)setupParameterView;
-- (void)resetParameterView:(id)fp8;
+- (void)resetParameterView:(id)fp8; // NSInternalInconsistencyException : Function not implemented
 @end
 
 @interface QCPort (QCPortView)
-- (void)drawPortView:(id)fp8;
+- (void)drawPortView:(id)fp8;       // NSInternalInconsistencyException : Function not implemented
 @end
 
 @interface QCPort (QCProFX)
@@ -86,7 +86,7 @@
 
 @interface QCPort (TooltipExtensionView)
 - (id)tooltipExtensionView;
-- (NSSize)tooltipExtensionViewSize:(id)fp8;
+- (NSSize)tooltipExtensionViewSize:(id)fp8; // NSInternalInconsistencyException : Function not implemented
 - (id)tooltipString;
 - (id)setupTooltipView;
 - (void)resetTooltipView;

@@ -16,7 +16,7 @@
 - (BOOL)startExecution:(QCOpenGLContext*)context;
 - (void)enableExecution:(QCOpenGLContext*)context;
 - (double)executionTimeForContext:(QCOpenGLContext*)context atTime:(double)time withArguments:(NSDictionary*)args;
-- (double)nextRecommendedExecutionTime:(QCOpenGLContext*)context forTime:(double)time withArguments:(NSDictionary*)args;
+- (double)nextRecommendedExecutionTime:(QCOpenGLContext*)context forTime:(double)time withArguments:(NSDictionary*)args;    // deprecated -> executionTimeForContext...
 - (BOOL)execute:(QCOpenGLContext*)context atTime:(double)time withArguments:(NSDictionary*)args;
 - (void)disableExecution:(QCOpenGLContext*)context;
 - (void)stopExecution:(QCOpenGLContext*)context;

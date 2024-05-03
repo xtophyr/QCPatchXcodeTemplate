@@ -42,11 +42,11 @@
 - (GLuint)name;
 - (const CGFloat *)matrix;
 - (NSUInteger)virtualScreen;
-- (BOOL)beginUploadTexture:(BOOL)fp8 colorSpace:(CGColorSpaceRef)fp12;
+- (BOOL)beginUploadTexture:(BOOL)fp8 colorSpace:(CGColorSpaceRef)fp12; // deprecated -> beginUploadTexture:colorSpace:virtualScreen:
 - (BOOL)beginUploadTexture:(BOOL)fp8 colorSpace:(CGColorSpaceRef)fp12 virtualScreen:(NSUInteger)fp16;
 - (BOOL)uploadTextureWithBaseAddress:(void *)fp8 releaseCallback:(void *)fp12 releaseInfo:(void *)fp16 bytesPerRow:(NSUInteger)fp20;
 - (void)endUploadTexture;
-- (id)beginRenderTexture:(BOOL)fp8 colorSpace:(CGColorSpaceRef)fp12;
+- (id)beginRenderTexture:(BOOL)fp8 colorSpace:(CGColorSpaceRef)fp12; // deprecated -> beginRenderTexture:colorSpace:virtualScreen:
 - (id)beginRenderTexture:(BOOL)fp8 colorSpace:(CGColorSpaceRef)fp12 virtualScreen:(NSUInteger)fp16;
 - (void)endRenderTexture;
 - (void)endRenderTextureAndFinish:(BOOL)fp8;

@@ -45,7 +45,7 @@
 + (double)_maximumAvailableMemoryForRendererID:(int)fp8;
 + (id)sharedSoftwareImageManager;
 + (QCImageManager *)createUniqueImageManagerForQCCGLContext:(QCCGLContext *)context options:(NSDictionary *)options;
-- (id)initWithQCCGLContext:(id)fp8 options:(id)fp12;
+- (id)initWithQCCGLContext:(id)fp8 options:(id)fp12;    // deprecated -> initWithOpenGLContext:options:
 - (id)initWithOpenGLContext:(id)fp8 options:(id)fp12;
 - (void)_finalize_QCImageManager;
 - (void)finalize;
@@ -53,7 +53,7 @@
 - (id)options;
 - (id)openGLContext;
 - (id)openGLContextForCurrentThread;
-- (id)QCCGLContext;
+- (id)QCCGLContext; // deprecated -> -[_context minimalSharedContextForCurrentThread]
 - (void)registerClient:(id)fp8;
 - (void)unregisterClient:(id)fp8;
 - (id)registeredClients;

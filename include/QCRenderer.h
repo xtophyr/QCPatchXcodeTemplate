@@ -34,7 +34,7 @@ typedef struct __QCRendererPrivateStruct {   // 0x58 = 88 bytes
 - (void)finalize;
 - (void)dealloc;
 - (double)renderingTimeForTime:(double)time arguments:(NSDictionary*)args;
-- (double)nextRecommendedRenderingTimeForTime:(double)time arguments:(NSDictionary*)args;
+- (double)nextRecommendedRenderingTimeForTime:(double)time arguments:(NSDictionary*)args; // deprecated -> renderingTimeForTime:arguments:
 - (BOOL)renderAtTime:(double)time arguments:(NSDictionary*)args;
 - (NSImage*)snapshotImage;
 - (id)createSnapshotImageOfType:(NSString*)imageType; // @"NSBitmapImageRep", NSImage, CIImage, CGImage, CVOpenGLBuffer, CVPixelBuffer

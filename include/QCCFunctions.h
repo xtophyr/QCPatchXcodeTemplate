@@ -41,7 +41,7 @@ BOOL QCCompositionCompliesToProtocol(QCComposition *composition, NSString *proto
 void QCCompositionFromData(void);
 void QCCompositionFromFile(void);
 int QCCompositionFromMovieFile(void);  // returns nil (14.4.1)
-void QCCompositionFromPatch(void);
+void QCCompositionFromPatch(void); // deprecated
 NSData* QCCompositionToData(NSDictionary *compositionDictionary); // serializes a filtered copy of compositionDictionary
 void QCCompositionToFile(void);
 void QCCompositionToMovieFile(void);

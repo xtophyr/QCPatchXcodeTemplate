@@ -269,7 +269,7 @@ typedef enum
 @interface QCPatch (Registry)
 + (QCNodeManager *)patchManager;
 + (NSArray *)patchNames;
-+ (QCPatch *)patchWithName:(NSString *)name;
++ (QCPatch *)patchWithName:(NSString *)name; // deprecated -> +createPatchWithName:
 + (QCPatch *)createPatchWithName:(NSString *)name NS_RETURNS_RETAINED; // creates a new instance
 + (NSDictionary *)patchAttributesWithName:(NSString *)name;
 + (void)registerPatch:(QCPatch *)patch withName:(NSString *)name;
@@ -326,8 +326,8 @@ typedef enum
 @end
 
 @interface QCPatch (Wrappers)
-- (NSArray *)inputs DEPRECATED_ATTRIBUTE;
-- (NSArray *)outputs DEPRECATED_ATTRIBUTE;
+- (NSArray *)inputs DEPRECATED_ATTRIBUTE; // deprecated -> inputPorts
+- (NSArray *)outputs DEPRECATED_ATTRIBUTE; // deprecated -> outputPorts
 
 // in the following, `attributes` is a dictionary of port metadata, corresponding to the `inputAttributes` section of the patch xml file
 - (id)createInputWithPortClass:(Class)fp8 forKey:(id)fp12 attributes:(id)fp16;

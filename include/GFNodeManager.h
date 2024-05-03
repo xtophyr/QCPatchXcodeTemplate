@@ -31,7 +31,7 @@ struct GFNodeInfo {
 - (id)initWithNamespace:(NSString*)nodeNamespace;
 - (NSString*)nodeNamespace;
 - (id)nodeAttributesWithName:(id)fp8;
-- (id)nodeInstanceWithName:(id)fp8;
+- (id)nodeInstanceWithName:(id)fp8; // deprecated -> -instantiateNodeWithName:
 - (id)instantiateNodeWithName:(id)fp8;
 - (void)registerNodeWithClass:(Class)nodeClass;	// equivalent to -[registerNodeWithClass: identifier:nil]
 - (void)registerNodeWithClass:(Class)nodeClass identifier:(NSString*)identifier;

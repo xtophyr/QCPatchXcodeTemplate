@@ -61,8 +61,14 @@
 - (void)swapIndex:(NSUInteger)indexA withIndex:(NSUInteger)indexB;
 - (void)makeObjectsPerformSelector:(SEL)fp8;
 - (void)makeObjectsPerformSelector:(SEL)fp8 withObject:(id)fp12;
-- (void)sortUsingFunction:(void *)fp8 context:(void *)ctx;
+
+// these sort using a home-rolled quicksort implementation (_QuickSort and _QuickSort_b).  Both flavors drive swapIndex:withIndex:
+- (void)sortUsingFunction:(void *)fp8 context:(void *)ctx; // this might be unused now in favor of the block variant below
+- (void)sortUsingComparator:(CDUnknownBlockType)arg1; // added some time after SSDK was dumped
+
 - (void)reverse;
+
+// applier function takes (value, key, context), returns void, no method to terminate enumeration early
 - (void)applyFunction:(void *)fp8 context:(void *)ctx;
 - (const id *)_values;
 - (const id *)_keys;

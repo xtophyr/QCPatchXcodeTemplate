@@ -9,7 +9,7 @@
 	void *_unused5[5];	// 236 = 0xec
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 - (id)initWithIdentifier:(id)fp8;
 - (void)dealloc;
 - (void)finalize;

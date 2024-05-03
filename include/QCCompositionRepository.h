@@ -19,7 +19,7 @@ extern NSString * const QCCompositionProtocolScreenSaver;
 	NSString *_requiredProtocol;	// 64 = 0x40
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // // ensures no subclasses of QCCompositionRepository
 + (void)initialize;
 + (id)defaultSortDescriptors;
 + (id)identityComposition;

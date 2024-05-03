@@ -21,7 +21,7 @@
 	void *_unused1[4];	// 128 = 0x80
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (void)initialize;
 - (id)initWithFormat:(id)fp8 pixelsWide:(NSUInteger)fp12 pixelsHigh:(NSUInteger)fp16 options:(id)fp20;
 - (id)copyWithZone_GCCacheResource:(NSZone *)zone;

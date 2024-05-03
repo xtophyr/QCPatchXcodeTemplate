@@ -3,7 +3,7 @@
 	void *_private; // QCPatch *patch
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (id)attributes;
 + (id)attributesForPropertyPortWithKey:(id)fp8;
 + (id)sortedPropertyPortKeys;

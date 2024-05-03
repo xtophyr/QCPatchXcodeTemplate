@@ -5,7 +5,7 @@
 	int _socketFD;	// 12 = 0xc
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (NSUInteger)maxStringLength;	// 0x112 = 274 characters (used for send and receive ?)
 + (NSUInteger)maxDataLength;	// 0x224 = 548 bytes	(used for reception only)
 - (id)initWithPort:(in_port_t)port;

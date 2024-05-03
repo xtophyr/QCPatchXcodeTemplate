@@ -6,7 +6,7 @@
 	void *_unused4[4];	// 128 = 0x80
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 - (Class)objectClass;
 - (id)object;
 - (BOOL)setObject:(id)objectValue;

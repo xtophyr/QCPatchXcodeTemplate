@@ -32,6 +32,7 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 	BOOL _disableValidation;	// 200 = 0xc8
 	NSPoint _cachedCenter;	// 204 = 0xcc
 	float _cachedZoomFactor;	// 212 = 0xd4
+    NSTrackingArea *_trackingArea; // added after SSDK was dumped
 	void *_unused[2];	// 216 = 0xd8
 }
 

@@ -1,7 +1,7 @@
 #import "QCPort.h"
 
 @interface QCProxyPort : QCPort
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures no subclasses of QCProxyPort
 + (Class)baseClass;
 - (id)initWithNode:(id)fp8 arguments:(id)fp12;
 - (void)portWillDeleteFromNode;

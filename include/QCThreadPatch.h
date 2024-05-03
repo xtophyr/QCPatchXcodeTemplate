@@ -10,7 +10,7 @@
 	void *_unused4[4];	// 288 = 0x120
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 - (id)initWithIdentifier:(id)fp8;
 - (void)_finalize_QCThreadPatch;
 - (void)finalize;

@@ -10,7 +10,7 @@ extern NSString * const QCPixelFormatCompatibility_QuickTime;
 {
 	void *_unused[4];	// 4 = 0x4
 }
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (void)initialize;
 - (NSString*)name;
 - (NSArray*)compatibilities;

@@ -11,7 +11,7 @@
 	void *_unused4[4];	// 180 = 0xb4
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (Class)portClassFromParameterInfo:(id)fp8;
 + (int)indicesType;
 + (NSArray *)sourceTypes; // array of NSStrings*

@@ -5,24 +5,25 @@
 // 0x8 -> retain (flag unset) vs copy (flag set) of values
 // 0x10
 // 0x20
-// 0x40 -> kCFAllocator vs malloc
+// 0x40 -> kCFAllocator (unset) vs malloc (set)  for arrayOfKeys, for example
 // 0x102 (?) is tested against sometimes to drive retain/release messages around mutations
 // sometimees _flags is AND'd with 0x42, and then checked for 0x2, if it fails, inconsistent state exception
+// -initWithCapacity: uses 0x16 as the default flags
 
 @interface GFList : NSObject <NSCopying, NSFastEnumeration>
 {
-	NSUInteger _flags;	// 4 = 0x4
-	NSUInteger _capacity;	// 8 = 0x8
-	NSUInteger _count;	// 12 = 0xc
-	id *_values;	// 16 = 0x10
-	NSUInteger *_hashValues;	// 20 = 0x14
-	id *_keys;	// 24 = 0x18
-	NSUInteger *_hashKeys;	// 28 = 0x1c
+	NSUInteger  _flags;
+	NSUInteger  _capacity;
+	NSUInteger  _count;
+	id          *_values;   // free'd in dealloc
+	NSUInteger  *_hashValues;// free'd in dealloc
+	id          *_keys;     // free'd in dealloc
+    NSUInteger  *_hashKeys; // free'd in dealloc
 }
 
 + (id)list;
 - (id)init;
-- (id)initWithCapacity:(NSUInteger)capacity;
+- (id)initWithCapacity:(NSUInteger)capacity; // capacity is initial capacity, the list resizes upward as needed.
 - (id)initWithCapacity:(NSUInteger)capacity optionFlags:(NSUInteger)flags;
 - (void)dealloc;
 - (id)initWithList:(GFList *)list;

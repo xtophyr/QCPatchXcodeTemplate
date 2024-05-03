@@ -6,7 +6,7 @@ extern NSString * const QCCompositionPickerPanelWillSelectCompositionNotificatio
 	void *_private;	// NSView *compositionPickerView
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures no subclasses of QCCompositionPickerPanel
 + (id)sharedCompositionPickerPanel;
 - (id)compositionPickerView;
 - (void)_willSelectComposition:(NSNotification *)notification;

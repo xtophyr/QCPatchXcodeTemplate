@@ -21,18 +21,19 @@ extern NSString * const QCCompositionCategoryUtility;
 	NSDictionary *_attributes;	// 8 = 0x8
 	NSArray *_inputKeys;	// 12 = 0xc
 	NSArray *_outputKeys;	// 16 = 0x10
-	id _backing;	// 20 = 0x14
+	id _backing;	// 20 = 0x14    // one of NSString*, NSData*, NSDictionary*, NSURL*, else InternalInconsistencyException
 	NSString *_identifier;	// 24 = 0x18
 	double _timestamp;	// 28 = 0x1c
 	BOOL _stateOK;	// 36 = 0x24
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;                 // ensures no subclasses of QCComposition
++ (id)compositionWithURL:(NSURL*)compositionURL;    // added some time after SSDK was dumped
 + (id)compositionWithFile:(NSString*)filePath;
 + (id)compositionWithData:(NSData*)compositionData;
 - (id)copyWithZone:(NSZone *)zone;
 - (id)_makePatch;
-- (id)_initWithBacking:(id)fp8;
+- (id)_initWithBacking:(id)backing; // one of the supported backing types (see _backing ivar)
 - (id)initWithComposition:(id)fp8;
 - (id)initWithPatchName:(id)fp8;
 - (void)dealloc;
@@ -50,7 +51,7 @@ extern NSString * const QCCompositionCategoryUtility;
 @end
 
 @interface QCComposition (InternalExtensions)
-+ (BOOL)isCompositionIdentity:(id)fp8;
++ (BOOL)isCompositionIdentity:(id)fp8;  // QCCompositionRepository can make an "identity" composition (does nothing).  This tests for equality against that.  used by QCCompositionPickerController
 @end
 
 @interface QCComposition (QCCompositionRepository)

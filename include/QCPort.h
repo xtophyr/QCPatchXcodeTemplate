@@ -22,7 +22,7 @@
 	void *_unused2[2];	// 96 = 0x60
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone; // ensures there are only subclasses - this class cannot be instantiated directly.
 + (BOOL)accessInstanceVariablesDirectly;
 + (BOOL)automaticallyNotifiesObserversForKey:(id)fp8;
 + (Class)baseClass;

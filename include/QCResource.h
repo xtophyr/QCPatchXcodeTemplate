@@ -8,7 +8,7 @@
 	void *_unused[4];	// 12 = 0xc
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 - (id)copyWithZone_GCCacheResource:(NSZone *)zone;
 - (id)retain;
 - (oneway void)release;

@@ -5,7 +5,7 @@
 	void *_unused[4];	// 12 = 0xc
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone; // ensures there are only subclasses - this class cannot be instantiated directly.
 - (void)finalize;
 - (void)dealloc;
 - (void)setMetadata:(id)object forKey:(id)key shouldForward:(BOOL)shouldForward;

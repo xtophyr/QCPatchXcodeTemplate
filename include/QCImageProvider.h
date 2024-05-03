@@ -4,7 +4,7 @@
 	void *_unused[4];	// 8 = 0x8
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (BOOL)isCompatibleWithSource:(id)fp8 sourceMD5:(QCMD5Sum *)fp12;
 + (id)createProviderWithSource:(id)fp8 options:(id)fp12;
 - (id)init;

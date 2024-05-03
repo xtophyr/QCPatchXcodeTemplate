@@ -1,5 +1,5 @@
 @interface NSArray (GFExtensions)
-- (id)GFArrayEnumerator;
+- (id)GFArrayEnumerator;        // this appears to no longer be present
 @end
 
 @interface NSColor (QCHue)
@@ -7,7 +7,7 @@
 @end
 
 @interface NSDictionary (GFExtensions)
-- (id)GFDictionaryEnumerator;
+- (id)GFDictionaryEnumerator;   // this appears to no longer be present
 @end
 
 @interface NSMutableDictionary (GFPrivateExtensions)
@@ -72,7 +72,7 @@
 @end
 
 @interface NSSet (GFExtensions)
-- (id)GFSetEnumerator;
+- (id)GFSetEnumerator;      // this appears to no longer be present
 @end
 
 @interface NSString (QCTextRenderer)

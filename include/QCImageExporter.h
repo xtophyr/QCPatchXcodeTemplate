@@ -10,7 +10,7 @@
 	void *_unused[4];	// 8 = 0x8
 }
 
-+ (id)allocWithZone:(NSZone *)zone;
++ (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (id)exporterForImageManager:(id)fp8;
 - (id)initWithImageManager:(id)fp8;
 - (id)imageManager;

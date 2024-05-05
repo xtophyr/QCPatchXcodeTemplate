@@ -28,8 +28,16 @@ void GFSetLogMessageCallback  (MessageCallback _Nullable cb,  void * _Nullable c
 void GFException(NSExceptionName name, NSString *messageFormatString, ...); // raises/throws an exception
 void GFThrowException(id object, SEL selector, NSExceptionName name, NSString *messageFormatString, ...); // raises/throws an exception decorated with object's class and selector to look like a message send (e.g., +[NSObject someClassMethod:])
 
+
+/* These appear to be used only by GFNodeManager under -_refreshList, and are probably functionally unused? */
+/* might have been a primitive precursor to patcherator search? */
+// returns true if each of Keywords is contained in Strings.  Strings are compared case-insensitive, and substrings match (so @"is" matches @"this")
+// order is important -- @[@"is"], @[@"this"] doesn't match, but @[@"this"], @[@"is"] does.
 BOOL GFFilterStringsWithKeywords(NSArray<NSString*> *strings, NSArray<NSString*> *keywords);
-id GFKeywordsFromSearchString(id something);
+// returns a de-duplicated array of words in string.  @"this this is a search string" -> @[@"this",@"is",@"a",@"search",@"string"]
+NSArray *GFKeywordsFromSearchString(NSString *string);
+
+
 NSString* GFNameForNode(GFNode *n);  // will return n->userInfo->@"name" if set, else p->attributes->@"name" if set, else __ClassNameForNode (private function)
 NSString* GFNameForPort(QCPort *p);  // will return p->userInfo->@"name" if set, else p->attributes->@"name" if set, else p->key
 

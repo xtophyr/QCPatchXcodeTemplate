@@ -1,10 +1,10 @@
 
-
-
+// Under the covers this uses an NSMutableDictionary to pair GFNodeClassDescriptions (values) with Classes (keys)
+// it is _not_ thread safe, there are no attempts made at synchronization.
+// +registerClassDescription is invoked for essentially every QCPatch class (subclasses included)
 @interface GFNodeClassDescriptionRegistry : NSObject
 
-
-+ (id)classDescriptionForClass:(Class)fp8;
-+ (void)registerClassDescription:(id)fp8 forClass:(Class)fp12;
++ (id)classDescriptionForClass:(Class)cls;
++ (void)registerClassDescription:(GFNodeClassDescription*)classDescription forClass:(Class)cls;
 
 @end

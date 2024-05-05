@@ -15,8 +15,12 @@
 
 - (id)initWithNodeClass:(Class)cls;
 - (Class)nodeClass;
-- (void)_initializeAttributes;
-- (id)xmlAttributes;
+- (void)_initializeAttributes;  // by default, attributes aren't loaded/initialized.  This drives the loading/initialization.
+
+// the "xml" here refers to the xml files in /S/L/F/Quartz.framework/Frameworks/QuartzComposer.framework/Versions/A/Resources/*.xml
+- (NSDictionary*)xmlAttributes; // similar to the dict seen higher up in -[QCPatch patchAttributesWithName:]? (maybe filtered by then)
+// historical note:  these used to be real text-based xml files.  This was changed (around 10.7?) to be a binary plist to save loading time and disk space, but the file extension didn't change.
+
 - (id)xmlAttributesForNodeIdentifier:(NSString*)identifier;
 - (id)attributesForNodeIdentifier:(NSString*)identifier;
 - (id)attributesForInputPort:(id)fp8 nodeIdentifier:(NSString*)identifier;

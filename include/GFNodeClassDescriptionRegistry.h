@@ -4,7 +4,7 @@
 // +registerClassDescription is invoked for essentially every QCPatch class (subclasses included)
 @interface GFNodeClassDescriptionRegistry : NSObject
 
-+ (id)classDescriptionForClass:(Class)cls;
++ (GFNodeClassDescription*)classDescriptionForClass:(Class)cls;
 + (void)registerClassDescription:(GFNodeClassDescription*)classDescription forClass:(Class)cls;
 
 @end

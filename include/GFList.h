@@ -35,12 +35,12 @@
 - (id)initWithCapacity:(NSUInteger)capacity optionFlags:(NSUInteger)flags NS_DESIGNATED_INITIALIZER;
 - (void)dealloc;
 - (id)initWithList:(GFList *)list;
-- (id)initWithObjects:(id)fp8 keys:(id)fp12 optionFlags:(NSUInteger)flags;
+- (id)initWithObjects:(NSArray*)objects keys:(NSArray*)keys optionFlags:(NSUInteger)flags;
 - (id)copyWithZone:(NSZone *)zone;
 - (NSUInteger)optionFlags;  // same as -flags
 - (NSUInteger)count;
 - (NSUInteger)flags;
-- (void)setObject:(id)object forKey:(id)key;
+- (void)setObject:(id)object forKey:(id)key;    // inserts object/key if key isn't found, removes key if object is null
 - (void)insertObject:(id)object atIndex:(NSUInteger)index forKey:(id)key;
 - (void)addObject:(id)object forKey:(NSString *)key;    // insertObject:object atIndex:_count forKey:key
 - (void)addEntriesFromList:(GFList*)list;
@@ -63,21 +63,22 @@
 - (NSDictionary*)dictionary;
 - (void)moveIndex:(NSUInteger)sourceIndex toIndex:(NSUInteger)destIndex;
 - (void)setObject:(id)object atIndex:(NSUInteger)index;
-- (void)setKey:(id)fp8 atIndex:(NSUInteger)index;
+- (void)setKey:(id)key atIndex:(NSUInteger)index;
 - (void)setIndex:(NSUInteger)index ofObject:(id)object;
 - (void)setIndex:(NSUInteger)index ofKey:(id)key;
 - (void)swapIndex:(NSUInteger)indexA withIndex:(NSUInteger)indexB;
-- (void)makeObjectsPerformSelector:(SEL)fp8;
-- (void)makeObjectsPerformSelector:(SEL)fp8 withObject:(id)fp12;
+- (void)makeObjectsPerformSelector:(SEL)selector;
+- (void)makeObjectsPerformSelector:(SEL)selector withObject:(id)object;
 
 // these sort using a home-rolled quicksort implementation (_QuickSort and _QuickSort_b).  Both flavors drive swapIndex:withIndex:
-- (void)sortUsingFunction:(void *)fp8 context:(void *)ctx; // this might be unused now in favor of the block variant below
-- (void)sortUsingComparator:(CDUnknownBlockType)arg1; // added some time after SSDK was dumped
+// It's home-rolled so it can drive -swapIndex:withIndex: so that the 4 arrays (keys, values, hashes) stay correlated.
+- (void)sortUsingFunction:(NSComparisonResult (*)(id valueL, id keyL, id valueR, id keyR, void *ctx))compare context:(void *)ctx; // this might be unused now in favor of the block variant below
+- (void)sortUsingComparator:(NSComparisonResult(^)(id valueL, id keyL, id valueR, id keyR))compare; // added some time after SSDK was dumped
 
 - (void)reverse;
 
 // applier function takes (value, key, context), returns void, no method to terminate enumeration early
-- (void)applyFunction:(void *)fp8 context:(void *)ctx;
+- (void)applyFunction:(void(*)(id obj, id key, void *ctx))applierFunc context:(void *)ctx;
 - (const id *)_values;
 - (const id *)_keys;
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)objects count:(NSUInteger)count;
@@ -85,6 +86,6 @@
 // follows standard NSEnumerationOptions semantics - concurrent, forward, reverse
 // if there are fewer than 32 items in the list, concurrent enumeration is silently downgraded serial
 // TODO: figure out the block signature (probably returns void, takes key and object)
-- (void)enumerateKeysAndObjectsWithOptions:(NSEnumerationOptions)options usingBlock:(CDUnknownBlockType)block; // added since SSDK was dumped
-
+- (void)enumerateKeysAndObjectsWithOptions:(NSEnumerationOptions)options usingBlock:(void(^)(id key, id obj, BOOL *stop))block; // added since SSDK was dumped
+- (void)enumerateObjectsWithOptions:(NSEnumerationOptions)options usingBlock:(void(^)(id obj, size_t iteration, BOOL *stop))block;; // added since the SSDK was dumped
 @end

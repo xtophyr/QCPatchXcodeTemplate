@@ -3,7 +3,7 @@
 @end
 
 @interface NSColor (QCHue)
-+ (id)_colorWithHue:(float)hue;
++ (id)_colorWithHue:(float)hue; // this appears to no longer be present
 @end
 
 @interface NSDictionary (GFExtensions)
@@ -17,9 +17,9 @@
 @end
 
 @interface NSObject (GFExtensions)
-- (void)__performUndo2:(id)fp8;
-- (void)__performUndo3:(id)fp8;
-- (void)__performUndo4:(id)fp8;
+- (void)__performUndo2:(id)fp8;     //
+- (void)__performUndo3:(id)fp8;     // these appear to no longer be present
+- (void)__performUndo4:(id)fp8;     //
 @end
 
 @interface NSObject (GFSettingsViewDelegate)
@@ -79,10 +79,12 @@
 - (void)drawInContext:(CGContextRef)context atPoint:(NSPoint)point withFontName:(id)fontName size:(float)size alignement:(int)align;
 @end
 
+// used by GFLog/GFDebug for logging to the Graph Foundation Log window
 @interface NSTextView (GFLogMessage)
 - (void)_GFLogMessage:(id)fp8;
 @end
 
+// these appear to no longer be present
 @interface NSUndoManager (GFExtensions)
 - (void)registerUndoWithTarget:(id)fp8 selector:(SEL)fp12 object1:(id)fp16 object2:(id)fp20;
 - (void)registerUndoWithTarget:(id)fp8 selector:(SEL)fp12 object1:(id)fp16 object2:(id)fp20 object3:(id)fp24;

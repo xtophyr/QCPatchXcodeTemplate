@@ -5,7 +5,7 @@ typedef void (*MessageCallback)(NSString *_Nullable nodeIdentifier, NSString * _
 
 // This is used by QCStructure -initWithMembers: and -initWithMembersAndKeys:
 // builds an NSMutableArray filled with first, and then the items in list.  list is nil-terminated.
-// There might be a special mode where small integers are also used (the code checks against list against 0x28).
+// There might be a special mode where small integers are also used (the code checks list elements against 0x28 (40)).
 NSMutableArray* GFArrayFromArgumentList(id first, id *list);
 
 // each element of the returned array is a symbolicated string of the backtrace.  Symbolication is done by the private CoreSymbolication
@@ -168,8 +168,10 @@ void QCQuaternion_Substract(const QCVector4 *u, const QCVector4 *v, QCVector4 *r
 void QCResolveAliasPath(void);
 void QCRestorePatchInputParameters(void);
 void QCSavePatchInputParameters(void);
-void QCStateFromPath(void);
-void QCPathFromState(void);
+
+// these don't appear to do anything useful, and aren't used in the QC framework or the editor app.
+id QCStateFromPath(id path); // sends -length to path, and returns path if length is non-zero, else returns nil // not used in QC
+id QCPathFromState(id state); // returns state (does nothing) // not used in QC
 
 // only Vec3 here -- vec4 is probably just QCQuaternion?
 void QCVector_Add(const QCVector3 *u, const QCVector3 *v, QCVector3 *result);	// not used in QC

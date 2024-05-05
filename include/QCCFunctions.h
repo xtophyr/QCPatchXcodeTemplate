@@ -8,7 +8,8 @@ typedef void (*MessageCallback)(NSString *_Nullable nodeIdentifier, NSString * _
 // There might be a special mode where small integers are also used (the code checks against list against 0x28).
 NSMutableArray* GFArrayFromArgumentList(id first, id *list);
 
-
+// each element of the returned array is a symbolicated string of the backtrace.  Symbolication is done by the private CoreSymbolication
+// framework, so they're usually higher-quality than dladdr-based symbolications available to the public.
 NSArray* GFBacktrace(void);
 
 NSInteger GFDebuggingLevel(void);    // returns UserDefaults value GFDebuggingLevel

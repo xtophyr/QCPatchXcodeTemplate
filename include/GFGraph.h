@@ -19,9 +19,11 @@ extern NSString * const GFStateDidFinishLoadingNotification;
 - (BOOL)addNode:(GFNode*)node;
 - (void)removeNodeForKey:(NSString*)key;
 - (void)removeNode:(GFNode*)node;
-- (void)applyFunctionOnNodes:(void *)fp8 context:(void *)ctx;
+- (void)applyFunctionOnNodes:(void *)func context:(void *)ctx;
+- (void)enumerateNodesWithOptions:(NSUInteger)options usingBlock:(void*)block;
 - (NSArray *)nodes;	// subpatches
-- (void)applyFunctionOnConnections:(void *)fp8 context:(void *)ctx;
+- (void)applyFunctionOnConnections:(void *)func context:(void *)ctx;
+- (void)enumerateConnectionsWithOptions:(NSUInteger)options usingBlock:(void*)block; // added after SSDK was dumped
 - (BOOL)canCreateConnectionFromPort:(GFPort*)sourcePort toPort:(GFPort*)destPort;
 - (id)createConnectionFromPort:(GFPort*)sourcePort toPort:(GFPort*)destPort forKey:(NSString*)key;
 - (id)createConnectionFromPort:(GFPort*)sourcePort toPort:(GFPort*)destPort;

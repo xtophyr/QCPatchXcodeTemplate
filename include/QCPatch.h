@@ -57,7 +57,7 @@ extern NSString * const QCPatchTimebaseDidChangeNotification;
 - (NSArray *)customOutputPorts;
 - (NSArray *)systemInputPorts;
 - (NSArray *)systemOutputPorts;
-- (void)applyFunctionOnSubpatches:(void *)fp8 context:(void *)fp12 recursive:(BOOL)fp16;
+- (void)applyFunctionOnSubpatches:(void *)fp8 context:(void *)ctx recursive:(BOOL)recurse;
 @end
 
 

@@ -44,7 +44,9 @@
 - (NSArray *)inputPorts;
 - (NSArray *)outputPorts;
 - (void)applyFunctionOnInputPorts:(void *)fp8 context:(void *)fp12;
+- (void)enumerateInputPortsWithOptions:(NSUInteger)options usingBlock:(void*)block; // added after SSDK was dumped
 - (void)applyFunctionOnOutputPorts:(void *)fp8 context:(void *)fp12;
+- (void)enumerateOutputPortsWithOptions:(NSUInteger)options usingBlock:(void*)block; // added after SSDK was dumped
 - (NSArray *)ivarInputPorts;
 - (NSArray *)ivarOutputPorts;
 - (NSArray *)customInputPorts;

@@ -23,7 +23,8 @@ struct GFNodeInfo {
 + (BOOL)trylock;	// never called in QC framework
 + (void)lock;
 + (void)unlock;
-+ (void)checkIdentifier:(id)fp8;
+/* This will throw an exception (!) if identifier contains forbidden characters.  Allowed characters are a-z, A-Z, 0-9, '-', and '_' */
++ (void)checkIdentifier:(NSString*)identifier;
 + (id)managerForNodeNamespace:(NSString*)nodeNamespace;	// @"com.apple.QuartzComposer" is the default
 + (id)instantiateNodeWithName:(id)fp8;
 + (id)instantiateNodeWithClassName:(id)fp8 identifier:(NSString*)identifier;
@@ -37,16 +38,17 @@ struct GFNodeInfo {
 - (void)registerNodeWithClass:(Class)nodeClass identifier:(NSString*)identifier;
 - (id)_nodeFromArchive:(id)fp8;
 - (id)_attributesFromArchive:(id)fp8;
-- (void)registerNode:(id)fp8 withName:(id)fp12;
-- (void)registerNodeWithName:(id)fp8 constructor:(id)fp12 instantiateSelector:(SEL)fp16 attributesSelector:(SEL)fp20 info:(id)fp24;
-- (void)unregisterNodeWithName:(id)fp8;
-- (BOOL)isNodeRegisteredWithName:(id)fp8;
+- (void)registerNode:(id)fp8 withName:(NSString*)name;
+- (void)registerNodeWithName:(NSString*)name constructor:(id)ctorClass instantiateSelector:(SEL)instantiate attributesSelector:(SEL)attributes info:(id)fp24;
+- (void)unregisterNodeWithName:(NSString*)name;
+- (BOOL)isNodeRegisteredWithName:(NSString*)name;
 - (NSArray*)nodeNames;
 - (NSArray*)nodeNamesContainingAttributes:(id)fp8;
 - (NSArray*)nodeNamesMatchingAttributes:(id)fp8;
 - (NSArray*)nodeNamesExcludingAttributes:(id)fp8;
 - (id)nodeNameWithClassName:(id)fp8 identifier:(NSString*)identifier;
-- (void)applyFunction:(void *)fp8 context:(void *)ctx;
+//- (void)applyFunction:(void *)fp8 context:(void *)ctx;  // this no longer exists as of 14.4.1
+- (void)enumerateNodesUsingBlock:(void(^)(NSString *fullName, id constructor, NSString *path, NSDictionary *attributes))block; // probably replaced applyFunction.  fullName is classname:identifier, path can be nil
 - (NSString*)description;
 @end
 

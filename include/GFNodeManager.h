@@ -19,21 +19,21 @@ struct GFNodeInfo {
 	void *_unused[4];	        // 104 = 0x68
 }
 
-+ (void)initialize;
++ (void)initialize; // sets up a recursive mutex (PTHREAD_RECURSIVE_MUTEX_INITIALIZER didn't exist back then I guess)
 + (BOOL)trylock;	// never called in QC framework
 + (void)lock;
 + (void)unlock;
 /* This will throw an exception (!) if identifier contains forbidden characters.  Allowed characters are a-z, A-Z, 0-9, '-', and '_' */
 + (void)checkIdentifier:(NSString*)identifier;
 + (id)managerForNodeNamespace:(NSString*)nodeNamespace;	// @"com.apple.QuartzComposer" is the default
-+ (id)instantiateNodeWithName:(id)fp8;
++ (id)instantiateNodeWithName:(NSString*)name;
 + (id)instantiateNodeWithClassName:(id)fp8 identifier:(NSString*)identifier;
-- (id)init;
-- (id)initWithNamespace:(NSString*)nodeNamespace;
+- (id)init; // calls -initWithNamespace:nil (which immediately throws an exception)
+- (id)initWithNamespace:(NSString*)nodeNamespace NS_DESIGNATED_INITIALIZER;
 - (NSString*)nodeNamespace;
 - (id)nodeAttributesWithName:(id)fp8;
 - (id)nodeInstanceWithName:(id)fp8; // deprecated -> -instantiateNodeWithName:
-- (id)instantiateNodeWithName:(id)fp8;
+- (id)instantiateNodeWithName:(NSString*)name;
 - (void)registerNodeWithClass:(Class)nodeClass;	// equivalent to -[registerNodeWithClass: identifier:nil]
 - (void)registerNodeWithClass:(Class)nodeClass identifier:(NSString*)identifier;
 - (id)_nodeFromArchive:(id)fp8;

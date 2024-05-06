@@ -3,7 +3,7 @@
 	CGDirectDisplayID _displayID;	// 132 = 0x84
 }
 
-- (id)initWithScreen:(id)fp8;
+- (id)initWithScreen:(NSScreen*)screen;
 - (CGDirectDisplayID)displayID;
 - (BOOL)canBecomeMainWindow;
 - (BOOL)canBecomeKeyWindow;

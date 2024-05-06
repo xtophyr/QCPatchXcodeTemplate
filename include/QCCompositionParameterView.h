@@ -1,3 +1,5 @@
+/* This is also a public header in QC framework */
+
 typedef struct __QCCompositionParameterViewPrivate {   // 0x28 = 40 bytes
     // offset 0x00
     // offset 0x08
@@ -12,21 +14,21 @@ typedef struct __QCCompositionParameterViewPrivate {   // 0x28 = 40 bytes
 }
 
 - (void)observeValueForKeyPath:(NSString*)path ofObject:(id)object change:(NSDictionary*)change context:(void *)context;
-- (void)_setPatch:(id)fp8;
+- (void)_setPatch:(id)patch;
 - (void)__patchUpdated:(id)fp8;
-- (void)setCompositionRenderer:(id)fp8;
-- (id)compositionRenderer;
+- (void)setCompositionRenderer:(id<QCCompositionRenderer>)renderer;
+- (id<QCCompositionRenderer>)compositionRenderer;
 - (BOOL)hasParameters;
-- (void)setBackgroundColor:(id)fp8;
-- (id)backgroundColor;
-- (void)setDrawsBackground:(BOOL)fp8;
+- (void)setBackgroundColor:(NSColor*)color;
+- (NSColor*)backgroundColor;
+- (void)setDrawsBackground:(BOOL)flag;
 - (BOOL)drawsBackground;
-- (void)setBorderType:(NSBorderType)fp8;
+- (void)setBorderType:(NSBorderType)borderType;
 - (NSBorderType)borderType;
-- (void)setDelegate:(id)fp8;
+- (void)setDelegate:(id)delegate;
 - (id)delegate;
 - (void)_finishInitialization;
-- (id)initWithFrame:(NSRect)fp8;
+- (id)initWithFrame:(NSRect)frame;
 - (void)finalize;
 - (void)dealloc;
 - (void)encodeWithCoder:(NSCoder *)aCoder;

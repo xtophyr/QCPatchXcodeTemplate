@@ -8,8 +8,14 @@ extern NSString * const QCCompositionProtocolPhotoVisualizer;
 extern NSString * const QCCompositionProtocolRSSVisualizer;
 extern NSString * const QCCompositionProtocolScreenSaver;
 
-
 @interface QCCompositionRepository : NSObject
+{
+@private
+    dispatch_queue_t                    cq;
+}
+
+// this class seems wildly different from how it looks in the public header
+/*@interface QCCompositionRepository : NSObject
 {
 	pthread_mutex_t _mutex;	// 4 = 0x4
 	CFDictionaryRef _compositions;	// 48 = 0x30
@@ -17,13 +23,13 @@ extern NSString * const QCCompositionProtocolScreenSaver;
 	NSMutableArray *_directories;	// 56 = 0x38
 	BOOL _safeMode;	// 60 = 0x3c
 	NSString *_requiredProtocol;	// 64 = 0x40
-}
+}*/
 
 + (id)allocWithZone:(NSZone *)zone;     // // ensures no subclasses of QCCompositionRepository
 + (void)initialize;
 + (id)defaultSortDescriptors;
 + (id)identityComposition;
-+ (id)sharedCompositionRepository;
++ (QCCompositionRepository*)sharedCompositionRepository;
 + (id)sharedCompositionRepository:(BOOL)noAutoUpdate; // calls -...WithOptions: with @"noAutoUpdate" key set
 + (id)sharedCompositionRepositoryWithOptions:(NSDictionary*)options;
 + (id)sharedCompositionRepositoryWithRequiredProtocol:(id)fp8;
@@ -38,10 +44,10 @@ extern NSString * const QCCompositionProtocolScreenSaver;
 - (void)_loadAllCompositions;
 - (void)_registerProtocols;
 - (id)initWithOptions:(id)fp8;
-- (id)compositionWithIdentifier:(id)fp8;
-- (id)compositionsWithProtocols:(id)fp8 andAttributes:(id)fp12 sortedBy:(id)fp16;
-- (id)compositionsWithProtocols:(id)fp8 andAttributes:(id)fp12;
-- (id)allCompositions;
+- (id)compositionWithIdentifier:(NSString*)identifier;
+- (id)compositionsWithProtocols:(NSArary*)protocols andAttributes:(NSDictionary*)attributes sortedBy:(id)fp16;
+- (NSArray*)compositionsWithProtocols:(NSArray*)protocols andAttributes:(NSDictionary*)attributes;
+- (NSArray*)allCompositions;
 - (void)registerProtocol:(id)fp8 withDescription:(id)fp12;
 - (NSArray*)registeredProtocols;
 - (id)descriptionForProtocol:(id)fp8;

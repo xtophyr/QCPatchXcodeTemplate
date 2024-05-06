@@ -31,8 +31,8 @@
 @end
 
 @interface NSObject (QCCompositionParameterViewDelegate)
-- (BOOL)compositionParameterView:(id)fp8 shouldDisplayParameterWithKey:(id)fp12 attributes:(id)fp16;
-- (void)compositionParameterView:(id)fp8 didChangeParameterWithKey:(id)fp12;
+- (BOOL)compositionParameterView:(QCCompositionParameterView*)parameterView shouldDisplayParameterWithKey:(NSString*)portKey attributes:(NSDictionary*)portAttributes;
+- (void)compositionParameterView:(QCCompositionParameterView*)parameterView didChangeParameterWithKey:(NSString*)portKey;
 @end
 
 @interface NSObject (QCCompositionPickerViewDelegate)

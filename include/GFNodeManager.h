@@ -36,16 +36,16 @@ struct GFNodeInfo {
 - (id)instantiateNodeWithName:(NSString*)name;
 - (void)registerNodeWithClass:(Class)nodeClass;	// equivalent to -[registerNodeWithClass: identifier:nil]
 - (void)registerNodeWithClass:(Class)nodeClass identifier:(NSString*)identifier;
-- (id)_nodeFromArchive:(id)fp8;
-- (id)_attributesFromArchive:(id)fp8;
+- (id)_nodeFromArchive:(NSData*)data;       // data is passed to NSKeyedUnarchiver
+- (id)_attributesFromArchive:(NSData*)data; // data is passed to NSKeyedUnarchiver
 - (void)registerNode:(id)fp8 withName:(NSString*)name;
 - (void)registerNodeWithName:(NSString*)name constructor:(id)ctorClass instantiateSelector:(SEL)instantiate attributesSelector:(SEL)attributes info:(id)fp24;
-- (void)unregisterNodeWithName:(NSString*)name;
+- (void)unregisterNodeWithName:(NSString*)name; // only used in the editor, perhaps for virtual patch removal?
 - (BOOL)isNodeRegisteredWithName:(NSString*)name;
 - (NSArray*)nodeNames;
-- (NSArray*)nodeNamesContainingAttributes:(id)fp8;
-- (NSArray*)nodeNamesMatchingAttributes:(id)fp8;
-- (NSArray*)nodeNamesExcludingAttributes:(id)fp8;
+- (NSArray*)nodeNamesContainingAttributes:(id)fp8;  // not used in QC
+- (NSArray*)nodeNamesMatchingAttributes:(id)fp8;    // not used in QC
+- (NSArray*)nodeNamesExcludingAttributes:(id)fp8;   // not used in QC
 - (id)nodeNameWithClassName:(id)fp8 identifier:(NSString*)identifier;
 //- (void)applyFunction:(void *)fp8 context:(void *)ctx;  // this no longer exists as of 14.4.1
 - (void)enumerateNodesUsingBlock:(void(^)(NSString *fullName, id constructor, NSString *path, NSDictionary *attributes))block; // probably replaced applyFunction.  fullName is classname:identifier, path can be nil

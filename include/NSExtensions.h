@@ -12,8 +12,8 @@
 
 @interface NSMutableDictionary (GFPrivateExtensions)
 - (void)_mergeEntriesFromDictionary:(id)fp8 maxDepth:(unsigned int)fp12;
-- (id)_stripDotEntries;
-- (void)_setNullForKey:(id)aKey;
+- (id)_stripDotEntries;     // used to sanitize userInfo dicts (editor uses .-prefixed keys for bookkeeping, like .selected)
+- (void)_setNullForKey:(id)aKey;    // convenience method to set [NSNull null] for aKey
 @end
 
 @interface NSObject (GFExtensions)
@@ -22,12 +22,15 @@
 - (void)__performUndo4:(id)fp8;     //
 @end
 
+/* This might be a kludge category interface.  PreferencesController in the editor deals with settings,
+   maybe there's a private pref to tweak them outside the editor too.  But putting these on
+   every NSObject seems quite overly broad.  GFSettingsView drives a lot of these. */
 @interface NSObject (GFSettingsViewDelegate)
-- (id)settingsView:(id)fp8 settingForKey:(id)fp12;
-- (void)settingsView:(id)fp8 setSetting:(id)fp12 forKey:(id)fp16;
-- (void)settingsView:(id)fp8 clearSettingForKey:(id)fp12;
-- (BOOL)settingsView:(id)fp8 shouldRenameKey:(id)fp12;
-- (void)settingsView:(id)fp8 renameKey:(id)fp12 toKey:(id)fp16;
+- (id)settingsView:(id)fp8 settingForKey:(id)fp12;                  // returns 0
+- (void)settingsView:(id)fp8 setSetting:(id)fp12 forKey:(id)fp16;   // does nothing
+- (void)settingsView:(id)fp8 clearSettingForKey:(id)fp12;           // this calls setSetting:0
+- (BOOL)settingsView:(id)fp8 shouldRenameKey:(id)fp12;              // returns 0
+- (void)settingsView:(id)fp8 renameKey:(id)fp12 toKey:(id)fp16;     // does nothing
 @end
 
 @interface NSObject (QCCompositionParameterViewDelegate)

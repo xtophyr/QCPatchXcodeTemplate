@@ -13,7 +13,7 @@ struct GFNodeInfo {
 {
 	NSString *_namespace;	    // 8 = 0x8
 	pthread_mutex_t _mutex;	    // 16 = 0x10
-	CFDictionaryRef _registry;	// 80 = 0x50
+	CFDictionaryRef _registry;	// 80 = 0x50    // this maps node names to pointers in _infoList (yes, that's the design)
 	NSUInteger _infoListSize;	//  88 = 0x58   // number of elements in _infoList (allocated, not necessarily used)
 	struct GFNodeInfo *_infoList;	// 96 = 0x60
 	void *_unused[4];	        // 104 = 0x68
@@ -27,26 +27,26 @@ struct GFNodeInfo {
 + (void)checkIdentifier:(NSString*)identifier;
 + (id)managerForNodeNamespace:(NSString*)nodeNamespace;	// @"com.apple.QuartzComposer" is the default
 + (id)instantiateNodeWithName:(NSString*)name;
-+ (id)instantiateNodeWithClassName:(id)fp8 identifier:(NSString*)identifier;
++ (id)instantiateNodeWithClassName:(NSString*)className identifier:(NSString*)identifier;
 - (id)init; // calls -initWithNamespace:nil (which immediately throws an exception)
 - (id)initWithNamespace:(NSString*)nodeNamespace NS_DESIGNATED_INITIALIZER;
 - (NSString*)nodeNamespace;
-- (id)nodeAttributesWithName:(id)fp8;
-- (id)nodeInstanceWithName:(id)fp8; // deprecated -> -instantiateNodeWithName:
+- (id)nodeAttributesWithName:(NSString*)name;
+- (id)nodeInstanceWithName:(NSString*)name; // deprecated -> -instantiateNodeWithName:
 - (id)instantiateNodeWithName:(NSString*)name;
 - (void)registerNodeWithClass:(Class)nodeClass;	// equivalent to -[registerNodeWithClass: identifier:nil]
 - (void)registerNodeWithClass:(Class)nodeClass identifier:(NSString*)identifier;
 - (id)_nodeFromArchive:(NSData*)data;       // data is passed to NSKeyedUnarchiver
 - (id)_attributesFromArchive:(NSData*)data; // data is passed to NSKeyedUnarchiver
-- (void)registerNode:(id)fp8 withName:(NSString*)name;
-- (void)registerNodeWithName:(NSString*)name constructor:(id)ctorClass instantiateSelector:(SEL)instantiate attributesSelector:(SEL)attributes info:(id)fp24;
+- (void)registerNode:(GFNode*)node withName:(NSString*)name;
+- (void)registerNodeWithName:(NSString*)name constructor:(id)ctorClass instantiateSelector:(SEL)instantiate attributesSelector:(SEL)attributes info:(id)info;
 - (void)unregisterNodeWithName:(NSString*)name; // only used in the editor, perhaps for virtual patch removal?
 - (BOOL)isNodeRegisteredWithName:(NSString*)name;
 - (NSArray*)nodeNames;
 - (NSArray*)nodeNamesContainingAttributes:(id)fp8;  // not used in QC
 - (NSArray*)nodeNamesMatchingAttributes:(id)fp8;    // not used in QC
 - (NSArray*)nodeNamesExcludingAttributes:(id)fp8;   // not used in QC
-- (id)nodeNameWithClassName:(id)fp8 identifier:(NSString*)identifier;
+- (NSString*)nodeNameWithClassName:(NSString*)className identifier:(NSString*)identifier; // returns "className:identifier" if identifier is non-null, else "className"
 //- (void)applyFunction:(void *)fp8 context:(void *)ctx;  // this no longer exists as of 14.4.1
 - (void)enumerateNodesUsingBlock:(void(^)(NSString *fullName, id constructor, NSString *path, NSDictionary *attributes))block; // probably replaced applyFunction.  fullName is classname:identifier, path can be nil
 - (NSString*)description;

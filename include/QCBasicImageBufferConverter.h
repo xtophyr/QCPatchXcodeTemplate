@@ -1,7 +1,7 @@
 #import "QCImageBufferConverter.h"
 
 @interface QCBasicImageBufferConverter : QCImageBufferConverter
-+ (void)initialize;
++ (void)initialize;         // this initializes a dictionary for image manager (caching mode?).  probably unnecessary with literals now.
 - (BOOL)supportsCropping;
 - (id)supportedPixelBufferFormatsForFormat:(id)fp8;
 - (id)createPixelBufferFromImageBuffer:(id)fp8 withFormat:(id)fp12 transformation:(id)fp16 bounds:(NSRect)fp20 colorSpace:(CGColorSpaceRef)fp36 options:(id)fp40;

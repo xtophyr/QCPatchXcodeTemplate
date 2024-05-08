@@ -27,6 +27,7 @@ extern NSString * const QCCompositionCategoryUtility;
 	BOOL _stateOK;	// 36 = 0x24
 }
 
+- (void)initialize; // locks GFNodeManager, then invokes [QCImage class].  seems like a hackaround.  added after SSDK was dumped.
 + (id)allocWithZone:(NSZone *)zone;                 // ensures no subclasses of QCComposition
 + (id)compositionWithURL:(NSURL*)compositionURL;    // added some time after SSDK was dumped
 + (id)compositionWithFile:(NSString*)filePath;

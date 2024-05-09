@@ -7,9 +7,9 @@
 
 - (void)dealloc;
 - (void)setUndoManager:(NSUndoManager*)undoManager;
-- (id)undoManager;
+- (NSUndoManager*)undoManager;
 - (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
-- (void)undo:(id)fp8;
-- (void)redo:(id)fp8;
+- (void)undo:(id)sender;
+- (void)redo:(id)sender;
 
 @end

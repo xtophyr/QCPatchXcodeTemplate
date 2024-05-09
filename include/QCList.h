@@ -1,13 +1,15 @@
 #import "GFList.h"
 
+// QCList is semantically identical to GFList, with KVO additions (-willChangeValueForKey:/-didChangeValueForKey: messages around mutations)
+
 @interface QCList : GFList
-+ (BOOL)accessInstanceVariablesDirectly;
-+ (BOOL)automaticallyNotifiesObserversForKey:(id)fp8;
-- (void)setObject:(id)fp8 forKey:(id)fp12;
-- (void)insertObject:(id)fp8 atIndex:(NSUInteger)fp12 forKey:(id)fp16;
-- (void)removeObjectAtIndex:(NSUInteger)fp8;
++ (BOOL)accessInstanceVariablesDirectly;            // NO
++ (BOOL)automaticallyNotifiesObserversForKey:(id)key;   // NO
+- (void)setObject:(id)object forKey:(NSString*)key;
+- (void)insertObject:(id)object atIndex:(NSUInteger)index forKey:(NSString*)key;
+- (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeAllObjects;
-- (id)valueForKey:(id)fp8;
-- (void)setObject:(id)fp8 atIndex:(NSUInteger)fp12;
-- (void)setKey:(id)fp8 atIndex:(NSUInteger)fp12;
+- (id)valueForKey:(NSString*)key;
+- (void)setObject:(NSString*)key atIndex:(NSUInteger)index;
+- (void)setKey:(NSString*)key atIndex:(NSUInteger)index;
 @end

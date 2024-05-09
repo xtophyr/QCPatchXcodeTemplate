@@ -12,6 +12,11 @@ NSMutableArray* GFArrayFromArgumentList(id first, id *list);
 // framework, so they're usually higher-quality than dladdr-based symbolications available to the public.
 NSArray* GFBacktrace(void);
 
+// DebuggingLevel appears to be more like Flags, where various bits are tested to control logging.  TODO: categorize the various bits
+// 0x001 -
+// 0x002 -
+// 0x004 -
+// 0x008 -
 NSInteger GFDebuggingLevel(void);    // returns UserDefaults value GFDebuggingLevel
 
 /* GFLog and GFDebug are essentally the same, Debug messages go to the Debug Message Callback

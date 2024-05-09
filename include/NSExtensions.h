@@ -11,7 +11,7 @@
 @end
 
 @interface NSMutableDictionary (GFPrivateExtensions)
-- (void)_mergeEntriesFromDictionary:(NSDictionary*)dict maxDepth:(unsigned int)depth; // adds dict's key/value pairs to self, recursively to depth when value is a dictionary.  common depth values appear to be 0 and 0x400.  TODO: if self and dict share a key, who wins?
+- (void)_mergeEntriesFromDictionary:(NSDictionary*)dict maxDepth:(unsigned int)depth; // adds dict's key/value pairs to self, recursively to depth when value is a dictionary.  common depth values appear to be 0 and 0x400.  When both dictionaries have the same key, dict's value replaces self's.
 - (id)_stripDotEntries;     // used to sanitize userInfo dicts (editor uses .-prefixed keys for bookkeeping, like .selected)
 - (void)_setNullForKey:(id)aKey;    // convenience method to set [NSNull null] for aKey
 @end
@@ -70,8 +70,8 @@
 @end
 
 @interface NSOpenGLContext_QuartzComposer : NSOpenGLContext
-- (void)_surfaceWillGoAway:(id)fp8;
-- (void)_surfaceDidComeBack:(id)fp8;
+- (void)_surfaceWillGoAway:(id)fp8; // sends _surfaceWillGoAway to QCView so it pauses rendering and does some cleanup
+- (void)_surfaceDidComeBack:(id)fp8; // sends _surfaceDidComeBack to QCView so it resumes rendering
 @end
 
 @interface NSSet (GFExtensions)

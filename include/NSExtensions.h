@@ -12,7 +12,7 @@
 
 @interface NSMutableDictionary (GFPrivateExtensions)
 - (void)_mergeEntriesFromDictionary:(NSDictionary*)dict maxDepth:(unsigned int)depth; // adds dict's key/value pairs to self, recursively to depth when value is a dictionary.  common depth values appear to be 0 and 0x400.  When both dictionaries have the same key, dict's value replaces self's.
-- (id)_stripDotEntries;     // used to sanitize userInfo dicts (editor uses .-prefixed keys for bookkeeping, like .selected)
+- (NSMutableDictionary*)_stripDotEntries;     // used to sanitize userInfo dicts (editor uses .-prefixed keys for bookkeeping, like .selected).  returns stripped dictionary (always a different dictionary from self)
 - (void)_setNullForKey:(id)aKey;    // convenience method to set [NSNull null] for aKey
 @end
 

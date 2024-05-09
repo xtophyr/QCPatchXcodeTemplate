@@ -67,8 +67,8 @@
 - (id)copyWithZone:(NSZone *)zone;
 - (id)portForKey:(id)fp8;
 - (id)keyForPort:(id)fp8;
-- (int)directionForPort:(id)fp8;
-- (id)graph;
+- (int)directionForPort:(id)fp8;    // inputs return -1, outputs return 1, invalid returns 0
+- (id)graph;    // _parent
 - (void)pauseNotifications;
 - (void)resumeNotifications;
 - (void)stateUpdated;
@@ -83,7 +83,7 @@
 @end
 
 @interface GFNode (GFNodeActor)
-- (id)nodeActorForView:(id)fp8;
+- (GFNodeActor*)nodeActorForView:(NSView*)view;
 @end
 
 @interface GFNode (Private)
@@ -95,10 +95,10 @@
 - (void)disableNotifications;
 - (void)enableNotifications;
 - (id)debugPath;
-- (id)_getUserInfo:(id)fp8;
-- (void)_logMessage:(NSString*)format; // this one doesn't handle format strings
-- (id)_inputPorts;
-- (id)_outputPorts;
+- (id)_getUserInfo:(NSString*)key;  // returns object from _userInfo for key key
+- (void)_logMessage:(NSString*)message; // this one doesn't handle format strings
+- (GFList*)_inputPorts;
+- (GFList*)_outputPorts;
 - (id)_baseKey;
 - (BOOL)_isPortKeyInUse:(id)fp8;
 - (id)_uniqueInputPortKey;

@@ -18,7 +18,7 @@
 - (void)__patchExecuted:(id)fp8;
 - (void)__patchActivated:(id)fp8;
 - (void)__patchStarted:(id)fp8;
-- (void)setVisualizePatchExecution:(BOOL)fp8;
+- (void)setVisualizePatchExecution:(BOOL)flag;
 - (BOOL)visualizePatchExecution;
 @end
 

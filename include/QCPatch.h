@@ -267,7 +267,7 @@ typedef enum
 @end
 
 @interface QCPatch (Registry)
-+ (QCNodeManager *)patchManager;
++ (QCNodeManager *)patchManager;    // this sets up some node managers (2?) and then calls _RegisterPatches, which does all patch registration and plugin loading
 + (NSArray *)patchNames;
 + (QCPatch *)patchWithName:(NSString *)name; // deprecated -> +createPatchWithName:
 + (QCPatch *)createPatchWithName:(NSString *)name NS_RETURNS_RETAINED; // creates a new instance

@@ -23,8 +23,8 @@
 
 - (id)xmlAttributesForNodeIdentifier:(NSString*)identifier;
 - (id)attributesForNodeIdentifier:(NSString*)identifier;
-- (id)attributesForInputPort:(id)fp8 nodeIdentifier:(NSString*)identifier;
-- (id)attributesForOutputPort:(id)fp8 nodeIdentifier:(NSString*)identifier;
+- (id)attributesForInputPort:(NSString*)port nodeIdentifier:(NSString*)identifier;
+- (id)attributesForOutputPort:(NSString*)port nodeIdentifier:(NSString*)identifier;
 - (GFList*)ivarInputPorts;  // returns raw pointer to _inputs
 - (GFList*)ivarOutputPorts; // returns raw pointer to _outputs
 - (void)dealloc;

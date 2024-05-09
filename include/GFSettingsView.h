@@ -17,11 +17,11 @@
 }
 
 - (void)_finish_initialization;
-- (id)initWithFrame:(NSRect)fp8;
+- (id)initWithFrame:(NSRect)frame;
 - (void)dealloc;
 - (void)_updateDefaults;
-- (void)setDefaults:(id)fp8;
-- (id)defaults;
+- (void)setDefaults:(NSDictionary *)defaults; // yes, this is a dict, not a GFList
+- (GFList*)defaults;
 - (void)setDefault:(id)fp8 forKey:(id)fp12;
 - (void)removeDefaultForKey:(id)fp8;
 - (id)delegate;

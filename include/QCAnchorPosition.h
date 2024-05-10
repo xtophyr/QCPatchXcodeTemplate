@@ -10,8 +10,8 @@
 }
 
 + (BOOL)isSafe;
-+ (BOOL)allowsSubpatchesWithIdentifier:(id)fp8;
-- (id)initWithIdentifier:(id)fp8;
++ (BOOL)allowsSubpatchesWithIdentifier:(NSString*)identifier;
+- (id)initWithIdentifier:(NSString*)identifier;
 - (BOOL)setup:(QCOpenGLContext *)context;
 - (void)receiveMessage:(id)fp8 name:(id)fp12 attributes:(id)fp16;
 - (BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)args;

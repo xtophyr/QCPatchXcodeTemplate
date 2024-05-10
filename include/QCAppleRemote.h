@@ -16,13 +16,13 @@
 }
 
 + (BOOL)isSafe;
-+ (QCPatchExecutionMode)executionModeWithIdentifier:(id)identifier;
-+ (BOOL)allowsSubpatchesWithIdentifier:(id)fp8;
-+ (id)stateKeysWithIdentifier:(id)fp8;
++ (QCPatchExecutionMode)executionModeWithIdentifier:(NSString*)identifier;
++ (BOOL)allowsSubpatchesWithIdentifier:(NSString*)identifier;
++ (id)stateKeysWithIdentifier:(NSString*)identifier;
 - (void)_setUp;
 - (void)_processEvents;
 - (void)_cleanUp;
-- (void)setExclusiveAccess:(BOOL)fp8;
+- (void)setExclusiveAccess:(BOOL)flag;
 - (BOOL)exclusiveAccess;
 - (BOOL)setup:(QCOpenGLContext *)context;
 - (BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)args;
@@ -31,5 +31,5 @@
 @end
 
 @interface QCAppleRemote (QCInspector)
-+ (id)inspectorNibNameWithIdentifier:(id)fp8;
++ (id)inspectorNibNameWithIdentifier:(NSString*)identifier;
 @end

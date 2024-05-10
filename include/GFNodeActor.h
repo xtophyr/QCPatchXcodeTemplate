@@ -10,12 +10,12 @@
 
 + (GFNodeActor*)sharedActor;
 - (NSSize)sizeForNode:(GFNode*)node;
-- (id)_portForPoint:(NSPoint)fp8 inNode:(id)fp16 bounds:(NSRect)fp20 outBounds:(NSRect *)fp36;
-- (id)portForPoint:(NSPoint)fp8 inNode:(id)fp16 bounds:(NSRect)fp20;
-- (NSPoint)pointForPort:(id)fp8 inNode:(id)fp12 bounds:(NSRect)fp16;
+- (id)_portForPoint:(NSPoint)point inNode:(id)fp16 bounds:(NSRect)bounds outBounds:(NSRect *)outBounds;
+- (id)portForPoint:(NSPoint)point inNode:(id)fp16 bounds:(NSRect)bounds;
+- (NSPoint)pointForPort:(id)fp8 inNode:(id)fp12 bounds:(NSRect)bounds;
 - (void)drawNode:(GFNode*)node bounds:(NSRect)bounds view:(GFGraphView*)view;
-- (void)drawSelectionRingWithColor:(NSColor*)color width:(CGFloat)fp12 forNode:(id)fp16 bounds:(NSRect)fp20 view:(NSView*)view;
-- (BOOL)trackMouse:(id)fp8 inNode:(id)fp12 bounds:(NSRect)fp16 view:(id)fp32;
+- (void)drawSelectionRingWithColor:(NSColor*)color width:(CGFloat)width forNode:(id)fp16 bounds:(NSRect)bounds view:(NSView*)view;
+- (BOOL)trackMouse:(id)fp8 inNode:(id)fp12 bounds:(NSRect)bounds view:(id)fp32;
 - (NSMenu*)menuForNode:(GFNode*)node view:(GFGraphView*)view;
 - (BOOL)nodeAcceptsFirstResponder:(id)fp8 view:(NSView*)view;
 - (BOOL)nodeBecomesFirstResponder:(id)fp8 view:(NSView*)view;

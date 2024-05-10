@@ -1,5 +1,6 @@
 @interface QCMathematicalExpression : NSObject
 {
+    // this uses a C++-based evaluator, with Parser:: and FunctionInterpreter:: being some namespaces that crop up.
 	void *_interpreter;	// 4 = 0x4
 }
 

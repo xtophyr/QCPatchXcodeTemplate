@@ -22,10 +22,10 @@
 - (void)_updateDefaults;
 - (void)setDefaults:(NSDictionary *)defaults; // yes, this is a dict, not a GFList
 - (GFList*)defaults;
-- (void)setDefault:(id)fp8 forKey:(id)fp12;
-- (void)removeDefaultForKey:(id)fp8;
+- (void)setDefault:(id)fp8 forKey:(NSString*)key;
+- (void)removeDefaultForKey:(NSString*)key;
 - (id)delegate;
-- (void)setDelegate:(id)fp8;
+- (void)setDelegate:(id)delegate;
 - (void)reloadSettings;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;
@@ -36,9 +36,9 @@
 
 @interface GFSettingsView (TableViewSource)
 - (NSInteger)numberOfRowsInTableView:(NSTableView*)fp8;
-- (id)tableView:(NSTableView*)fp8 objectValueForTableColumn:(NSTableColumn*)fp12 row:(NSInteger)fp16;
-- (BOOL)tableView:(NSTableView*)fp8 shouldEditTableColumn:(NSTableColumn*)fp12 row:(NSInteger)fp16;
-- (void)tableView:(NSTableView*)fp8 setObjectValue:(id)fp12 forTableColumn:(NSTableColumn*)fp16 row:(NSInteger)fp20;
-- (void)tableView:(NSTableView*)fp8 willDisplayCell:(id)fp12 forTableColumn:(NSTableColumn*)fp16 row:(NSInteger)fp20;
-- (id)_cellForRow:(NSInteger)fp8;
+- (id)tableView:(NSTableView*)tableView objectValueForTableColumn:(NSTableColumn*)column row:(NSInteger)row;
+- (BOOL)tableView:(NSTableView*)tableView shouldEditTableColumn:(NSTableColumn*)column row:(NSInteger)row;
+- (void)tableView:(NSTableView*)tableView setObjectValue:(id)fp12 forTableColumn:(NSTableColumn*)column row:(NSInteger)row;
+- (void)tableView:(NSTableView*)tableView willDisplayCell:(id)fp12 forTableColumn:(NSTableColumn*)column row:(NSInteger)row;
+- (id)_cellForRow:(NSInteger)row;
 @end

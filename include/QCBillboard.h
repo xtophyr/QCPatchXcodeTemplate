@@ -19,34 +19,34 @@
 }
 
 + (BOOL)isSafe;
-+ (NSUInteger)stateVersionWithIdentifier:(id)fp8;
-+ (QCPatchExecutionMode)executionModeWithIdentifier:(id)identifier;
-+ (BOOL)allowsSubpatchesWithIdentifier:(id)fp8;
++ (NSUInteger)stateVersionWithIdentifier:(NSString*)identifier;
++ (QCPatchExecutionMode)executionModeWithIdentifier:(NSString*)identifier;
++ (BOOL)allowsSubpatchesWithIdentifier:(NSString*)identifier;
 + (BOOL)allowsInteraction;
-+ (id)stateKeysWithIdentifier:(id)fp8;
-+ (id)serializedStateKeysWithIdentifier:(id)fp8;
-- (id)initWithIdentifier:(id)fp8;
++ (id)stateKeysWithIdentifier:(NSString*)identifier;
++ (id)serializedStateKeysWithIdentifier:(NSString*)identifier;
+- (id)initWithIdentifier:(NSString*)identifier;
 - (void)receiveMessage:(id)fp8 name:(id)fp12 attributes:(id)fp16;
 - (BOOL)setup:(QCOpenGLContext *)context;
 - (BOOL)automaticStateSet:(id)fp8;
 - (BOOL)allowsScissors:(id)fp8;
 - (struct _QCDod *)createDodForContext:(id)fp8;
 - (CGPoint)position;
-- (void)setPosition:(CGPoint)fp8;
+- (void)setPosition:(CGPoint)position;
 - (CGFloat)rotation;
-- (void)setRotation:(CGFloat)fp8;
+- (void)setRotation:(CGFloat)rotation;
 - (CGFloat)scaleX;
 - (CGFloat)scaleY;
-- (void)setScaleX:(CGFloat)fp8;
-- (void)setScaleY:(CGFloat)fp8;
+- (void)setScaleX:(CGFloat)scaleX;
+- (void)setScaleY:(CGFloat)scaleY;
 - (BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)args;
 - (void)cleanup:(QCOpenGLContext *)context;
-- (void)setSizeMode:(int)fp8;
+- (void)setSizeMode:(int)sizeMode;
 - (int)sizeMode;
 - (NSDictionary*)state;
 - (BOOL)setState:(NSDictionary*)state;
 @end
 
 @interface QCBillboard (QCInspector)
-+ (Class)inspectorClassWithIdentifier:(id)fp8;
++ (Class)inspectorClassWithIdentifier:(NSString*)identifier;
 @end

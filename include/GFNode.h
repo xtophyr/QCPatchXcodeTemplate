@@ -4,6 +4,10 @@
 
 @class GFGraph, GFList, GFNodeClassDescription;
 
+/* _flags for GFNode:
+        TBD
+ */
+
 @interface GFNode : NSObject <GFBase, NSCoding, NSCopying>
 {
 	GFList *_inputPorts;	// 4 = 0x4
@@ -21,18 +25,18 @@
 }
 
 + (void)initialize;
-+ (id)xmlAttributesWithIdentifier:(id)fp8;
-+ (id)attributesWithIdentifier:(id)fp8;
-+ (NSUInteger)stateVersionWithIdentifier:(id)fp8;
++ (id)xmlAttributesWithIdentifier:(NSString*)identifier;
++ (id)attributesWithIdentifier:(NSString*)identifier;
++ (NSUInteger)stateVersionWithIdentifier:(NSString*)identifier;
 + (BOOL)shouldCreateIvarPorts;
 + (BOOL)shouldLoadAttributes;
-+ (id)nodeWithIdentifier:(id)fp8;
++ (id)nodeWithIdentifier:(NSString*)identifier;
 - (NSUInteger)versionFromState:(id)fp8;
 - (id)init;
 - (void)__setValue:(id)fp8 forIvar:(const char *)fp12;
-- (id)initWithIdentifier:(id)fp8;
+- (id)initWithIdentifier:(NSString*)identifier;
 - (void)dealloc;
-- (id)identifier;
+- (NSString*)identifier;
 - (id)argumentsForIvarPortWithKey:(id)fp8;
 - (id)createInputPortWithArguments:(id)fp8 forKey:(id)fp12;
 - (id)createOutputPortWithArguments:(id)fp8 forKey:(id)fp12;
@@ -73,7 +77,7 @@
 - (void)resumeNotifications;
 - (void)stateUpdated;
 - (void)logMessage:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
-- (void)debugMessage:(id)fp8;
+- (void)debugMessage:(NSString*)message;
 - (id)key;
 - (void)nodeDidAddToGraph:(id)fp8;
 - (void)nodeWillRemoveFromGraph;
@@ -87,11 +91,11 @@
 @end
 
 @interface GFNode (Private)
-+ (id)newWithIdentifier:(id)fp8;
++ (id)newWithIdentifier:(NSString*)identifier;
 + (Class)nodeClassDescriptionClass;
 + (Class)_listClass;
 + (id)_keyFromName:(id)fp8;
-- (id)nodeClassDescription;
+- (GFNodeClassDescription*)nodeClassDescription;
 - (void)disableNotifications;
 - (void)enableNotifications;
 - (id)debugPath;
@@ -100,7 +104,7 @@
 - (GFList*)_inputPorts;
 - (GFList*)_outputPorts;
 - (id)_baseKey;
-- (BOOL)_isPortKeyInUse:(id)fp8;
+- (BOOL)_isPortKeyInUse:(NSString*)key;
 - (id)_uniqueInputPortKey;
 - (id)_uniqueOutputPortKey;
 - (void)_portsUpdated;

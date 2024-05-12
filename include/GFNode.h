@@ -47,18 +47,19 @@
 - (NSMutableDictionary *)userInfo;
 - (NSArray *)inputPorts;
 - (NSArray *)outputPorts;
-- (void)applyFunctionOnInputPorts:(void *)fp8 context:(void *)context;
+- (void)applyFunctionOnInputPorts:(void(*)(id port, void *ctx))func context:(void *)context;
 - (void)enumerateInputPortsWithOptions:(NSUInteger)options usingBlock:(void*)block; // added after SSDK was dumped
-- (void)applyFunctionOnOutputPorts:(void *)fp8 context:(void *)context;
+- (void)applyFunctionOnOutputPorts:(void(*)(id port, void *ctx))func context:(void *)context;
 - (void)enumerateOutputPortsWithOptions:(NSUInteger)options usingBlock:(void*)block; // added after SSDK was dumped
+- (void)enumeratePortsWithOptions:(NSUInteger)options usingBlock:(void*)block; // added after SSDK was dumped
 - (NSArray *)ivarInputPorts;
 - (NSArray *)ivarOutputPorts;
 - (NSArray *)customInputPorts;
 - (NSArray *)customOutputPorts;
-- (BOOL)saveCustomInputPortStates:(id)fp8 toState:(id)fp12;
-- (BOOL)saveCustomOutputPortStates:(id)fp8 toState:(id)fp12;
-- (BOOL)restoreCustomInputPortStates:(id)fp8 fromState:(id)fp12;
-- (BOOL)restoreCustomOutputPortStates:(id)fp8 fromState:(id)fp12;
+- (BOOL)saveCustomInputPortStates:(id)fp8 toState:(NSMutableDictionary*)state;
+- (BOOL)saveCustomOutputPortStates:(id)fp8 toState:(NSMutableDictionary*)state;
+- (BOOL)restoreCustomInputPortStates:(id)fp8 fromState:(NSDictionary*)state;
+- (BOOL)restoreCustomOutputPortStates:(id)fp8 fromState:(NSDictionary*)state;
 - (NSDictionary *)xmlAttributes;
 - (NSDictionary*)attributes;
 - (NSUndoManager*)undoManager;
@@ -109,8 +110,8 @@
 - (NSString*)_uniqueOutputPortKey;
 - (void)_portsUpdated;
 - (void)_postNotification:(NSString*)notification sender:(id)sender;
-- (id)_stateForPorts:(id)fp8;
-- (BOOL)_setState:(id)fp8 forPorts:(id)fp12;
+- (id)_stateForPorts:(id)ports;
+- (BOOL)_setState:(id)state forPorts:(id)ports;
 - (id)_portsFromList:(GFList*)portList withSetFlags:(NSUInteger)fp12 unsetFlags:(NSUInteger)fp16;
 - (id)_userInfo;
 @end

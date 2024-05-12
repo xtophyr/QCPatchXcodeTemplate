@@ -13,7 +13,8 @@ extern NSString * const GFPortsLayoutDidChangeNotification;
 	GFPort *_originalPort;	// 12 = 0xc
 	NSDictionary *_attributes;	// 16 = 0x10
 	NSMutableDictionary *_userInfo;	// 20 = 0x14
-	void *_unused[4];	// 24 = 0x18
+    GFPort *_rootPort;  // added after SSDK was dumped
+	void *_unused[3];	// 24 = 0x18
 }
 
 - (id)init;

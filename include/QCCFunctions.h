@@ -82,7 +82,7 @@ int QCGetCompositionTrackAtIndex(void); // returns 0 (14.4.1)
 CGColorSpaceRef QCGetIndexedColorSpace(int index); // indexes are 0 - 12 or so
 
 /* returns mach_absolute_time() with the usual mach_timebase_info fixups (scale by numer/denom) */
-/* time is adjusted to roughly seconds of uptime (not nanoseconds), with an unknown offset */
+/* time is adjusted to roughly seconds of uptime (not nanoseconds) */
 double QCHostTime(void);
 /* filters compositionDictionary, removing some internal keys.  returns a new dict, leaves the original unmodified. */
 NSDictionary* QCInfoFromComposition(NSDictionary*compositionDictionary);

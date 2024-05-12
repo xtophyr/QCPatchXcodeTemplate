@@ -31,25 +31,25 @@
 + (BOOL)shouldCreateIvarPorts;
 + (BOOL)shouldLoadAttributes;
 + (id)nodeWithIdentifier:(NSString*)identifier;
-- (NSUInteger)versionFromState:(id)fp8;
+- (NSUInteger)versionFromState:(id)state;
 - (id)init;
-- (void)__setValue:(id)fp8 forIvar:(const char *)fp12;
+- (void)__setValue:(id)value forIvar:(const char *)ivarName;
 - (id)initWithIdentifier:(NSString*)identifier;
 - (void)dealloc;
 - (NSString*)identifier;
-- (id)argumentsForIvarPortWithKey:(id)fp8;
-- (id)createInputPortWithArguments:(id)fp8 forKey:(id)fp12;
-- (id)createOutputPortWithArguments:(id)fp8 forKey:(id)fp12;
-- (void)setInputPortOrder:(NSUInteger)fp8 forKey:(id)fp12;
-- (void)setOutputPortOrder:(NSUInteger)fp8 forKey:(id)fp12;
-- (void)deleteInputPortForKey:(id)fp8;
-- (void)deleteOutputPortForKey:(id)fp8;
+- (NSDictionary*)argumentsForIvarPortWithKey:(NSString*)key;
+- (GFPort*)createInputPortWithArguments:(NSDictionary*)args forKey:(NSString*)key;
+- (GFPort*)createOutputPortWithArguments:(NSDictionary*)args forKey:(NSString*)key;
+- (void)setInputPortOrder:(NSUInteger)fp8 forKey:(NSString*)key;
+- (void)setOutputPortOrder:(NSUInteger)fp8 forKey:(NSString*)key;
+- (void)deleteInputPortForKey:(NSString*)key;
+- (void)deleteOutputPortForKey:(NSString*)key;
 - (NSMutableDictionary *)userInfo;
 - (NSArray *)inputPorts;
 - (NSArray *)outputPorts;
-- (void)applyFunctionOnInputPorts:(void *)fp8 context:(void *)fp12;
+- (void)applyFunctionOnInputPorts:(void *)fp8 context:(void *)context;
 - (void)enumerateInputPortsWithOptions:(NSUInteger)options usingBlock:(void*)block; // added after SSDK was dumped
-- (void)applyFunctionOnOutputPorts:(void *)fp8 context:(void *)fp12;
+- (void)applyFunctionOnOutputPorts:(void *)fp8 context:(void *)context;
 - (void)enumerateOutputPortsWithOptions:(NSUInteger)options usingBlock:(void*)block; // added after SSDK was dumped
 - (NSArray *)ivarInputPorts;
 - (NSArray *)ivarOutputPorts;
@@ -69,20 +69,20 @@
 - (void)encodeWithCoder:(NSCoder*)aCoder;
 - (id)initWithCoder:(NSCoder*)aDeoder;
 - (id)copyWithZone:(NSZone *)zone;
-- (id)portForKey:(id)fp8;
-- (id)keyForPort:(id)fp8;
-- (int)directionForPort:(id)fp8;    // inputs return -1, outputs return 1, invalid returns 0
+- (id)portForKey:(NSString*)key;
+- (NSString*)keyForPort:(GFPort*)port;
+- (int)directionForPort:(GFPort*)port;    // inputs return -1, outputs return 1, invalid returns 0
 - (id)graph;    // _parent
 - (void)pauseNotifications;
 - (void)resumeNotifications;
 - (void)stateUpdated;
 - (void)logMessage:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
-- (void)debugMessage:(NSString*)message;
-- (id)key;
+- (void)debugMessage:(NSString*)message; // TODO: this one is maybe var args after all...
+- (NSString*)key;
 - (void)nodeDidAddToGraph:(id)fp8;
 - (void)nodeWillRemoveFromGraph;
-- (void)__setUndoableValue:(id)fp8 forKeyPath:(id)fp12 updatesState:(id)fp16;
-- (void)setUndoableValue:(id)fp8 forKeyPath:(id)fp12 updatesState:(BOOL)fp16;
+- (void)__setUndoableValue:(id)fp8 forKeyPath:(NSString*)keyPath updatesState:(id)fp16;
+- (void)setUndoableValue:(id)fp8 forKeyPath:(NSString*)keyPath updatesState:(BOOL)flag;
 
 @end
 
@@ -94,23 +94,23 @@
 + (id)newWithIdentifier:(NSString*)identifier;
 + (Class)nodeClassDescriptionClass;
 + (Class)_listClass;
-+ (id)_keyFromName:(id)fp8;
++ (NSString*)_keyFromName:(NSString*)name;
 - (GFNodeClassDescription*)nodeClassDescription;
 - (void)disableNotifications;
 - (void)enableNotifications;
-- (id)debugPath;
-- (id)_getUserInfo:(NSString*)key;  // returns object from _userInfo for key key
+- (NSString*)debugPath;
+- (id)_getUserInfo:(NSString*)key;  // returns object from _userInfo for key, recursing parent's userInfo if not found
 - (void)_logMessage:(NSString*)message; // this one doesn't handle format strings
 - (GFList*)_inputPorts;
 - (GFList*)_outputPorts;
-- (id)_baseKey;
+- (NSString*)_baseKey;
 - (BOOL)_isPortKeyInUse:(NSString*)key;
-- (id)_uniqueInputPortKey;
-- (id)_uniqueOutputPortKey;
+- (NSString*)_uniqueInputPortKey;
+- (NSString*)_uniqueOutputPortKey;
 - (void)_portsUpdated;
-- (void)_postNotification:(id)fp8 sender:(id)fp12;
+- (void)_postNotification:(NSString*)notification sender:(id)sender;
 - (id)_stateForPorts:(id)fp8;
 - (BOOL)_setState:(id)fp8 forPorts:(id)fp12;
-- (id)_portsFromList:(id)fp8 withSetFlags:(NSUInteger)fp12 unsetFlags:(NSUInteger)fp16;
+- (id)_portsFromList:(GFList*)portList withSetFlags:(NSUInteger)fp12 unsetFlags:(NSUInteger)fp16;
 - (id)_userInfo;
 @end

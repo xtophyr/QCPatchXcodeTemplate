@@ -29,7 +29,9 @@ extern NSString * const GFStateDidFinishLoadingNotification;
 - (BOOL)canCreateConnectionFromPort:(GFPort*)sourcePort toPort:(GFPort*)destPort;
 - (id)createConnectionFromPort:(GFPort*)sourcePort toPort:(GFPort*)destPort forKey:(NSString*)key;
 - (id)createConnectionFromPort:(GFPort*)sourcePort toPort:(GFPort*)destPort;
-- (void)__createConnectionFrom:(id)fp8 to:(id)fp12 forKey:(NSString*)key withUserInfo:(NSMutableDictionary*)userInfo;
+
+// source and dest array are 2-element arrays containing a port node [index 0] and a port key [index 1].  used to undo deleting a connection.
+- (void)__createConnectionFrom:(NSArray*)source to:(NSArray*)dest forKey:(NSString*)key withUserInfo:(NSMutableDictionary*)userInfo;
 - (void)deleteConnectionForKey:(NSString*)key;
 - (void)deleteConnection:(GFConnection*)connection;
 - (NSArray*)connections;
@@ -37,9 +39,9 @@ extern NSString * const GFStateDidFinishLoadingNotification;
 - (NSString*)keyForNode:(GFNode*)node;
 - (GFConnection*)connectionForKey:(NSString*)key;
 - (NSString*)keyForConnection:(GFConnection*)connection;
-- (id)pathForNode:(GFNode*)node;
+- (NSString*)pathForNode:(GFNode*)node;
 - (GFNode*)nodeForPath:(id)path;
-- (id)pathForPort:(GFPort*)port;
+- (NSString*)pathForPort:(GFPort*)port;
 - (GFPort*)portForPath:(id)path;
 - (BOOL)canCreateProxyPortWithOriginalPort:(GFPort*)port;
 - (id)createProxyPortWithOriginalPort:(GFPort*)port forKey:(NSString*)key;

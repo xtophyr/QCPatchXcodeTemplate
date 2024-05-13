@@ -1,6 +1,9 @@
 
 #import "GFNodeActor.h"
 
+/* QCPatchActor draws nodes in the graph editor view.  It controls stuff like the node's name and title, where ports are located,
+ and the visual appearance of the patches.  QCCirclePatchActor is a subclass used to get Logic and Mathematical Expression's different look. */
+
 @class QCInspector, QCPatch, QCTableView;
 
 @interface QCPatchActor : GFNodeActor
@@ -22,32 +25,32 @@
 + (void)initialize;
 - (id)init;
 - (void)dealloc;
-- (CGColorRef)_overlayColorForNode:(id)fp8 view:(id)fp12;
-- (void)_drawTitle:(id)fp8 inContext:(CGContextRef)fp12 atPoint:(NSPoint)fp16 withAttributes:(id)fp24;
-- (void)_drawString:(id)fp8 inContext:(CGContextRef)fp12 atPoint:(NSPoint)fp16 withAttributes:(id)fp24;
+- (CGColorRef)_overlayColorForNode:(id)fp8 view:(NSView*)view;
+- (void)_drawTitle:(id)fp8 inContext:(CGContextRef)context atPoint:(NSPoint)point withAttributes:(id)fp24;
+- (void)_drawString:(id)fp8 inContext:(CGContextRef)context atPoint:(NSPoint)point withAttributes:(id)fp24;
 - (id)_colorForNode:(id)fp8;
 - (id)_titleTextAttributesForNode:(id)fp8;
 - (id)_portTextAttributesForNode:(id)fp8;
-- (void)_makeCGPathForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)fp28;
-- (void)_makeSelectionPathForNode:(id)fp8 border:(float)fp12 bounds:(NSRect)fp16 inContext:(CGContextRef)fp32;
-- (void)_drawBackgroundGradientLayerForNode:(id)fp8 bounds:(NSRect)fp12 reflectionHeight:(CGFloat)fp28 inContext:(CGContextRef)fp32;
+- (void)_makeCGPathForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)context;
+- (void)_makeSelectionPathForNode:(id)fp8 border:(float)fp12 bounds:(NSRect)fp16 inContext:(CGContextRef)context;
+- (void)_drawBackgroundGradientLayerForNode:(id)fp8 bounds:(NSRect)fp12 reflectionHeight:(CGFloat)fp28 inContext:(CGContextRef)context;
 - (id)portForPoint:(NSPoint)fp8 inNode:(id)fp16 bounds:(NSRect)fp20;
 - (id)_portForPoint:(NSPoint)fp8 inNode:(id)fp16 bounds:(NSRect)fp20 outBounds:(NSRect *)fp36;
 - (NSPoint)pointForPort:(id)fp8 inNode:(id)fp12 bounds:(NSRect)fp16;
-- (void)_drawHighLightForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)fp28;
-- (void)_drawSelectionForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)fp28;
-- (void)_drawNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)fp28;
-- (CGFloat)_drawBadgeForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)fp28;
-- (CGFloat)_drawOrderForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)fp28;
-- (void)_drawTitleForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)fp28;
-- (void)_drawNameForPort:(id)fp8 node:(id)fp12 atPoint:(NSPoint)fp16 bounds:(NSRect)fp24 inContext:(CGContextRef)fp40;
-- (CGLayerRef)_createPortRingWithColor:(CGColorRef)fp8 inContext:(CGContextRef)fp12 zoom:(CGFloat)fp16;
-- (void)_drawPortsForNode:(id)fp8 bounds:(NSRect)fp12 view:(id)fp28 inContext:(CGContextRef)fp32;
-- (void)_drawPortColorsForNode:(id)fp8 bounds:(NSRect)fp12 view:(id)fp28 inContext:(CGContextRef)fp32;
-- (void)_drawOverlayForNode:(id)fp8 bounds:(NSRect)fp12 stroke:(BOOL)fp28 view:(id)fp32 inContext:(CGContextRef)fp36;
-- (void)_drawOverlayForNode:(id)fp8 bounds:(NSRect)fp12 view:(id)fp28 inContext:(CGContextRef)fp32;
+- (void)_drawHighLightForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)context;
+- (void)_drawSelectionForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)context;
+- (void)_drawNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)context;
+- (CGFloat)_drawBadgeForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)context;
+- (CGFloat)_drawOrderForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)context;
+- (void)_drawTitleForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)context;
+- (void)_drawNameForPort:(id)fp8 node:(id)fp12 atPoint:(NSPoint)fp16 bounds:(NSRect)fp24 inContext:(CGContextRef)context;
+- (CGLayerRef)_createPortRingWithColor:(CGColorRef)fp8 inContext:(CGContextRef)context zoom:(CGFloat)fp16;
+- (void)_drawPortsForNode:(id)fp8 bounds:(NSRect)fp12 view:(id)fp28 inContext:(CGContextRef)context;
+- (void)_drawPortColorsForNode:(id)fp8 bounds:(NSRect)fp12 view:(id)fp28 inContext:(CGContextRef)context;
+- (void)_drawOverlayForNode:(id)fp8 bounds:(NSRect)fp12 stroke:(BOOL)fp28 view:(id)fp32 inContext:(CGContextRef)context;
+- (void)_drawOverlayForNode:(id)fp8 bounds:(NSRect)fp12 view:(id)fp28 inContext:(CGContextRef)context;
 - (QCMD5Sum *)nodeMD5List:(id)fp8 bounds:(NSRect)fp12 view:(id)fp28 zoom:(CGFloat)fp32 outCount:(NSUInteger *)fp36;
-- (void)drawNode:(id)fp8 bounds:(NSRect)fp12 view:(id)fp28;
+- (void)drawNode:(id)fp8 bounds:(NSRect)bounds view:(NSView*)view;
 - (id)parametersViewForPatch:(id)fp8;
 - (NSSize)sizeForNode:(id)fp8;
 - (BOOL)dragsOnPortForNode:(id)fp8;
@@ -66,14 +69,17 @@
 - (void)resetInspectorViews;
 - (void)_updatedState:(id)fp8;
 - (void)_updatedPorts:(id)fp8;
-- (NSInteger)numberOfRowsInTableView:(NSTableView*)fp8;
-- (id)tableView:(NSTableView*)fp8 portForRow:(int)fp12;
-- (id)tableView:(NSTableView*)fp8 objectValueForTableColumn:(NSTableColumn*)fp12 row:(NSInteger)fp16;
-- (BOOL)tableView:(NSTableView*)fp8 shouldEditTableColumn:(NSTableColumn*)fp12 row:(NSInteger)fp16;
-- (void)tableView:(NSTableView*)fp8 setObjectValue:(id)fp12 forTableColumn:(NSTableColumn*)fp16 row:(NSInteger)fp20;
-- (BOOL)tableView:(NSTableView*)fp8 writeRows:(id)fp12 toPasteboard:(id)fp16;
-- (NSUInteger)tableView:(NSTableView*)fp8 validateDrop:(id)fp12 proposedRow:(NSInteger)fp16 proposedDropOperation:(NSUInteger)fp20;
-- (BOOL)tableView:(NSTableView*)fp8 acceptDrop:(id)fp12 row:(NSInteger)fp16 dropOperation:(NSUInteger)fp20;
+
+// NSTableView stuff (not sure what this is used for, maybe the UI is modeled as a table view with each row being a port?)
+- (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView;
+- (id)tableView:(NSTableView*)tableView portForRow:(int)row;
+- (id)tableView:(NSTableView*)tableView objectValueForTableColumn:(NSTableColumn*)fp12 row:(NSInteger)row;
+- (BOOL)tableView:(NSTableView*)tableView shouldEditTableColumn:(NSTableColumn*)fp12 row:(NSInteger)row;
+- (void)tableView:(NSTableView*)tableView setObjectValue:(id)fp12 forTableColumn:(NSTableColumn*)fp16 row:(NSInteger)row;
+- (BOOL)tableView:(NSTableView*)tableView writeRows:(id)fp12 toPasteboard:(id)fp16;
+- (NSUInteger)tableView:(NSTableView*)tableView validateDrop:(id)fp12 proposedRow:(NSInteger)row proposedDropOperation:(NSUInteger)fp20;
+- (BOOL)tableView:(NSTableView*)tableView acceptDrop:(id)fp12 row:(NSInteger)row dropOperation:(NSUInteger)fp20;
+
 - (id)parametersViewForPatch:(id)fp8;
 - (void)_setLayer:(id)fp8;
 - (void)_explodeSubgraph:(id)fp8;
@@ -85,5 +91,5 @@
 @end
 
 @interface QCPatchActor (Tooltip)
-- (id)tooltipStringForPoint:(NSPoint)fp8 inNode:(id)fp16 bounds:(NSRect)fp20 tooltipBounds:(NSRect *)fp36;
+- (id)tooltipStringForPoint:(NSPoint)point inNode:(id)fp16 bounds:(NSRect)bounds tooltipBounds:(NSRect *)fp36;
 @end

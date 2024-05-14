@@ -10,19 +10,20 @@
 	void *_unused[4];	// 24 = 0x18
 }
 
-- (id)init;
-- (id)initWithGraph:(GFGraph*)graph sourcePort:(GFPort*)src destinationPort:(GFPort*)dst arguments:(NSDictionary*)args;
+- (id)init; // -initWithGrap:... nil, nil, nil, nil, immediately throws an exception.
+- (id)initWithGraph:(GFGraph*)graph sourcePort:(GFPort* _Nonnull)src destinationPort:(GFPort* _Nonnull)dst arguments:(NSDictionary* _Nullable)args NS_DESIGNATED_INITIALIZER;
 - (void)dealloc;
-- (void)connectionWillDeleteFromGraph;
+
+- (void)connectionWillDeleteFromGraph;  // releases _sourcePort and _destPort, sets them and _owner to nil.  exception thrown if _owner is already nil
 - (GFPort*)sourcePort;
 - (GFPort*)destinationPort;
 - (NSDictionary*)attributes;
 - (NSMutableDictionary*)userInfo;
 - (GFGraph*)graph;
-- (NSDictionary*)state;
-- (BOOL)setState:(NSDictionary*)state;
+- (NSMutableDictionary*)state;          // serializes the connection
+- (BOOL)setState:(NSDictionary*)state;  // restores the connection from serialization, returns YES
 - (void)stateUpdated;
 - (NSString*)description;
-- (NSString*)key;
+- (NSString*)key;       // returns _owner's key for this connection
 
 @end

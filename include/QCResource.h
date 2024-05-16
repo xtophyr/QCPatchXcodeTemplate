@@ -15,8 +15,8 @@
 - (NSUInteger)retainCount;
 - (void)setResourcePool:(id)fp8;
 - (id)resourcePool;
-- (void)willRecycleResource:(id)fp8;
-- (BOOL)didRecycleResource:(id)fp8;
+- (void)willRecycleResource:(QCCache*)cache;
+- (BOOL)didRecycleResource:(QCCache*)cache;
 - (NSString*)description;
 
 @end

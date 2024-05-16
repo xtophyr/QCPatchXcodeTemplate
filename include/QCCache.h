@@ -1,3 +1,10 @@
+// QCCache is probably where QC started going off the rails and became less reliable.  to improve "performances", all kind of stuff is cached.
+// As you can see, a cache holds ... a parent cache, and a root cache too.  MD5sums are computed for things, then tossed into the cache.
+// methods like "copyBestResource" suggest that it's a best-effort cache;  the worst kind.
+// I sometimes idly wonder if making this do nothing would Just Work.
+
+// check out QCStreamManager for even more cache instanity.  3 (three) caches! 2 (two) mutexes _and_ a condition variable (!!).
+
 @interface QCCache : NSObject <QCCache>
 {
 	NSUInteger _flags;	// 4 = 0x4

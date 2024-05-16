@@ -1,4 +1,8 @@
 /* GFSettingsView is used to drive the scrollview and tableview that display and manage the private preferences. */
+// its UI is backed by GFSettingsView.nib (this holds the cached NSCells and the scrollview and tableview, for instance)
+
+// It appears as though it's incomplete - there are cells for data types that aren't used (menu cell, key cell), and some of the methods
+// check for classes like NSArray only to throw special exceptions for them.  Perhaps the intent was something richer, like Property List Editor?
 
 @class GFList;
 
@@ -6,14 +10,14 @@
 {
 	NSView *_insideView;	// 80 = 0x50    // this is used to hold the NSScrollView that holds the tableview
 	NSTableView *_tableView;	// 84 = 0x54
-	NSCell *_keyCell;	// 88 = 0x58                //
+	NSCell *_keyCell;	// 88 = 0x58                // this appears to be unused?
 	NSTextFieldCell *_stringCell;	// 92 = 0x5c    //
 	NSTextFieldCell *_integerCell;	// 96 = 0x60    //
 	NSTextFieldCell *_floatingCell;	// 100 = 0x64   //
 	NSButtonCell *_booleanCell;	// 104 = 0x68       //
 	NSPopUpButtonCell *_menuCell;	// 108 = 0x6c   // this appears to be unused?
 	GFList *_defaults;	// 112 = 0x70               // this holds the names and default values for the prefs.  differing values render in bold
-	id _delegate;	// 116 = 0x74                   // GFSettingsViewDelegate category on NSObject
+	id _delegate;	// 116 = 0x74                   // GFSettingsViewDelegate category on NSObject (informal protocol)
 }
 
 - (void)_finish_initialization;

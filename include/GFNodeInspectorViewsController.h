@@ -1,5 +1,6 @@
 
-
+// GFNodeInspectorViewsController is used behind the scenes in GFNodeActor.
+// its UI elements are backed by GFNodeActorInspectorViews.nib
 
 @class GFNode;
 
@@ -15,11 +16,11 @@
 
 + (id)sharedController;
 - (id)init;
-- (void)resetTitle:(id)fp8;
-- (void)titleEdited:(id)fp8;
-- (void)noteEdited:(id)fp8;
-- (void)__stateUpdated:(id)fp8;
-- (id)setupViewsForNode:(id)fp8;
+- (void)resetTitle:(id)sender;
+- (void)titleEdited:(id)sender;
+- (void)noteEdited:(id)sender;
+- (void)__stateUpdated:(id)sender;
+- (id)setupViewsForNode:(id)node;
 - (void)resetInspectorViews;
 
 @end

@@ -20,7 +20,7 @@
 - (void)setAlphaComponent:(CGFloat)alpha;
 - (void)setRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
 - (CGColorRef)newCGColor; // added after SSDK was dumped
-- (CGColorRef)createCGColor;    // deprecated -> -createCGColor
+- (CGColorRef)createCGColor;    // deprecated -> -newCGColor
 - (id)CIColorWithColorSpace:(CGColorSpaceRef)colorspace;
 @end
 

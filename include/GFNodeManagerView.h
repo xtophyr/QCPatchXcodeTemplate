@@ -2,6 +2,8 @@
     it supports drag-n-drop into a GFGraphEditorView, and appears to have some search/filtering capabilities too.
  */
 
+/* UI elements of GFNodeManagerView are backed by GFNodeManagerView.nib */
+
 extern NSString * const GFNodeManagerViewInstantiateNodeNotification;
 
 @interface GFNodeManagerView : NSView
@@ -36,7 +38,7 @@ extern NSString * const GFNodeManagerViewInstantiateNodeNotification;
 
 @interface GFNodeManagerView (Private)
 - (void)_finishInitialization;
-- (id)_descriptionForNode:(id)fp8;
+- (NSAttributedString*)_descriptionForNode:(id)fp8;
 - (id)_cellContentForNode:(id)fp8 columnIdentifier:(id)identifier;
 - (int)_compareNode:(id)fp8 withNode:(id)fp12 usingColumnIdentifier:(id)identifier ascending:(BOOL)flag;
 - (id)_filterStringsForNode:(id)fp8;

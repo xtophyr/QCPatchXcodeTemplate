@@ -19,42 +19,42 @@ extern NSString * const GFGraphEditorViewSelectionDidChangeNotification;
 - (BOOL)isOpaque;
 - (void)resizeSubviewsWithOldSize:(NSSize)fp8;
 - (void)showGraphEditorInspector:(id)fp8;
-- (void)printWithInfo:(id)fp8 showingPrintPanel:(BOOL)fp12;
+- (void)printWithInfo:(id)fp8 showingPrintPanel:(BOOL)flag;
 - (void)setGraph:(id)fp8;
 - (id)graph;
 - (NSPoint)editorCenter;
-- (void)setEditorCenter:(NSPoint)fp8;
+- (void)setEditorCenter:(NSPoint)center;
 - (NSSize)editorSize;
-- (void)setEditorSize:(NSSize)fp8;
+- (void)setEditorSize:(NSSize)size;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;
-- (void)setGridStep:(NSUInteger)fp8;
+- (void)setGridStep:(NSUInteger)gridStep;
 - (NSUInteger)gridStep;
 - (BOOL)drawsShadows;
-- (void)setDrawsShadows:(BOOL)fp8;
-- (id)backgroundColor;
-- (void)setBackgroundColor:(id)fp8;
-- (id)gridColor;
-- (void)setGridColor:(id)fp8;
+- (void)setDrawsShadows:(BOOL)flag;
+- (NSColor*)backgroundColor;
+- (void)setBackgroundColor:(NSColor*)backgroundColor;
+- (NSColor*)gridColor;
+- (void)setGridColor:(NSColor*)gridColor;
 - (BOOL)alignNodes;
-- (void)setAlignNodes:(BOOL)fp8;
+- (void)setAlignNodes:(BOOL)flag;
 - (float)zoomFactor;
-- (void)setZoomFactor:(float)fp8;
+- (void)setZoomFactor:(float)zoomFactor;
 - (void)zoomToFitSelection;
 - (void)zoomToFitAll;
-- (void)setTooltipDelay:(double)fp8;
-- (double)tooltipDelay;
-- (void)setNodeManager:(id)fp8;
+- (void)setTooltipDelay:(NSTimeInterval)fp8;
+- (NSTimeInterval)tooltipDelay;
+- (void)setNodeManager:(GFNodeManager)nodeManager;
 - (id)nodeManager;
 - (id)graphView;
 
 @end
 
 @interface GFGraphEditorView (Private)
-- (void)__instantiateNode:(id)fp8;
+- (void)__instantiateNode:(NSNotification*)notification;
 - (void)_finishInitialization;
-- (void)__contentUpdated:(id)fp8;
-- (void)__selectionUpdated:(id)fp8;
-- (void)_setGraphView:(id)fp8;
+- (void)__contentUpdated:(NSNotification*)notification;
+- (void)__selectionUpdated:(NSNotification*)notification;
+- (void)_setGraphView:(GFGraphView*)graphView;
 - (void)viewDidMoveToWindow; // added after SSDK was dumped, I think this tells the window to not be opaque if the editor view isn't opque.
 @end

@@ -135,7 +135,7 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)_stopTooltips;
 - (void)_drawGraph:(NSRect)fp8 selectionRingColor:(id)fp24 selectionRingWidth:(CGFloat)fp28 nodeCount:(NSUInteger)fp32 nodeList:(id *)fp36 connectionCount:(NSUInteger)fp40 connectionList:(id *)fp44;
 - (BOOL)_editNode:(id)fp8;
-- (void)_printWithInfo:(id)fp8 showingPrintPanel:(BOOL)fp12;
+- (void)_printWithInfo:(NSPrintInfo*)info showingPrintPanel:(BOOL)flag;
 - (BOOL)_setFirstResponderNode:(id)fp8;
 - (void)removeFromSuperview;
 - (void)_setGraphEditor:(GFGraphEditorView*)graphEditor;

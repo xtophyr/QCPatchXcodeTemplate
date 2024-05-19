@@ -17,10 +17,10 @@ extern NSString * const GFGraphEditorViewSelectionDidChangeNotification;
 - (id)initWithFrame:(NSRect)fp8;
 - (void)dealloc;
 - (BOOL)isOpaque;
-- (void)resizeSubviewsWithOldSize:(NSSize)fp8;
-- (void)showGraphEditorInspector:(id)fp8;
-- (void)printWithInfo:(id)fp8 showingPrintPanel:(BOOL)flag;
-- (void)setGraph:(id)fp8;
+- (void)resizeSubviewsWithOldSize:(NSSize)oldSize;  // oldSize is unused
+- (void)showGraphEditorInspector:(id)sender;
+- (void)printWithInfo:(NSPrintInfo*)info showingPrintPanel:(BOOL)flag;
+- (void)setGraph:(id)graph;
 - (id)graph;
 - (NSPoint)editorCenter;
 - (void)setEditorCenter:(NSPoint)center;
@@ -56,5 +56,6 @@ extern NSString * const GFGraphEditorViewSelectionDidChangeNotification;
 - (void)__contentUpdated:(NSNotification*)notification;
 - (void)__selectionUpdated:(NSNotification*)notification;
 - (void)_setGraphView:(GFGraphView*)graphView;
+- (void)removeFromSuperview; // added after SSDK was dumped
 - (void)viewDidMoveToWindow; // added after SSDK was dumped, I think this tells the window to not be opaque if the editor view isn't opque.
 @end

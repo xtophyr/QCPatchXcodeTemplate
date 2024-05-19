@@ -1,5 +1,7 @@
 @class GFNodeManagerView;
 
+// GFGraphEditorView is a thin wrapper over GFGraphView.  It manages notifications, and redirects stuff to a GFGraphView inside _scrollView.
+
 extern NSString * const GFGraphEditorViewCenterDidChangeNotification;
 extern NSString * const GFGraphEditorViewContentDidChangeNotification;
 extern NSString * const GFGraphEditorViewGraphDidChangeNotification;
@@ -54,4 +56,5 @@ extern NSString * const GFGraphEditorViewSelectionDidChangeNotification;
 - (void)__contentUpdated:(id)fp8;
 - (void)__selectionUpdated:(id)fp8;
 - (void)_setGraphView:(id)fp8;
+- (void)viewDidMoveToWindow; // added after SSDK was dumped, I think this tells the window to not be opaque if the editor view isn't opque.
 @end

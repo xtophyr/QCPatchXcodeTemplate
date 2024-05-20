@@ -30,20 +30,20 @@
 @end
 
 @interface GFNodeActor (MenuActions)
-- (void)_publish:(id)fp8;
-- (void)__setNodeSelection:(BOOL)fp8 adjacentToNode:(id)fp12 inputNodes:(BOOL)fp16 selectedList:(id)fp20;
-- (void)_selectDownstream:(id)fp8;
-- (void)_deselectDownstream:(id)fp8;
-- (void)_selectUpstream:(id)fp8;
-- (void)_deselectUpstream:(id)fp8;
-- (void)_editSubgraph:(id)fp8;
+- (void)_publish:(NSMenuItem*)sender;
+- (void)__setNodeSelection:(BOOL)selected adjacentToNode:(id)fp12 inputNodes:(BOOL)inputs selectedList:(NSArray*)list;
+- (void)_selectDownstream:(NSMenuItem*)sender;
+- (void)_deselectDownstream:(NSMenuItem*)sender;
+- (void)_selectUpstream:(NSMenuItem*)sender;
+- (void)_deselectUpstream:(NSMenuItem*)sender;
+- (void)_editSubgraph:(NSMenuItem*)sender;
 @end
 
 @interface GFNodeActor (Private)
 - (NSDictionary*)_titleTextAttributesForNode:(GFNode*)node;
 - (NSDictionary*)_portTextAttributesForNode:(GFNode*)node;
 - (NSColor*)_colorForNode:(GFNode*)node;
-- (void)_makeCGPathForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)fp28;
+- (void)_makeCGPathForNode:(GFNode*)node bounds:(NSRect)bounds inContext:(CGContextRef)cgctx;
 - (CGColorRef)_overlayColorForNode:(id)fp8 view:(NSView*)view;
-- (id)_portIsConnected:(id)fp8 view:(NSView*)view;
+- (GFConnection*)_portIsConnected:(GFPort*)port view:(NSView*)view;
 @end

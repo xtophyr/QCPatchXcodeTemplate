@@ -182,7 +182,7 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (BOOL)trackMouse:(id)fp8;
 - (BOOL)handleKeyDown:(id)fp8;
 - (BOOL)handleKeyUp:(id)fp8;
-- (BOOL)trackConnection:(id)fp8 fromPort:(id)fp12 atPoint:(NSPoint)fp16;
+- (BOOL)trackConnection:(NSEvent*)event fromPort:(GFPort*)port atPoint:(NSPoint)point;
 - (void)noteContentChanged;
 - (id)setupInspectorViews;
 - (void)resetInspectorViews;

@@ -1,5 +1,9 @@
 @class GFGraph, GFGraphEditorView, GFNode;
 
+// GFGraphBrowserView is optionally at the top of the editor window.
+// Setting the graphEditor and rootNode is the minimum needed to get it operating.
+// setting displayNodes will show nodes, not just macros.
+
 extern NSString * const GFGraphBrowserViewNodeDidSelectNotification;
 
 @interface GFGraphBrowserView : NSView
@@ -13,40 +17,40 @@ extern NSString * const GFGraphBrowserViewNodeDidSelectNotification;
 	void *_unused[4];	// 104 = 0x68
 }
 
-- (void)setCurrentNode:(id)fp8;
+- (void)setCurrentNode:(GFNode*)node;
 - (id)initWithFrame:(NSRect)frameRect;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;
 - (void)dealloc;
 - (BOOL)isOpaque;
-- (int)browser:(id)fp8 numberOfRowsInColumn:(int)fp12;
-- (void)browser:(id)fp8 willDisplayCell:(id)fp12 atRow:(int)fp16 column:(int)fp20;
+- (NSInteger)browser:(NSBrowser*)browser numberOfRowsInColumn:(NSInteger)fp12;
+- (void)browser:(NSBrowser*)browser willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column;
 - (void)setRootGraph:(GFGraph*)graph;
 - (GFGraph*)rootGraph;
 - (id)currentNode;
-- (void)__graphDidChange:(id)fp8;
-- (void)setGraphEditor:(id)fp8;
-- (id)graphEditor;
-- (void)delete:(id)fp8;
+- (void)__graphDidChange:(NSNotification*)notification;
+- (void)setGraphEditor:(GFGraphEditorView*)editor;
+- (GFGraphEditorView*)graphEditor;
+- (void)delete:(id)sender;
 - (void)keyDown:(NSEvent*)theEvent;
-- (void)copy:(id)fp8;
-- (void)cut:(id)fp8;
+- (void)copy:(id)sender;
+- (void)cut:(id)sender;
 - (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end
 
 @interface GFGraphBrowserView (Private)
-+ (BOOL)_isGraph:(id)fp8;
-- (void)_graphUpdated:(id)fp8;
-- (NSUInteger)_indexForNode:(id)fp8 inGraph:(id)fp12;
-- (id)_nodeFromGraph:(id)fp8 atIndex:(NSUInteger)fp12;
-- (NSUInteger)_nodesCountInGraph:(id)fp8;
-- (id)_selectedNodeAtColumn:(NSUInteger)fp8;
-- (void)_setCurrentNode:(id)fp8;
-- (void)_selectItem:(id)fp8;
-- (BOOL)_getPathFromGraph:(id)fp8 toNode:(id)fp12 withBuffer:(id *)fp16;
-- (id)_setPathWithBuffer:(id *)fp8;
-- (void)_setDisplayNodes:(BOOL)fp8;
++ (BOOL)_isGraph:(id)node;
+- (void)_graphUpdated:(NSNotification*)notification;
+- (NSUInteger)_indexForNode:(GFNode*)node inGraph:(GFGraph*)graph;
+- (id)_nodeFromGraph:(GFGraph*)graph atIndex:(NSUInteger)fp12;
+- (NSUInteger)_nodesCountInGraph:(GFGraph*)graph;
+- (id)_selectedNodeAtColumn:(NSUInteger)column;
+- (void)_setCurrentNode:(GFNode*)node;
+- (void)_selectItem:(id)item;
+- (BOOL)_getPathFromGraph:(GFGraph*)graph toNode:(GFNode*)node withBuffer:(id *)buffer;
+- (id)_setPathWithBuffer:(id *)buffer;
+- (void)_setDisplayNodes:(BOOL)flag;
 - (BOOL)_displayNodes;
 - (void)_finishInitialization;
 @end

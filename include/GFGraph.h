@@ -44,14 +44,14 @@ extern NSString * const GFStateDidFinishLoadingNotification;
 - (NSString*)pathForPort:(GFPort*)port;
 - (GFPort*)portForPath:(id)path;
 - (BOOL)canCreateProxyPortWithOriginalPort:(GFPort*)port;
-- (id)createProxyPortWithOriginalPort:(GFPort*)port forKey:(NSString*)key;
-- (id)createProxyPortWithOriginalPort:(GFPort*)port;
-- (void)__createProxyPortWithNode:(id)fp8 portKey:(id)fp12 forKey:(NSString*)key withUserInfo:(id)fp20;
+- (GFPort*)createProxyPortWithOriginalPort:(GFPort*)port forKey:(NSString*)key;
+- (GFPort*)createProxyPortWithOriginalPort:(GFPort*)port;
+- (void)__createProxyPortWithNode:(id)fp8 portKey:(NSString*)portKey forKey:(NSString*)key withUserInfo:(id)fp20;
 - (void)deleteInputPortForKey:(NSString*)key;
 - (void)deleteOutputPortForKey:(NSString*)key;
 - (void)deleteProxyPortForKey:(NSString*)key;
 - (void)deleteProxyPortWithOriginalPort:(id)fp8;
-- (id)proxyPortForOriginalPort:(id)fp8;
+- (GFPort*)proxyPortForOriginalPort:(id)fp8;
 - (id)proxyInputPorts;
 - (id)proxyOutputPorts;
 - (NSDictionary*)state;
@@ -69,12 +69,12 @@ extern NSString * const GFStateDidFinishLoadingNotification;
 @end
 
 @interface GFGraph (Private)
-- (id)_uniqueProxyPortKeyFromPort:(id)fp8;
+- (NSString*)_uniqueProxyPortKeyFromPort:(id)fp8;
 - (BOOL)_finalizing;
 - (BOOL)_isNodeKeyInUse:(NSString*)key;
-- (id)_uniqueKeyFromNode:(GFNode*)node;
+- (NSString*)_uniqueKeyFromNode:(GFNode*)node;
 - (BOOL)_isConnectionKeyInUse:(NSString*)key;
-- (id)_uniqueConnectionKey;
+- (NSString*)_uniqueConnectionKey;
 - (GFList*)_connections;
 - (GFList*)_nodes;
 - (void)_willDeleteNodeInputPort:(id)fp8;

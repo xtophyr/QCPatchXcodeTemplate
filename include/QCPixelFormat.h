@@ -1,10 +1,14 @@
-extern NSString * const QCPixelFormatCompatibility_CGImage;
-extern NSString * const QCPixelFormatCompatibility_CIBitmapContext;
-extern NSString * const QCPixelFormatCompatibility_CIImage;
 extern NSString * const QCPixelFormatCompatibility_CoreVideo;
-extern NSString * const QCPixelFormatCompatibility_GLContext;
-extern NSString * const QCPixelFormatCompatibility_OpenGL;
-extern NSString * const QCPixelFormatCompatibility_QuickTime;
+extern NSString * const kQCPixelFormatCompatibility_CGBitmapContext;
+extern NSString * const kQCPixelFormatCompatibility_CGImage;
+extern NSString * const kQCPixelFormatCompatibility_CIBitmapContext;
+extern NSString * const kQCPixelFormatCompatibility_CIImage;
+extern NSString * const kQCPixelFormatCompatibility_CoreVideo;
+extern NSString * const kQCPixelFormatCompatibility_GLContext;
+extern NSString * const kQCPixelFormatCompatibility_OpenCL_Read;
+extern NSString * const kQCPixelFormatCompatibility_OpenCL_Write;
+extern NSString * const kQCPixelFormatCompatibility_OpenGL;
+extern NSString * const kQCPixelFormatCompatibility_QuickTime;
 
 @interface QCPixelFormat : NSObject
 {

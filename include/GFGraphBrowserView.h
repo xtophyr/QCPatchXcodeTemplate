@@ -3,6 +3,7 @@
 // GFGraphBrowserView is optionally at the top of the editor window.
 // Setting the graphEditor and rootNode is the minimum needed to get it operating.
 // setting displayNodes will show nodes, not just macros.
+// UI is backed by GFGraphBrowserView.nib
 
 extern NSString * const GFGraphBrowserViewNodeDidSelectNotification;
 
@@ -23,7 +24,7 @@ extern NSString * const GFGraphBrowserViewNodeDidSelectNotification;
 - (id)initWithCoder:(NSCoder *)aDecoder;
 - (void)dealloc;
 - (BOOL)isOpaque;
-- (NSInteger)browser:(NSBrowser*)browser numberOfRowsInColumn:(NSInteger)fp12;
+- (NSInteger)browser:(NSBrowser*)browser numberOfRowsInColumn:(NSInteger)column;
 - (void)browser:(NSBrowser*)browser willDisplayCell:(id)cell atRow:(NSInteger)row column:(NSInteger)column;
 - (void)setRootGraph:(GFGraph*)graph;
 - (GFGraph*)rootGraph;
@@ -43,13 +44,16 @@ extern NSString * const GFGraphBrowserViewNodeDidSelectNotification;
 + (BOOL)_isGraph:(id)node;
 - (void)_graphUpdated:(NSNotification*)notification;
 - (NSUInteger)_indexForNode:(GFNode*)node inGraph:(GFGraph*)graph;
-- (id)_nodeFromGraph:(GFGraph*)graph atIndex:(NSUInteger)fp12;
+- (id)_nodeFromGraph:(GFGraph*)graph atIndex:(NSUInteger)index;
 - (NSUInteger)_nodesCountInGraph:(GFGraph*)graph;
 - (id)_selectedNodeAtColumn:(NSUInteger)column;
 - (void)_setCurrentNode:(GFNode*)node;
 - (void)_selectItem:(id)item;
+// the buffer is fixed-size, and _getPath... appears to be recursive, without a means for bounds checking.
+// this is a text-book stack smasher opportunity :(
 - (BOOL)_getPathFromGraph:(GFGraph*)graph toNode:(GFNode*)node withBuffer:(id *)buffer;
 - (id)_setPathWithBuffer:(id *)buffer;
+
 - (void)_setDisplayNodes:(BOOL)flag;
 - (BOOL)_displayNodes;
 - (void)_finishInitialization;

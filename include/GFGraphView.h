@@ -5,48 +5,51 @@ extern NSString * const GFGraphViewNodeDoubleClickedWithModifiersNotification;
 extern NSString * const GFGraphViewSelectionDidChangeNotification;
 extern NSString * const GFGraphViewZoomDidChangeNotification;
 
+/* Notes are stored in _graph's userInfo dictionary in an NSMutableArray under the key @"noteList" */
+
 @interface GFGraphView : NSView
 {
-	GFGraph *_graph;	// 80 = 0x50
-	GFNode *_firstResponder;	// 84 = 0x54
-	BOOL _drawsBackground;	// 88 = 0x58
-	BOOL _drawsShadows;	// 89 = 0x59
-	NSUInteger _gridStep;	// 92 = 0x5c
-	NSColor *_backgroundColor;	// 96 = 0x60
-	NSColor *_gridColor;	// 100 = 0x64
-	double _tooltipDelay;	// 104 = 0x68
-	BOOL _spaceDown;	// 112 = 0x70
-	NSRect _selectionBounds;	// 116 = 0x74
-	GFPort *_connectionPort;	// 132 = 0x84
-	NSPoint _connectionStart;	// 136 = 0x88
-	NSPoint _connectionEnd;	// 144 = 0x90
-	GFConnection *_connection;	// 152 = 0x98
-	CFRunLoopTimerRef _tooltipTimer;	// 156 = 0x9c
-	BOOL _tooltipPending;	// 160 = 0xa0
-	NSRect _tooltipBounds;	// 164 = 0xa4
-	GFNode *_tooltipNode;	// 180 = 0xb4
-	NSMutableDictionary *_alignment;	// 184 = 0xb8
-	GFList *_nodeActorCache;	// 188 = 0xbc
-	GFGraphEditorView *_graphEditor;	// 192 = 0xc0
-	NSUndoManager *_undoManager;	// 196 = 0xc4
-	BOOL _disableValidation;	// 200 = 0xc8
-	NSPoint _cachedCenter;	// 204 = 0xcc
-	float _cachedZoomFactor;	// 212 = 0xd4
-    NSTrackingArea *_trackingArea; // added after SSDK was dumped
-	void *_unused[2];	// 216 = 0xd8
+	GFGraph *_graph;
+	GFNode *_firstResponder;
+	BOOL _drawsBackground;
+	BOOL _drawsShadows;
+	NSUInteger _gridStep;
+	NSColor *_backgroundColor;
+	NSColor *_gridColor;
+	NSTimeInterval _tooltipDelay;
+	BOOL _spaceDown;
+	NSRect _selectionBounds;
+	GFPort *_connectionPort;
+	NSPoint _connectionStart;
+	NSPoint _connectionEnd;
+	GFConnection *_connection;
+	CFRunLoopTimerRef _tooltipTimer;
+	BOOL _tooltipPending;
+	NSRect _tooltipBounds;
+	GFNode *_tooltipNode;
+	NSMutableDictionary *_alignment;
+	GFList *_nodeActorCache; // this "caches" -nodeActorForView:.  That's backed by an NSDictionary, so this "optimizes" an O(log(n)) lookup with an O(n) lookup, while also doubling the memory footprint.  And the O(log(n)) implementation could be O(1) if it just used per-actor-class singletons (there are maybe 5 actor classes?).
+	GFGraphEditorView *_graphEditor;
+	NSUndoManager *_undoManager;
+	BOOL _disableValidation;
+	NSPoint _cachedCenter;      // this and _cachedZoomFactor below are used in -cacheZoomState/-restoreZoomState
+	float _cachedZoomFactor;    //
+    NSTrackingArea *_trackingArea;
+	void *_unused[2];
 }
 
 - (id)initWithFrame:(NSRect)frameRect;
-- (void)finalize;
+- (id)initWithCoder:(NSCoder *)aDecoder;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+- (void)finalize;   // only used for GarbageCollection (no longer used)
 - (void)dealloc;
+
 - (BOOL)isOpaque;
 - (BOOL)isFlipped;
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
 - (BOOL)acceptsFirstResponder;
 - (BOOL)becomeFirstResponder;
 - (BOOL)resignFirstResponder;
-- (void)encodeWithCoder:(NSCoder *)aCoder;
-- (id)initWithCoder:(NSCoder *)aDecoder;
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
 - (void)keyDown:(NSEvent *)theEvent;
 - (void)keyUp:(NSEvent *)theEvent;
@@ -146,31 +149,31 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)_zoomToFitAll;
 - (void)_cacheZoomState;
 - (void)_restoreZoomState;
-- (void)_setZoomFactor:(float)fp8 centerPoint:(NSPoint)fp12;
+- (void)_setZoomFactor:(float)zoomFactor centerPoint:(NSPoint)point;
 - (void)_zoomWithSpeedFactor:(float)fp8;
 - (void)_zoomToFitRect:(NSRect)fp8;
 - (void)_adjustFrame;
 - (void)_validateNodePosition:(id)fp8;
 - (void)_validateNodePositions;
-- (BOOL)_addNode:(id)fp8 atPosition:(NSPoint)fp12;
+- (BOOL)_addNode:(id)fp8 atPosition:(NSPoint)point;
 - (void)__stateUpdated:(id)fp8;
 - (void)__layoutUpdated:(id)fp8;
 - (void)__windowKey:(id)fp8;
 - (void)__frameChanged:(id)fp8;
 - (void)_finishInitialization;
-- (id)_nodeAtPosition:(NSPoint)fp8 outBounds:(NSRect *)fp16;
-- (NSUInteger)_performActionOnNodes:(SEL)fp8 context:(void *)fp12 selectedOnly:(BOOL)fp16;
-- (NSUInteger)_performActionOnSelectedNodes:(SEL)fp8 context:(void *)fp12;
-- (NSUInteger)_performActionOnAllNodes:(SEL)fp8 context:(void *)fp12;
+- (id)_nodeAtPosition:(NSPoint)fp8 outBounds:(NSRect *)outBounds;
+- (NSUInteger)_performActionOnNodes:(SEL)selector context:(void *)ctx selectedOnly:(BOOL)selected;
+- (NSUInteger)_performActionOnSelectedNodes:(SEL)selector context:(void *)ctx;
+- (NSUInteger)_performActionOnAllNodes:(SEL)selector context:(void *)ctx;
 - (NSRect)_boundsForSelection;
 - (BOOL)_deselectAll;
 - (BOOL)__selectionFilter:(id)fp8;
-- (void)_writeSelectionToState:(id)fp8 fromPoint:(NSPoint)fp12;
-- (void)_writeSelectionToArchiver:(id)fp8 fromPoint:(NSPoint)fp12;
-- (void)_writeSelectionToPasteboard:(id)fp8 fromPoint:(NSPoint)fp12;
-- (BOOL)_readSelectionFromState:(id)fp8 toPoint:(NSPoint)fp12;
-- (BOOL)_readSelectionFromUnarchiver:(id)fp8 toPoint:(NSPoint)fp12;
-- (void)_readSelectionFromPasteboard:(id)fp8 toPoint:(NSPoint)fp12;
+- (void)_writeSelectionToState:(id)fp8 fromPoint:(NSPoint)point;
+- (void)_writeSelectionToArchiver:(id)fp8 fromPoint:(NSPoint)point;
+- (void)_writeSelectionToPasteboard:(id)fp8 fromPoint:(NSPoint)point;
+- (BOOL)_readSelectionFromState:(id)fp8 toPoint:(NSPoint)point;
+- (BOOL)_readSelectionFromUnarchiver:(id)fp8 toPoint:(NSPoint)point;
+- (void)_readSelectionFromPasteboard:(id)fp8 toPoint:(NSPoint)point;
 - (id)_imageForSelection;
 - (id)_firstResponderNode;
 - (id)_colorForConnection:(id)fp8;
@@ -186,26 +189,26 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)noteContentChanged;
 - (id)setupInspectorViews;
 - (void)resetInspectorViews;
-- (id)tooltipStringForPoint:(NSPoint)fp8 tooltipBounds:(NSRect *)fp16;
-- (id)setupTooltipViewForPoint:(NSPoint)fp8 tooltipBounds:(NSRect *)fp16;
+- (NSString*)tooltipStringForPoint:(NSPoint)point tooltipBounds:(NSRect *)outBounds;
+- (id)setupTooltipViewForPoint:(NSPoint)point tooltipBounds:(NSRect *)outBounds;
 - (void)resetTooltipView;
 - (id)menuForGraph;
-- (void)setGraph:(id)fp8;
-- (id)graph;
+- (void)setGraph:(GFGraph*)graph;
+- (GFGraph*)graph;
 - (BOOL)drawsBackground;
-- (void)setDrawsBackground:(BOOL)fp8;
+- (void)setDrawsBackground:(BOOL)flag;
 - (BOOL)drawsShadows;
-- (void)setDrawsShadows:(BOOL)fp8;
-- (void)setGridStep:(NSUInteger)fp8;
+- (void)setDrawsShadows:(BOOL)flag;
+- (void)setGridStep:(NSUInteger)gridStep;
 - (NSUInteger)gridStep;
-- (id)backgroundColor;
-- (void)setBackgroundColor:(id)fp8;
-- (id)gridColor;
-- (void)setGridColor:(id)fp8;
+- (NSColor*)backgroundColor;
+- (void)setBackgroundColor:(NSColor*)color;
+- (NSColor*)gridColor;
+- (void)setGridColor:(NSColor*)color;
 - (BOOL)alignNodes;
 - (void)setAlignNodes:(BOOL)alignNodes;
-- (void)setTooltipDelay:(double)tooltipDelay;
-- (double)tooltipDelay;
+- (void)setTooltipDelay:(NSTimeInterval)tooltipDelay;
+- (NSTimeInterval)tooltipDelay;
 - (id)nodeActorForNode:(id)fp8;
 - (NSRect)boundsForConnection:(id)fp8;
 - (NSRect)boundsForNode:(id)fp8;
@@ -213,10 +216,10 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (NSRect)boundsForConnection:(id)fp8 fromPoint:(NSPoint)fp12 toPoint:(NSPoint)fp20;
 - (void)_drawConnection:(id)fp8 fromPort:(id)fp12 point:(NSPoint)fp16 toPoint:(NSPoint)fp24;
 - (void)drawConnection:(id)fp8 fromPoint:(NSPoint)fp12 toPoint:(NSPoint)fp20;
-- (void)drawBackground:(NSRect)fp8;
-- (void)drawSelectionArea:(NSRect)fp8;
-- (NSRect)titlebarBoundsForNote:(id)fp8 inBounds:(NSRect)fp12;
-- (NSRect)resizeBoundsForNote:(id)fp8 inBounds:(NSRect)fp12;
-- (void)drawNote:(id)fp8 inBounds:(NSRect)fp12 withColor:(id)fp28;
+- (void)drawBackground:(NSRect)rect;    // fills background color and draws the grid if _gridStep is non-zero
+- (void)drawSelectionArea:(NSRect)rect; // draws the selection box (grey box with outline)
+- (NSRect)titlebarBoundsForNote:(NSString*)noteString inBounds:(NSRect)bounds;
+- (NSRect)resizeBoundsForNote:(id)fp8 inBounds:(NSRect)bounds;
+- (void)drawNote:(NSString*)noteString inBounds:(NSRect)bounds withColor:(NSColor*)color;
 - (void)setNeedsDisplayForNode:(id)fp8;
 @end

@@ -59,6 +59,8 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)rightMouseDown:(NSEvent *)theEvent;
 - (void)otherMouseDown:(NSEvent *)theEvent;
 - (void)scrollWheel:(NSEvent *)theEvent;
+- (void)swipeWithEvent:(NSEvent *)theEvent;     // added after SSDK was dumped
+- (void)magnifyWithEvent:(NSEvent *)theEvent;   // added after SSDK was dumped
 - (void)undo:(id)sender;
 - (void)redo:(id)sender;
 - (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
@@ -80,32 +82,34 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)setBoundsSize:(NSSize)fp8;
 - (void)viewWillMoveToWindow:(NSWindow*)newWindow;
 - (void)viewDidMoveToWindow;
+- (void)updateTrackingAreas; // added after SSDK was dumped
 
 @end
 
 @interface GFGraphView (Actions)
-- (id)_createSubgraphFromSelection:(id)fp8;
-- (void)_editParentGraph:(id)fp8;
-- (void)_addNote:(id)fp8;
-- (void)_editNote:(id)fp8;
-- (void)_setNoteColor:(id)fp8;
-- (void)_deleteNote:(id)fp8;
+- (id)_createSubgraphFromSelection:(NSMenuItem*)menuItem;
+- (id)_createSubgraphFromSelection:(NSMenuItem*)menuItem withMacroType:(Class)macroClass; // added after SSDK was dumped
+- (void)_editParentGraph:(NSMenuItem*)menuItem;
+- (void)_addNote:(NSMenuItem*)menuItem;
+- (void)_editNote:(NSMenuItem*)menuItem;
+- (void)_setNoteColor:(NSMenuItem*)menuItem;
+- (void)_deleteNote:(NSMenuItem*)menuItem;
 @end
 
 @interface GFGraphView (ItemActions)
-- (void)__validatePosition:(id)fp8 context:(void *)fp12;
-- (void)__savePosition:(id)fp8 context:(void *)fp12;
-- (void)__restorePosition:(id)fp8 context:(void *)fp12;
-- (void)__saveSelection:(id)fp8 context:(void *)fp12;
-- (void)__restoreSelection:(id)fp8 context:(void *)fp12;
-- (void)__addToSelection:(id)fp8 context:(void *)fp12;
-- (void)__removeFromSelection:(id)fp8 context:(void *)fp12;
-- (void)__unionRect:(id)fp8 context:(void *)fp12;
-- (void)__select:(id)fp8 context:(void *)fp12;
-- (void)__deselect:(id)fp8 context:(void *)fp12;
-- (void)__delete:(id)fp8 context:(void *)fp12;
-- (void)__move:(id)fp8 context:(void *)fp12;
-- (void)__undoableMove:(id)fp8 context:(void *)fp12;
+- (void)__validatePosition:(id)fp8 context:(void *)ctx;
+- (void)__savePosition:(id)fp8 context:(void *)ctx;
+- (void)__restorePosition:(id)fp8 context:(void *)ctx;
+- (void)__saveSelection:(id)fp8 context:(void *)ctx;
+- (void)__restoreSelection:(id)fp8 context:(void *)ctx;
+- (void)__addToSelection:(id)fp8 context:(void *)ctx;
+- (void)__removeFromSelection:(id)fp8 context:(void *)ctx;
+- (void)__unionRect:(id)fp8 context:(void *)ctx;
+- (void)__select:(id)fp8 context:(void *)ctx;
+- (void)__deselect:(id)fp8 context:(void *)ctx;
+- (void)__delete:(id)fp8 context:(void *)ctx;
+- (void)__move:(id)fp8 context:(void *)ctx;
+- (void)__undoableMove:(id)fp8 context:(void *)ctx;
 @end
 
 @interface GFGraphView (LocalNodeActor)
@@ -137,14 +141,14 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)_updateTooltipsForMouseLocation:(NSPoint)fp8;
 - (void)_stopTooltips;
 - (void)_drawGraph:(NSRect)fp8 selectionRingColor:(id)fp24 selectionRingWidth:(CGFloat)fp28 nodeCount:(NSUInteger)fp32 nodeList:(id *)fp36 connectionCount:(NSUInteger)fp40 connectionList:(id *)fp44;
-- (BOOL)_editNode:(id)fp8;
+- (BOOL)_editNode:(GFGraph*)npde;
 - (void)_printWithInfo:(NSPrintInfo*)info showingPrintPanel:(BOOL)flag;
 - (BOOL)_setFirstResponderNode:(id)fp8;
 - (void)removeFromSuperview;
 - (void)_setGraphEditor:(GFGraphEditorView*)graphEditor;
 - (GFGraphEditorView*)_graphEditor;
 - (float)_zoomFactor;
-- (void)_setZoomFactor:(float)fp8;
+- (void)_setZoomFactor:(float)zoomFactor;
 - (void)_zoomToFitSelection;
 - (void)_zoomToFitAll;
 - (void)_cacheZoomState;
@@ -156,10 +160,10 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)_validateNodePosition:(id)fp8;
 - (void)_validateNodePositions;
 - (BOOL)_addNode:(id)fp8 atPosition:(NSPoint)point;
-- (void)__stateUpdated:(id)fp8;
-- (void)__layoutUpdated:(id)fp8;
-- (void)__windowKey:(id)fp8;
-- (void)__frameChanged:(id)fp8;
+- (void)__stateUpdated:(NSNotification*)notification;
+- (void)__layoutUpdated:(NSNotification*)notification;
+- (void)__windowKey:(NSNotification*)notification;
+- (void)__frameChanged:(NSNotification*)notification;
 - (void)_finishInitialization;
 - (id)_nodeAtPosition:(NSPoint)fp8 outBounds:(NSRect *)outBounds;
 - (NSUInteger)_performActionOnNodes:(SEL)selector context:(void *)ctx selectedOnly:(BOOL)selected;
@@ -182,9 +186,9 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 @end
 
 @interface GFGraphView (Specific)
-- (BOOL)trackMouse:(id)fp8;
-- (BOOL)handleKeyDown:(id)fp8;
-- (BOOL)handleKeyUp:(id)fp8;
+- (BOOL)trackMouse:(NSEvent*)event;
+- (BOOL)handleKeyDown:(NSEvent*)event;
+- (BOOL)handleKeyUp:(NSEvent*)event;
 - (BOOL)trackConnection:(NSEvent*)event fromPort:(GFPort*)port atPoint:(NSPoint)point;
 - (void)noteContentChanged;
 - (id)setupInspectorViews;
@@ -209,7 +213,7 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)setAlignNodes:(BOOL)alignNodes;
 - (void)setTooltipDelay:(NSTimeInterval)tooltipDelay;
 - (NSTimeInterval)tooltipDelay;
-- (id)nodeActorForNode:(id)fp8;
+- (id)nodeActorForNode:(GFGraph*)node;
 - (NSRect)boundsForConnection:(id)fp8;
 - (NSRect)boundsForNode:(id)fp8;
 - (NSRect)maxBounds;

@@ -10,6 +10,8 @@ extern NSString * const kQCPixelFormatCompatibility_OpenCL_Write;
 extern NSString * const kQCPixelFormatCompatibility_OpenGL;
 extern NSString * const kQCPixelFormatCompatibility_QuickTime;
 
+// TODO: figure out compatibility bits
+
 @interface QCPixelFormat : NSObject
 {
 	void *_unused[4];	// 4 = 0x4
@@ -17,7 +19,7 @@ extern NSString * const kQCPixelFormatCompatibility_QuickTime;
 + (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (void)initialize;                 //
 - (NSString*)name;                  //
-- (NSArray*)compatibilities;        //      These methods generally throw NSInternalInconsistency : "Function not implemented"
+- (unsigned long long)compatibilities;//      These methods generally throw NSInternalInconsistency : "Function not implemented"
 - (int)pixelColorModel;             //      or 0, further enforcing that this is a pure virtual class.
 - (int)pixelType;                   //
 - (int)pixelAlpha;                  //
@@ -36,14 +38,12 @@ extern NSString * const kQCPixelFormatCompatibility_QuickTime;
 - (BOOL)isValidColorSpace:(CGColorSpaceRef)colorspace;  //
 - (BOOL)isSupportedOnContext:(QCCGLContext *)context;   //
 - (NSString*)description;           //
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 - (cl_image_format)CLFormat;        //
-#endif
 @end
 
 @interface QCPixelFormat (Extensions)
 + (QCPixelFormat *)defaultClosestPixelFormat:(QCPixelFormat *)pixelformat withColorSpace:(CGColorSpaceRef)colorspace;
-- (BOOL)hasCompatibility:(NSString*)trialCompatability;
+- (BOOL)hasCompatibility:(unsigned long long)trialCompatability;
 - (BOOL)isValidWidth:(NSUInteger)trialWidth;
 - (BOOL)isValidHeight:(NSUInteger)trialHeight;
 - (BOOL)areValidBounds:(NSRect)trialBounds;

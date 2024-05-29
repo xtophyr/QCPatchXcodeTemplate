@@ -3,6 +3,8 @@
 
 @class QCAgeProfileView, QCProfileView;
 
+// UI backed by QCProfileConfigurationView.nib
+
 @interface QCProfileConfigurationView : NSView
 {
 	NSView *_insideView;	// 80 = 0x50

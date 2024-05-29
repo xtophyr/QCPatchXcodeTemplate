@@ -1,6 +1,7 @@
 @class QCPatch;
 
 extern NSString * const QCLogViewNewMessageNotification;
+// UI is backed by QCLogView.nib
 
 @interface QCLogView : NSView
 {
@@ -12,15 +13,16 @@ extern NSString * const QCLogViewNewMessageNotification;
 }
 
 + (void)initialize;
-- (Class)valueClassForBinding:(NSBindingName)binding;
-- (void)_appendLog:(id)fp8;
-- (void)_message:(id)fp8;
-- (void)_finishInitialization;
 - (id)initWithFrame:(NSRect)frameRect;
-- (void)dealloc;
-- (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;
+- (void)_finishInitialization;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+- (void)dealloc;
+
+- (Class)valueClassForBinding:(NSBindingName)binding;
+- (void)_appendLog:(NSString*)logMessage;
+- (void)_message:(NSNotification*)notification; // [notification userInfo] is the message string, [notification object] is a QCPatch*
 - (void)setRootPatch:(QCPatch*)patch;
 - (id)rootPatch;
-- (void)clear:(id)fp8;
+- (void)clear:(id)unused;
 @end

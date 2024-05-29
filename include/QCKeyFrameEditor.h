@@ -13,8 +13,8 @@
 
 - (void)dealloc;
 - (void)awakeFromNib;
-- (BOOL)runEditorForTimeLine:(id)fp8 atKeyFrame:(NSInteger)fp12 forTimeLine:(NSInteger)fp16 controlType:(int)fp20 inView:(id)fp24 atPoint:(NSPoint)fp28;
-- (void)cancel:(id)fp8;
-- (void)done:(id)fp8;
+- (BOOL)runEditorForTimeLine:(id)fp8 atKeyFrame:(NSInteger)keyFrame forTimeLine:(NSInteger)timeline controlType:(int)fp20 inView:(id)view atPoint:(NSPoint)fp28;
+- (void)cancel:(id)sender;
+- (void)done:(id)sender;
 
 @end

@@ -79,9 +79,9 @@ typedef struct __QCCompositionPickerViewPrivate {   // 0x30 = 48 bytes
 - (void)setAllowsIdentitySelection:(BOOL)flag;
 - (BOOL)allowsIdentitySelection;
 - (NSUInteger)numberOfColumns;
-- (void)setNumberOfColumns:(NSUInteger)fp8;
+- (void)setNumberOfColumns:(NSUInteger)numberOfColumns;
 - (NSUInteger)numberOfRows;
-- (void)setNumberOfRows:(NSUInteger)fp8;
+- (void)setNumberOfRows:(NSUInteger)numberOfRows;
 - (BOOL)setValue:(id)fp8 forInputKey:(id)fp12 composition:(id)fp16;
 - (void)setFlipCellsHorizontally:(BOOL)flag;
 - (BOOL)flipCellsHorizontally;

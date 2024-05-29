@@ -2,9 +2,9 @@
 
 @interface QCKeyFrameEditorWindow : NSWindow
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)style backing:(NSBackingStoreType)backing defer:(BOOL)defer;
-- (void)setHidesOnDeactivate:(BOOL)fp8;
+- (void)setHidesOnDeactivate:(BOOL)flag;
 - (NSSize)size;
-- (void)setSize:(NSSize)fp8;
+- (void)setSize:(NSSize)size;
 - (BOOL)canBecomeKeyWindow;
 - (void)sendEvent:(NSEvent*)event;
 @end

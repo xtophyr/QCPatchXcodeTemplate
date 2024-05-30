@@ -2,6 +2,8 @@
 
 @class GFGraphEditorView, GFGraphView, GFInspectorWindow, GFList, GFNode;
 
+// UI is backed by GFGraphEditorInspector.nib
+
 @interface GFGraphEditorInspector : NSObject
 {
 	GFInspectorWindow *_window;	// 4 = 0x4
@@ -20,12 +22,12 @@
 + (id)sharedInspector;
 - (id)init;
 - (void)dealloc;
-- (void)cancelOperation:(id)fp8;
+- (void)cancelOperation:(id)sender;
 - (void)windowWillClose:(NSNotification *)notification;
 - (void)show;
 - (void)hide;
 - (BOOL)isVisible;
-- (void)__invalidateInspector:(id)fp8;
+- (void)__invalidateInspector:(NSNotification*)notification;
 - (void)setGraphEditor:(GFGraphEditor*)graphEditor;
 - (id)graphEditor;
 
@@ -34,8 +36,8 @@
 @interface GFGraphEditorInspector (Private)
 - (id)_window;
 - (void)_menuSelect:(id)fp8;
-- (void)_previousPanel:(id)fp8;
-- (void)_nextPanel:(id)fp8;
-- (void)_loadViews:(id)fp8 clearUndoManager:(BOOL)fp12;
+- (void)_previousPanel:(id)sender;
+- (void)_nextPanel:(id)sender;
+- (void)_loadViews:(id)fp8 clearUndoManager:(BOOL)flag;
 - (void)_reloadInspector;
 @end

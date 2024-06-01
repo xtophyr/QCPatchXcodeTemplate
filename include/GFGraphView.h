@@ -96,30 +96,31 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)_deleteNote:(NSMenuItem*)menuItem;
 @end
 
+// These are used typically under -_performActionOn... methods below, where they're applied to all, or just selected patches.
 @interface GFGraphView (ItemActions)
-- (void)__validatePosition:(id)fp8 context:(void *)ctx;
-- (void)__savePosition:(id)fp8 context:(void *)ctx;
-- (void)__restorePosition:(id)fp8 context:(void *)ctx;
-- (void)__saveSelection:(id)fp8 context:(void *)ctx;
-- (void)__restoreSelection:(id)fp8 context:(void *)ctx;
-- (void)__addToSelection:(id)fp8 context:(void *)ctx;
-- (void)__removeFromSelection:(id)fp8 context:(void *)ctx;
-- (void)__unionRect:(id)fp8 context:(void *)ctx;
-- (void)__select:(id)fp8 context:(void *)ctx;
-- (void)__deselect:(id)fp8 context:(void *)ctx;
-- (void)__delete:(id)fp8 context:(void *)ctx;
-- (void)__move:(id)fp8 context:(void *)ctx;
-- (void)__undoableMove:(id)fp8 context:(void *)ctx;
+- (void)__validatePosition:(GFNode*)node context:(void *)ctx;   // ctx unused
+- (void)__savePosition:(GFNode*)node context:(void *)ctx;       // ctx unused
+- (void)__restorePosition:(GFNode*)node context:(void *)ctx;    // ctx maybe used?
+- (void)__saveSelection:(GFNode*)node context:(void *)ctx;      // ctx unused
+- (void)__restoreSelection:(GFNode*)node context:(void *)ctx;   // ctx unused
+- (void)__addToSelection:(GFNode*)node context:(void *)ctx;     // ctx is pointer to CGRect
+- (void)__removeFromSelection:(GFNode*)node context:(void *)ctx;// ctx is pointer to CGRect
+- (void)__unionRect:(GFNode*)node context:(void *)ctx;          // ctx is pointer to CGRect
+- (void)__select:(GFNode*)node context:(void *)ctx;             // ctx unused
+- (void)__deselect:(GFNode*)node context:(void *)ctx;           // ctx unused
+- (void)__delete:(GFNode*)node context:(void *)ctx;             // ctx unused
+- (void)__move:(GFNode*)node context:(void *)ctx;               // ctx is pointer to CGPoint delta
+- (void)__undoableMove:(GFNode*)node context:(void *)ctx;       // ctx is pointer to CGPoint delta
 @end
 
 @interface GFGraphView (LocalNodeActor)
-- (NSSize)_sizeForNode:(id)fp8;
+- (NSSize)_sizeForNode:(GFNode*)node;
 - (NSPoint)_pointForPort:(id)fp8 inNode:(id)fp12 bounds:(NSRect)fp16;
 - (id)_portForPoint:(NSPoint)fp8 inNode:(id)fp16 bounds:(NSRect)fp20;
 - (void)_drawNode:(id)fp8 bounds:(NSRect)fp12;
-- (void)_drawSelectionRingWithColor:(id)fp8 width:(CGFloat)fp12 forNode:(id)fp16 bounds:(NSRect)fp20;
+- (void)_drawSelectionRingWithColor:(NSColor*)color width:(CGFloat)fp12 forNode:(id)fp16 bounds:(NSRect)fp20;
 - (BOOL)_trackMouse:(id)fp8 inNode:(id)fp12 bounds:(NSRect)fp16;
-- (NSMenu*)_menuForNode:(id)fp8;
+- (NSMenu*)_menuForNode:(GFNode*)node;
 - (BOOL)_nodeAcceptsFirstResponder:(id)fp8;
 - (BOOL)_nodeBecomesFirstResponder:(id)fp8;
 - (BOOL)_nodeResignsFirstResponder:(id)fp8;
@@ -141,9 +142,9 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)_updateTooltipsForMouseLocation:(NSPoint)fp8;
 - (void)_stopTooltips;
 - (void)_drawGraph:(NSRect)fp8 selectionRingColor:(id)fp24 selectionRingWidth:(CGFloat)fp28 nodeCount:(NSUInteger)fp32 nodeList:(id *)fp36 connectionCount:(NSUInteger)fp40 connectionList:(id *)fp44;
-- (BOOL)_editNode:(GFGraph*)npde;
+- (BOOL)_editNode:(GFGraph*)node;
 - (void)_printWithInfo:(NSPrintInfo*)info showingPrintPanel:(BOOL)flag;
-- (BOOL)_setFirstResponderNode:(id)fp8;
+- (BOOL)_setFirstResponderNode:(GFNode*)node;
 - (void)removeFromSuperview;
 - (void)_setGraphEditor:(GFGraphEditorView*)graphEditor;
 - (GFGraphEditorView*)_graphEditor;
@@ -154,18 +155,22 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)_cacheZoomState;
 - (void)_restoreZoomState;
 - (void)_setZoomFactor:(float)zoomFactor centerPoint:(NSPoint)point;
-- (void)_zoomWithSpeedFactor:(float)fp8;
+- (void)_zoomWithSpeedFactor:(float)speedFactor;
 - (void)_zoomToFitRect:(NSRect)rect;
 - (void)_adjustFrame;
 - (void)_validateNodePosition:(id)fp8;
 - (void)_validateNodePositions;
-- (BOOL)_addNode:(id)fp8 atPosition:(NSPoint)point;
+- (BOOL)_addNode:(GFNode*)node atPosition:(NSPoint)point;
 - (void)__stateUpdated:(NSNotification*)notification;
 - (void)__layoutUpdated:(NSNotification*)notification;
 - (void)__windowKey:(NSNotification*)notification;
 - (void)__frameChanged:(NSNotification*)notification;
 - (void)_finishInitialization;
 - (id)_nodeAtPosition:(NSPoint)fp8 outBounds:(NSRect *)outBounds;
+
+// these return the number of nodes visited (so it's also used with nil selector as a method to count selected nodes, for example).
+// ctx is a pointer passed to the __... context: methods above.  It's mainly used to get results out, such as unioned rects.
+// move and undoableMove use ctx to pass in a CGPoint where x and y are deltas from the current location.
 - (NSUInteger)_performActionOnNodes:(SEL)selector context:(void *)ctx selectedOnly:(BOOL)selected;
 - (NSUInteger)_performActionOnSelectedNodes:(SEL)selector context:(void *)ctx;
 - (NSUInteger)_performActionOnAllNodes:(SEL)selector context:(void *)ctx;
@@ -179,9 +184,9 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (BOOL)_readSelectionFromUnarchiver:(id)fp8 toPoint:(NSPoint)point;
 - (void)_readSelectionFromPasteboard:(id)fp8 toPoint:(NSPoint)point;
 - (id)_imageForSelection;
-- (id)_firstResponderNode;
+- (GFNode*)_firstResponderNode;
 - (NSColor*)_colorForConnection:(id)connection;
-- (id)_trackedConnection;
+- (GFConnection*)_trackedConnection;
 - (void)delete:(id)fp8;
 @end
 

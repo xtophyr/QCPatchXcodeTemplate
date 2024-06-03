@@ -6,17 +6,17 @@
 
 @interface GFGraphEditorInspector : NSObject
 {
-	GFInspectorWindow *_window;	// 4 = 0x4
-	NSPopUpButton *_menu;	// 8 = 0x8
-	NSTextField *_text;	// 12 = 0xc
-	GFList *_views;	// 16 = 0x10
-	GFList *_viewSizes;	// 20 = 0x14
-	NSView *_currentView;	// 24 = 0x18
-	GFGraphEditorView *_graphEditor;	// 28 = 0x1c
-	GFNode *_targetNode;	// 32 = 0x20
-	GFGraphView *_targetGraphView;	// 36 = 0x24
-	CFDictionaryRef _savedDimensions;	// 40 = 0x28
-	void *_unused[2];	// 44 = 0x2c
+	GFInspectorWindow *_window;	//
+	NSPopUpButton *_menu;	    // the popup for the inspector panes
+	NSTextField *_text;	        // Not Applicable text(?).  hidden / unhidden in -_loadViews:clearUndoManager: as needed.
+	GFList *_views;	            // list of inspector panes
+	GFList *_viewSizes;	        // list of NSValues of NSSize for resizable inspector panes
+	NSView *_currentView;	    // currently active/visible pane for the inspector
+	GFGraphEditorView *_graphEditor;
+	GFNode *_targetNode;	    // current node the inspector is inspecting
+	GFGraphView *_targetGraphView;
+	CFDictionaryRef _savedDimensions;	// _savedDimensions is only set temporarily in _reloadInspector, and used in _loadViews:clearUndoManager (which -_reloadInspector calls).  This is a sign of poor factoring.
+	void *_unused[2];
 }
 
 + (id)sharedInspector;
@@ -28,16 +28,16 @@
 - (void)hide;
 - (BOOL)isVisible;
 - (void)__invalidateInspector:(NSNotification*)notification;
-- (void)setGraphEditor:(GFGraphEditor*)graphEditor;
-- (id)graphEditor;
+- (void)setGraphEditor:(GFGraphEditorView*)graphEditor;
+- (GFGraphEditorView*)graphEditor;
 
 @end
 
 @interface GFGraphEditorInspector (Private)
 - (id)_window;
-- (void)_menuSelect:(id)fp8;
-- (void)_previousPanel:(id)sender;
-- (void)_nextPanel:(id)sender;
-- (void)_loadViews:(id)fp8 clearUndoManager:(BOOL)flag;
+- (void)_menuSelect:(id)sender;
+- (void)_previousPanel:(id)sender;  // previous and nextPanel are driven by the < and > buttons at the top of the inspector
+- (void)_nextPanel:(id)sender;      //
+- (void)_loadViews:(GFList*)viewList clearUndoManager:(BOOL)flag;   // viewList contains the panes for the inspector (Input Parameters, Settings, Published Ports)
 - (void)_reloadInspector;
 @end

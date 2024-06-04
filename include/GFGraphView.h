@@ -158,7 +158,7 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)_zoomWithSpeedFactor:(float)speedFactor;
 - (void)_zoomToFitRect:(NSRect)rect;
 - (void)_adjustFrame;
-- (void)_validateNodePosition:(id)fp8;
+- (void)_validateNodePosition:(id)node;
 - (void)_validateNodePositions;
 - (BOOL)_addNode:(GFNode*)node atPosition:(NSPoint)point;
 - (void)__stateUpdated:(NSNotification*)notification;
@@ -177,12 +177,12 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (NSRect)_boundsForSelection;
 - (BOOL)_deselectAll;
 - (BOOL)__selectionFilter:(id)fp8;
-- (void)_writeSelectionToState:(id)fp8 fromPoint:(NSPoint)point;
-- (void)_writeSelectionToArchiver:(id)fp8 fromPoint:(NSPoint)point;
-- (void)_writeSelectionToPasteboard:(id)fp8 fromPoint:(NSPoint)point;
-- (BOOL)_readSelectionFromState:(id)fp8 toPoint:(NSPoint)point;
-- (BOOL)_readSelectionFromUnarchiver:(id)fp8 toPoint:(NSPoint)point;
-- (void)_readSelectionFromPasteboard:(id)fp8 toPoint:(NSPoint)point;
+- (void)_writeSelectionToState:(NSMutableDictionary*)state fromPoint:(NSPoint)point;
+- (void)_writeSelectionToArchiver:(NSKeyedArchiver*)state fromPoint:(NSPoint)point;
+- (void)_writeSelectionToPasteboard:(NSPasteboard*)state fromPoint:(NSPoint)point;
+- (BOOL)_readSelectionFromState:(NSMutableDictionary*)state toPoint:(NSPoint)point;
+- (BOOL)_readSelectionFromUnarchiver:(NSKeyedUnarchiver*)state toPoint:(NSPoint)point;
+- (void)_readSelectionFromPasteboard:(NSPasteboard*)state toPoint:(NSPoint)point;
 - (id)_imageForSelection;
 - (GFNode*)_firstResponderNode;
 - (NSColor*)_colorForConnection:(id)connection;
@@ -228,7 +228,7 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)drawBackground:(NSRect)rect;    // fills background color and draws the grid if _gridStep is non-zero
 - (void)drawSelectionArea:(NSRect)rect; // draws the selection box (grey box with outline)
 - (NSRect)titlebarBoundsForNote:(NSString*)noteString inBounds:(NSRect)bounds;
-- (NSRect)resizeBoundsForNote:(id)fp8 inBounds:(NSRect)bounds;
+- (NSRect)resizeBoundsForNote:(id)node inBounds:(NSRect)bounds;
 - (void)drawNote:(NSString*)noteString inBounds:(NSRect)bounds withColor:(NSColor*)color;
-- (void)setNeedsDisplayForNode:(id)fp8;
+- (void)setNeedsDisplayForNode:(id)node;
 @end

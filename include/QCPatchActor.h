@@ -4,6 +4,8 @@
 /* QCPatchActor draws nodes in the graph editor view.  It controls stuff like the node's name and title, where ports are located,
  and the visual appearance of the patches.  QCCirclePatchActor is a subclass used to get Logic and Mathematical Expression's different look. */
 
+// UI is backed by QCPatchActorInspectorViews.nib
+
 @class QCInspector, QCPatch, QCTableView;
 
 @interface QCPatchActor : GFNodeActor

@@ -8,9 +8,9 @@
 	void *_unused[4];	// 104 = 0x68
 }
 
-- (id)initWithFrame:(NSRect)fp8;
-- (void)scrollWheel:(id)fp8;
-- (BOOL)autoscroll:(id)fp8;
+- (id)initWithFrame:(NSRect)frame;
+- (void)scrollWheel:(NSEvent*)event;
+- (BOOL)autoscroll:(NSEvent*)event;
 - (void)viewDidMoveToSuperview;
 - (NSRect)maxBounds;        // NSInternalInconsistencyException : "Function not implemented"
 - (NSRect)selectionBounds;  // NSInternalInconsistencyException : "Function not implemented"
@@ -23,8 +23,8 @@
 - (CGFloat)maxY;
 - (CGFloat)zoomFactorX;
 - (CGFloat)zoomFactorY;
-- (void)setZoomFactorX:(CGFloat)fp8;
-- (void)setZoomFactorY:(CGFloat)fp8;
+- (void)setZoomFactorX:(CGFloat)zoomFactorX;
+- (void)setZoomFactorY:(CGFloat)zoomFactorY;
 - (void)zoomToFitSelection;
 - (void)zoomToFitAll;
 - (BOOL)zoomStateCached;
@@ -38,10 +38,10 @@
 
 @interface QCZoomView (Private)
 - (NSPoint)_centerPoint;
-- (void)_setCenterPoint:(NSPoint)fp8;
-- (void)_setZoomFactorX:(CGFloat)fp8 factorY:(CGFloat)fp12 centerPoint:(NSPoint)fp16;
+- (void)_setCenterPoint:(NSPoint)center;
+- (void)_setZoomFactorX:(CGFloat)zoomFactorX factorY:(CGFloat)zoomFactorY centerPoint:(NSPoint)center;
 - (void)_zoomWithSpeedFactorForX:(CGFloat)fp8 speedFactorForY:(CGFloat)fp12;
-- (void)_zoomToFitRect:(NSRect)fp8;
+- (void)_zoomToFitRect:(NSRect)rect;
 - (void)_adjustFrame;
-- (void)__frameChanged:(id)fp8;
+- (void)__frameChanged:(NSNotification*)notification;
 @end

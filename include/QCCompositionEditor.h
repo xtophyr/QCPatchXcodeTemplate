@@ -1,5 +1,6 @@
 
 
+// UI is backed by nib QCCompositionEditor
 
 @class QCPatchEditorView, QCPatchManagerView;
 

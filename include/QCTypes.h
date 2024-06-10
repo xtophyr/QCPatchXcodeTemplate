@@ -30,15 +30,15 @@ struct _QCC3DMesh;/* {
 };*/
 
 typedef struct _QCCacheProfileInfo {
-	unsigned int _field1;
-	unsigned int _field2;
+	NSUInteger _field1;
+    NSUInteger _field2;
 } QCCacheProfileInfo;
 
 typedef struct _QCContactInfo {
-	float x;
-	float y;
-	float prev_x;
-	float prev_y;
+	CGFloat x;
+    CGFloat y;
+    CGFloat prev_x;
+    CGFloat prev_y;
 	int state;
 } QCContactInfo;
 
@@ -47,32 +47,32 @@ struct _QCDod;
 typedef struct _QCExecutionArray {
 	struct {
 	} **_field1;
-	unsigned int _field2;
-	unsigned int _field3;
+    NSUInteger _field2;
+    NSUInteger _field3;
 } QCExecutionArray;
 
 typedef struct _QCExecutionStride {
-	unsigned int *_field1;
-	unsigned int _field2;
-	unsigned int _field3;
-	unsigned int _field4;
+    NSUInteger *_field1;
+    NSUInteger _field2;
+    NSUInteger _field3;
+    NSUInteger _field4;
 } QCExecutionStride;
 
 typedef struct _QCIterationManager {
 	QCArray *_field1;
 	QCArray *_field2;
-	unsigned int _field3;
-	unsigned int _field4;
-	unsigned int _field5;
-	unsigned int _field6;
+    NSUInteger _field3;
+    NSUInteger _field4;
+    NSUInteger _field5;
+    NSUInteger _field6;
 } QCIterationManager;
 
 typedef struct _QCIterationStack {
-	unsigned int *_field1;
-	unsigned int *_field2;
-	unsigned int _field3;
-	unsigned int _field4;
-	unsigned int _field5;
+    NSUInteger *_field1;
+    NSUInteger *_field2;
+    NSUInteger _field3;
+    NSUInteger _field4;
+    NSUInteger _field5;
 } QCIterationStack;
 
 typedef struct _QCMeshBoundingBox {
@@ -93,16 +93,16 @@ typedef struct _QCMeshInternal {
 	union {
 		float componentSize;
 		struct {
-			unsigned int width;
-			unsigned int height;
-			unsigned int depth;
+            NSUInteger width;
+            NSUInteger height;
+            NSUInteger depth;
 		} volumeSize;
 	} _field2;
 } QCMeshInternal;
 
 typedef struct _QCPatchExecutionInfo {
 	double _field1;
-	unsigned int _field2;
+    NSUInteger _field2;
 	double _field3;
 	double _field4;
 	QCArray *_field5;
@@ -118,10 +118,10 @@ struct __C3DTextureSampler;
 struct __Spline {
 	double *_field1;
 	double *_field2;
-	int _field3;
+	NSInteger _field3;
 	double *_field4;
-	int _field5;
-	int _field6;
+    NSInteger _field5;
+    NSInteger _field6;
 };
 
 typedef struct {
@@ -157,16 +157,16 @@ typedef struct {
 } CDAnonymousStruct5; // related to QCArrayTexture3D
 
 typedef struct {
-	float _field1;
-	float _field2;
-	float _field3;
-	float _field4;
-	float _field5;
-	float _field6;
-	float _field7;
-	float _field8;
+	CGFloat _field1;
+	CGFloat _field2;
+	CGFloat _field3;
+	CGFloat _field4;
+	CGFloat _field5;
+	CGFloat _field6;
+	CGFloat _field7;
+	CGFloat _field8;
 	float _field9;
-	int _field10;
+	NSInteger _field10;
 	float _field11;
 	float _field12;
 	float _field13;
@@ -175,10 +175,10 @@ typedef struct {
 	float _field16;
 	float _field17;
 	float _field18;
-	float _field19;
-	float _field20;
-	float _field21;
-	float _field22;
+	CGFloat _field19;
+	CGFloat _field20;
+	CGFloat _field21;
+	CGFloat _field22;
 	float _field23;
 } CDAnonymousStruct7; // related to QCParticleSystem
 
@@ -218,10 +218,10 @@ typedef struct {
 } CDAnonymousStruct9; // related to QCKeyFrameList
 
 typedef struct {
-	float x;
-	float y;
-	float z;
-	float w;
+	CGFloat x;
+    CGFloat y;
+    CGFloat z;
+    CGFloat w;
 } QCVector4;
 
 typedef struct {

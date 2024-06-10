@@ -28,7 +28,7 @@ extern NSString * const GFPortsLayoutDidChangeNotification;
 - (BOOL)setState:(NSDictionary*)state;
 - (void)stateUpdated;
 - (NSString *)description;
-- (id)key;
+- (NSString *)key;
 - (GFPort*)originalPort;
 @end
 

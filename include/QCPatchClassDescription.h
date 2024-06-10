@@ -7,8 +7,7 @@
 	CFDictionaryRef _stateKeysCaches;	// 80 = 0x50
 }
 
-- (id)stateKeysForIdentifier:(id)fp8;
-- (void)finalize;
+- (id)stateKeysForIdentifier:(NSString*)identifier;
 - (void)dealloc;
 
 @end

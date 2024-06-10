@@ -12,8 +12,8 @@
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;
 - (void)dealloc;
 - (id)patch;
-- (void)_real_willChangeValueForKey:(id)fp8;
-- (void)_real_didChangeValueForKey:(id)fp8;
+- (void)_real_willChangeValueForKey:(NSString*)key;
+- (void)_real_didChangeValueForKey:(NSString*)key;
 - (void)setPatch:(id)fp8;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;

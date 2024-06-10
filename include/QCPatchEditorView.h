@@ -9,23 +9,23 @@
 + (void)initialize;
 - (Class)valueClassForBinding:(NSBindingName)binding;
 - (void)dealloc;
-- (void)showInspector:(id)fp8;
+- (void)showInspector:(id)sender;
 
 @end
 
 @interface QCPatchEditorView (Private)
-- (void)__redrawBounds:(id)fp8;
-- (void)__patchExecuted:(id)fp8;
-- (void)__patchActivated:(id)fp8;
-- (void)__patchStarted:(id)fp8;
+- (void)__redrawBounds:(NSNotification*)notification;
+- (void)__patchExecuted:(NSNotification*)notification;
+- (void)__patchActivated:(NSNotification*)notification;
+- (void)__patchStarted:(NSNotification*)notification;
 - (void)setVisualizePatchExecution:(BOOL)flag;
 - (BOOL)visualizePatchExecution;
 @end
 
 @interface QCPatchEditorView (Wrappers)
 + (id)drawingCache;
-- (void)setPatch:(id)fp8;
+- (void)setPatch:(id)patch;
 - (id)patch;
-- (void)setPatchManager:(id)fp8;
+- (void)setPatchManager:(id)patchManager;
 - (id)patchManager;
 @end

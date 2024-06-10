@@ -8,10 +8,10 @@
 + (id)allocWithZone:(NSZone *)zone; // ensures there are only subclasses - this class cannot be instantiated directly.
 - (void)finalize;
 - (void)dealloc;
-- (void)setMetadata:(id)object forKey:(id)key shouldForward:(BOOL)shouldForward;
-- (void)removeMetadataForKey:(id)key;
+- (void)setMetadata:(id)object forKey:(NSString*)key shouldForward:(BOOL)shouldForward;
+- (void)removeMetadataForKey:(NSString*)key;
 - (void)removeAllMetadata;
-- (id)metadataForKey:(id)key;
+- (id)metadataForKey:(NSString*)key;
 - (CFDictionaryRef)_forwardMetadata;
 - (void)forwardMetadataToObject:(id)object;
 - (id)allMetadata;

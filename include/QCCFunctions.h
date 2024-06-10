@@ -90,7 +90,6 @@ NSDictionary* QCInfoFromComposition(NSDictionary*compositionDictionary);
 // MD5s are used as a key for QCCache.  This is generally an abomination.
 QCMD5Sum QCMD5FromData(NSData *data);  // this just shuttles around 16 bytes of md5sum data in an NSData (doesn't hash the data)
 QCMD5Sum QCMD5FromString(NSString *string); // parses string for md5 data (doesn't hash the string)
-void QCMD5ListToString(void); // added some time after SSDK was dumped
 NSData* QCMD5ToData(const void *bytes, NSUInteger length);
 NSString* QCMD5ToString(QCMD5Sum * _Nullable md5);
 QCMD5Sum QCMD5WithBytes(const void *data, CC_LONG len);    // args sent to CC_MD5 more or less as-is
@@ -98,8 +97,7 @@ QCMD5Sum QCMD5WithColorSpace(CGColorSpaceRef cs);
 QCMD5Sum QCMD5WithDoubles(void);
 QCMD5Sum QCMD5WithIntegers(void);
 QCMD5Sum QCMD5WithObject(void);
-void QCMD5WithOptions(void); // added some time after SSDK was dumped
-QCMD5Sum QCMD5WithPointer(void *ptr);
+QCMD5Sum QCMD5WithPointer(void *ptr);   // ptr is copied into the bottom 8 bytes of result (top 8 bytes are zero)
 QCMD5Sum QCMD5WithString(NSString *string);    // hashes string
 
 // TODO: should probably break this out into a separate header with better documentation

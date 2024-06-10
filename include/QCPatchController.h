@@ -9,7 +9,7 @@
 }
 
 + (BOOL)accessInstanceVariablesDirectly;
-+ (BOOL)automaticallyNotifiesObserversForKey:(id)fp8;
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;
 - (void)dealloc;
 - (id)patch;
 - (void)_real_willChangeValueForKey:(id)fp8;

@@ -6,7 +6,7 @@
 
 + (void)initialize;
 + (BOOL)accessInstanceVariablesDirectly;
-+ (BOOL)automaticallyNotifiesObserversForKey:(id)fp8;
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;
 - (void)_sliderAction:(id)sender;
 - (id)initWithFrame:(NSRect)frameRect;
 - (id)initWithFrame:(NSRect)frameRect scale:(double)scale;

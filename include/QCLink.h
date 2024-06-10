@@ -7,7 +7,7 @@
 }
 
 + (BOOL)accessInstanceVariablesDirectly;
-+ (BOOL)automaticallyNotifiesObserversForKey:(id)fp8;
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;
 - (id)sourcePatch;
 - (id)destinationPatch;
 - (id)parentPatch;

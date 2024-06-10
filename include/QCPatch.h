@@ -45,7 +45,7 @@ extern NSString * const QCPatchTimebaseDidChangeNotification;
 
 + (void)initialize;
 + (id)allocWithZone:(NSZone *)zone;
-+ (BOOL)automaticallyNotifiesObserversForKey:(id)fp8;
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;
 - (NSArray *)consumerSubpatches;	// This is likely pricey (no NSArrays are used internally, so they're synthesized on demand)
 - (void)__setOrder:(id)fp8 forConsumerSubpatch:(id)fp12;
 - (void)setOrder:(NSUInteger)fp8 forConsumerSubpatch:(id)fp12;

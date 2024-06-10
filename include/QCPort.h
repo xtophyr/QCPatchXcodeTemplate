@@ -24,7 +24,7 @@
 
 + (id)allocWithZone:(NSZone *)zone; // ensures there are only subclasses - this class cannot be instantiated directly.
 + (BOOL)accessInstanceVariablesDirectly;
-+ (BOOL)automaticallyNotifiesObserversForKey:(id)fp8;
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;
 + (Class)baseClass;     // NSInternalInconsistencyException : Function not implemented
 - (id)initWithNode:(id)fp8 arguments:(NSDictionary*)args;
 - (void)dealloc;

@@ -4,7 +4,7 @@
 
 @interface QCList : GFList
 + (BOOL)accessInstanceVariablesDirectly;            // NO
-+ (BOOL)automaticallyNotifiesObserversForKey:(id)key;   // NO
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;   // NO
 - (void)setObject:(id)object forKey:(NSString*)key;
 - (void)insertObject:(id)object atIndex:(NSUInteger)index forKey:(NSString*)key;
 - (void)removeObjectAtIndex:(NSUInteger)index;

@@ -52,10 +52,10 @@ int QCAddCompositionTrackToMovie(void); // returns 0 (14.4.1)
 void QCAddXMLElementsToStructure(void); // returns void, takes 2 object-ish args
 int QCAppendCompositionSampleToTrack(void); // returns 0 (14.4.1)
 BOOL QCCompositionCompliesToProtocol(QCComposition *composition, NSString *protocol); // not sure about second arg
-void QCCompositionFromData(void);
-void QCCompositionFromFile(void);
+id QCCompositionFromData(NSData *data);
+id QCCompositionFromFile(NSString *filePath);
 int QCCompositionFromMovieFile(void);  // returns nil (14.4.1)
-void QCCompositionFromPatch(void); // deprecated
+id QCCompositionFromPatch(void); // deprecated
 NSData* QCCompositionToData(NSDictionary *compositionDictionary); // serializes a filtered copy of compositionDictionary
 void QCCompositionToFile(void);
 void QCCompositionToMovieFile(void);

@@ -115,17 +115,17 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 
 @interface GFGraphView (LocalNodeActor)
 - (NSSize)_sizeForNode:(GFNode*)node;
-- (NSPoint)_pointForPort:(id)fp8 inNode:(id)fp12 bounds:(NSRect)fp16;
-- (id)_portForPoint:(NSPoint)fp8 inNode:(id)fp16 bounds:(NSRect)fp20;
-- (void)_drawNode:(id)fp8 bounds:(NSRect)fp12;
-- (void)_drawSelectionRingWithColor:(NSColor*)color width:(CGFloat)fp12 forNode:(id)fp16 bounds:(NSRect)fp20;
-- (BOOL)_trackMouse:(id)fp8 inNode:(id)fp12 bounds:(NSRect)fp16;
+- (NSPoint)_pointForPort:(id)port inNode:(id)node bounds:(NSRect)bounds;
+- (id)_portForPoint:(NSPoint)point inNode:(id)node bounds:(NSRect)bounds;
+- (void)_drawNode:(id)node bounds:(NSRect)bounds;
+- (void)_drawSelectionRingWithColor:(NSColor*)color width:(CGFloat)width forNode:(id)node bounds:(NSRect)bounds;
+- (BOOL)_trackMouse:(NSEvent*)event inNode:(id)node bounds:(NSRect)bounds;
 - (NSMenu*)_menuForNode:(GFNode*)node;
-- (BOOL)_nodeAcceptsFirstResponder:(id)fp8;
-- (BOOL)_nodeBecomesFirstResponder:(id)fp8;
-- (BOOL)_nodeResignsFirstResponder:(id)fp8;
-- (BOOL)_handleKeyUp:(id)fp8 inNode:(id)fp12;
-- (BOOL)_handleKeyDown:(id)fp8 inNode:(id)fp12;
+- (BOOL)_nodeAcceptsFirstResponder:(id)node;
+- (BOOL)_nodeBecomesFirstResponder:(id)node;
+- (BOOL)_nodeResignsFirstResponder:(id)node;
+- (BOOL)_handleKeyUp:(NSEvent*)event inNode:(id)node;
+- (BOOL)_handleKeyDown:(NSEvent*)event inNode:(id)node;
 @end
 
 @interface GFGraphView (Private)
@@ -139,9 +139,9 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)_startTooltips;
 - (void)_showTooltip;
 - (void)_hideTooltip;
-- (void)_updateTooltipsForMouseLocation:(NSPoint)fp8;
+- (void)_updateTooltipsForMouseLocation:(NSPoint)location;
 - (void)_stopTooltips;
-- (void)_drawGraph:(NSRect)fp8 selectionRingColor:(id)fp24 selectionRingWidth:(CGFloat)fp28 nodeCount:(NSUInteger)fp32 nodeList:(id *)fp36 connectionCount:(NSUInteger)fp40 connectionList:(id *)fp44;
+- (void)_drawGraph:(NSRect)bounds selectionRingColor:(id)color selectionRingWidth:(CGFloat)width nodeCount:(NSUInteger)nodeCount nodeList:(id *)nodes connectionCount:(NSUInteger)connectionCount connectionList:(id *)connections;
 - (BOOL)_editNode:(GFGraph*)node;
 - (void)_printWithInfo:(NSPrintInfo*)info showingPrintPanel:(BOOL)flag;
 - (BOOL)_setFirstResponderNode:(GFNode*)node;
@@ -166,7 +166,7 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (void)__windowKey:(NSNotification*)notification;
 - (void)__frameChanged:(NSNotification*)notification;
 - (void)_finishInitialization;
-- (id)_nodeAtPosition:(NSPoint)fp8 outBounds:(NSRect *)outBounds;
+- (id)_nodeAtPosition:(NSPoint)position outBounds:(NSRect *)outBounds;
 
 // these return the number of nodes visited (so it's also used with nil selector as a method to count selected nodes, for example).
 // ctx is a pointer passed to the __... context: methods above.  It's mainly used to get results out, such as unioned rects.
@@ -187,7 +187,7 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (GFNode*)_firstResponderNode;
 - (NSColor*)_colorForConnection:(id)connection;
 - (GFConnection*)_trackedConnection;
-- (void)delete:(id)fp8;
+- (void)delete:(id)sender;
 @end
 
 @interface GFGraphView (Specific)

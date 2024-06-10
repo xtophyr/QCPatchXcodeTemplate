@@ -95,10 +95,6 @@ typedef struct _GLMatrices {
 - (void)didPopRenderState:(id)fp8;
 @end
 
-// this isn't in a category on 14.4.1 - as such, this is a cetrgory-free class in more modern times.
-// (later: it may be that category information isn't included as reliably in later OSs, or class-dump
-//  doesn't output it any longer.  Other categories appear to be missing too and that seems like an unusual
-//  thing to have an engineer spend time on)
 @interface QCOpenGLContext (NSOpenGLContext)
 - (id)initWithNSOpenGLContext:(id)fp8 format:(id)fp12 options:(NSDictionary *)options;
 @end

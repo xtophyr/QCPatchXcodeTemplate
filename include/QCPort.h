@@ -5,21 +5,22 @@
 
 @interface QCPort : GFPort
 {
-	Class _baseClass;	// 40 = 0x28
-	QCPort *_connectedPort;	// 44 = 0x2c
-	QCProxyPort *_proxyPort;	// 48 = 0x30
-	NSUInteger _timestamp;	// 52 = 0x34
-	NSUInteger _previousTimestamp;	// 56 = 0x38
-	NSUInteger _iteration;	// 60 = 0x3c
-	NSUInteger _previousIteration;	// 64 = 0x40
-	BOOL _updated;	// 68 = 0x44
-	NSString *_keyCache;	// 72 = 0x48
-	int _direction;	// 76 = 0x4c
-	NSUInteger _connectedPortTimestamp;	// 80 = 0x50
-	NSUInteger _kindAndUnits;	// 84 = 0x54
-	void *_observationInfo;	// 88 = 0x58
-	id _proExtension;	// 92 = 0x5c
-	void *_unused2[2];	// 96 = 0x60
+	Class _baseClass;
+	QCPort *_connectedPort;
+	QCProxyPort *_proxyPort;
+	NSUInteger _timestamp;
+	NSUInteger _previousTimestamp;
+	NSUInteger _iteration;
+	NSUInteger _previousIteration;
+    BOOL _updated;
+	NSString *_keyCache;
+	int _direction;
+	NSUInteger _connectedPortTimestamp;
+	NSUInteger _kindAndUnits;   // bottom 16 bits are units, "top" 16 bits are kind, both populated by args["attributes"]["kind" | "units"] in -init.
+                                // these are exposed through -kind and -units, which are apparently only used in QCProFX stuff?
+	void *_observationInfo;
+	id _proExtension;
+	void *_unused2[2];
 }
 
 + (id)allocWithZone:(NSZone *)zone; // ensures there are only subclasses - this class cannot be instantiated directly.
@@ -28,8 +29,8 @@
 + (Class)baseClass;     // NSInternalInconsistencyException : Function not implemented
 - (id)initWithNode:(id)fp8 arguments:(NSDictionary*)args;
 - (void)dealloc;
-- (int)kind;
-- (int)units;
+- (int)kind;    // bits 16 - 31 of _kindAndUnits
+- (int)units;   // bits  0 - 15 of _kindAndUnits
 - (void)_clearCachedKey;
 - (NSString *)key;
 - (void)portWillDeleteFromNode;

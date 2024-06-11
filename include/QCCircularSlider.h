@@ -10,6 +10,7 @@
 - (void)_sliderAction:(id)sender;
 - (id)initWithFrame:(NSRect)frameRect;
 - (id)initWithFrame:(NSRect)frameRect scale:(double)scale;
-- (void)setValue:(id)fp8 forKey:(id)fp12;
-- (id)valueForKey:(id)fp8;
+- (void)scrollWheel:(NSEvent*)event; // added after SSDK was dumped
+- (void)setValue:(id)value forKey:(NSString*)key;
+- (id)valueForKey:(NSString*)key;
 @end

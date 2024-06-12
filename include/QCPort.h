@@ -20,7 +20,8 @@
                                 // these are exposed through -kind and -units, which are apparently only used in QCProFX stuff?
 	void *_observationInfo;
 	id _proExtension;
-	void *_unused2[2];
+    NSUInteger _observerCount;
+	void *_unused2[1];
 }
 
 + (id)allocWithZone:(NSZone *)zone; // ensures there are only subclasses - this class cannot be instantiated directly.

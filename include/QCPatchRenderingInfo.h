@@ -1,5 +1,7 @@
 @class QCContext;
 
+// most of these fields are accessed directly (renderingInfo->____) rather than via accessors.
+
 @interface QCPatchRenderingInfo : NSObject
 {
 	QCContext *_context;	// 4 = 0x4

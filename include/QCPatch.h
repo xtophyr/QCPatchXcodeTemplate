@@ -14,7 +14,6 @@ extern NSString * const QCPatchTimebaseDidChangeNotification;
 	QCPatchRenderingInfo *_renderingInfo;	// 84 = 0x54
 	QCRenderState *_renderState;	// 88 = 0x58
 	int _executionMode;	// 92 = 0x5c
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 	QCRenderingManager *_renderingManager;	// 96 = 0x60
 	QCPatchExecutionInfo *_executionInfo;	// 100 = 0x64
 	NSUInteger _executionFlags;	// 104 = 0x68
@@ -27,20 +26,6 @@ extern NSString * const QCPatchTimebaseDidChangeNotification;
 	id _proExtension;	// 132 = 0x84
 	double _unused31[2];	// 136 = 0x88
 	NSUInteger _unused32[1];	// 152 = 0x98
-#else
-	NSUInteger _executionFlags;       // 96 = 0x60
-    int _timebase;      // 100 = 0x64
-    QCBooleanPort *_enableInput;        // 104 = 0x68
-    QCNumberPort *_timeInput;   // 108 = 0x6c
-    BOOL _enabled;      // 112 = 0x70
-    NSUInteger _activeCount;  // 116 = 0x74
-    double _lastExecutionTime;  // 120 = 0x78
-    NSUInteger _lastExecutionFrame;   // 128 = 0x80
-    double _activationTime;     // 132 = 0x84
-    void *_observationInfo;     // 140 = 0x8c
-    id _proExtension;   // 144 = 0x90
-    void *_unused3[3];  // 148 = 0x94	
-#endif
 }
 
 + (void)initialize;
@@ -103,15 +88,12 @@ typedef enum
 - (id)serializedValueForStateKey:(id)fp8;
 - (void)setSerializedValue:(id)fp8 forStateKey:(id)fp12;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 + (id)cachedStateArrays;
 + (id)stateArrays;
 + (BOOL)supportsOptimizedExecutionForIdentifier:(id)identifier;	// default to false.  true for QCRenderInImage, QCCamera, QCGLSLShader, QCTrackBall, QCIterator, QCReplicator.  "optimized execution" apparently means something like "can tell you that it doesn't need to run until a specified time" (specified by -nextExecutionTime).
 - (double)nextExecutionTime:(id)fp8 time:(double)time arguments:(NSDictionary*)args;
 - (double)nextExecutionTimeForSubpatches:(id)fp8 time:(double)time arguments:(NSDictionary*)args;
 - (void)invalidateDodForSubpatches;
-#endif
-
 @end
 
 @interface QCPatch (Execution)
@@ -135,11 +117,8 @@ typedef enum
 - (void)setCustomizedName:(NSString*)name; // sets displayed patch name to "name" (in quotes)
 - (BOOL)beginLocalContext;
 - (void)endLocalContext;
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 - (void)setForceInputsUpdate;
 - (void)_drawDirtyRect;
-#endif
 @end
 
 @interface QCPatch (FCPImageExtensions)
@@ -218,8 +197,6 @@ typedef enum
 - (void)_disable;
 - (void)_cleanup;
 - (int)_executionFlags;
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 - (void)_forwardRenderingFlag;
 - (double)_nextExecutionTime;
 - (void)_resetExecutionFlags;
@@ -228,15 +205,11 @@ typedef enum
 - (BOOL)__execute:(double)time arguments:(NSDictionary*)args;
 - (double)_nextExecutionTime:(double)time arguments:(NSDictionary*)args;
 - (void)_invalidateDodForSubpatches;
-#endif
-
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 @interface QCPatch (PrivateRuntime)
 - (BOOL)prerenderAtTime:(double)time imageSizeHint:(NSSize)sizeHint arguments:(NSDictionary*)args;
 @end
-#endif
 
 @interface QCPatch (QCInspector)
 + (id)inspectorNibNameWithIdentifier:(id)identifier;
@@ -289,10 +262,7 @@ typedef enum
 - (QCContext *)renderingContext;
 - (void)setRenderingFlags:(int)fp8;
 - (int)renderingFlags;
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 - (double)nextExecutionTime:(double)time arguments:(NSDictionary*)args;
-#endif
 @end
 
 @interface QCPatch (Search)
@@ -319,10 +289,7 @@ typedef enum
 - (void)__setValue:(id)fp8 forPortKey:(id)fp12;
 - (void)_setIndex:(id)fp8 forPort:(id)fp12;
 - (void)_setKey:(id)fp8 forPort:(id)fp12;
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 - (id)selectedNodes;
-#endif
 @end
 
 @interface QCPatch (Wrappers)

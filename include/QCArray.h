@@ -1,20 +1,20 @@
-// _type field: (see QCArrayTypeSize())
-/*  most of these aren't used, so most of this is speculative.  signed/unsigned order is guessed and might be backwards.
-    QCArrayTypeSize() takes _type int, and returns the value in a table, or 0 if it's greater than 0xB (table goes to 0xC)
+// _type field: (see QCArrayTypeSize() and _StringFromArrayType())
+/*  Most of these aren't used, but they're named in StringFromArrayType.
+ 
         64 bit:     32 bit:     (while 32 bit is dead, it leaks information about CGFloat-style size-changing types or pointers)
-    0:  0           0
-    1:  1           1   BOOL? // QCCounter uses this for its _last* Arrays
-    2:  1           1   uint8_t?
-    3:  1           1   int8_t?
-    4:  2           2   uint16_t?
-    5:  2           2   int16_t?
-    6:  4           4   uint32_t? // QCCounter uses this for its _value Array
-    7:  4           4   int32_t?
-    8:  8           4   CGFloat?
-    9:  8           4   CGFloat?
-    A:  4           4   float?
-    B:  8           8   // double -- (QCSmooth, QCMouseInteraction)
-    C:  8           4   // probably pointer -- QCImagePort_Cache uses type 0xc
+    0:  0           0   undefined
+    1:  1           1   BOOL            // QCCounter uses this for its _last* Arrays
+    2:  1           1   unsigned char
+    3:  1           1   char
+    4:  2           2   unsigned short
+    5:  2           2   short
+    6:  4           4   unsigned int    // QCCounter uses this for its _value Array
+    7:  4           4   int
+    8:  8           4   unsigned long
+    9:  8           4   long
+    A:  4           4   float
+    B:  8           8   double          -- (QCSmooth, QCMouseInteraction)
+    C:  8           4   pointer         -- QCImagePort_Cache uses type 0xc
  */
 
 /*  _status field:
@@ -28,16 +28,18 @@
 /* _backingCallback returns void and takes void *_array and void *_backingInfo as arguments.  _backingInfo is essentially "void *context" for the callback. */
 /* the callback is called in -finalize_QCArray, and is called if it's not null.  this in turn is driven by -dealloc (and -finalize if GC was still a thing) */
 
+typedef void (*releaseCallback)(void *array, void *info);
+
 @interface QCArray : NSObject
 {
-	void *_array;	// 4 = 0x4
-	int _type;	// 8 = 0x8
-	NSUInteger _count;	// 12 = 0xc
-	NSUInteger _elementSize;	// 16 = 0x10
-	int _status;	// 20 = 0x14
-	void *_backingCallback;	// 24 = 0x18
-	void *_backingInfo;	// 28 = 0x1c
-	void *_unused[4];	// 32 = 0x20
+	void *_array;
+	int _type;
+	NSUInteger _count;
+	NSUInteger _elementSize;
+	int _status;
+	releaseCallback _backingCallback;
+	void *_backingInfo;
+	void *_unused[4];
 }
 
 @property (readonly,assign) NSUInteger byteSize;

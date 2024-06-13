@@ -94,9 +94,9 @@ NSData* QCMD5ToData(const void *bytes, NSUInteger length);
 NSString* QCMD5ToString(QCMD5Sum * _Nullable md5);
 QCMD5Sum QCMD5WithBytes(const void *data, CC_LONG len);    // args sent to CC_MD5 more or less as-is
 QCMD5Sum QCMD5WithColorSpace(CGColorSpaceRef cs);
-QCMD5Sum QCMD5WithDoubles(void);
-QCMD5Sum QCMD5WithIntegers(void);
-QCMD5Sum QCMD5WithObject(void);
+QCMD5Sum QCMD5WithDoubles(uint64_t count, ...); // count is the number of double args.  This uses a stack array, so large values of count may be lethal.
+QCMD5Sum QCMD5WithIntegers(uint64_t count, ...); // count is the number of uint64_t args.  This uses a stack array, so large values of count may be lethal.
+QCMD5Sum QCMD5WithObject(id object);    // handles NSNumber and NSString simply, NSValue goes through NSArchiver (eek), else goes through NSKeyedArchiver, with resulting bytes getting sent to QCMD5WithBytes
 QCMD5Sum QCMD5WithPointer(void *ptr);   // ptr is copied into the bottom 8 bytes of result (top 8 bytes are zero)
 QCMD5Sum QCMD5WithString(NSString *string);    // hashes string
 

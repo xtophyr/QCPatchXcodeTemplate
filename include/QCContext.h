@@ -2,13 +2,13 @@
 
 @interface QCContext : NSObject
 {
-	QCIterationManager *_iterationManager;	// 4 = 0x4
-	NSMutableDictionary *_optimizedRendering;	// 8 = 0x8
-	NSDictionary *_options;	// 12 = 0xc
-	NSMutableDictionary *_userInfo;	// 16 = 0x10
-	CFSetRef _renderingPatches;	// 20 = 0x14
-	id _proExtension;	// 24 = 0x18
-	void *_unused[1];	// 28 = 0x1c
+	QCIterationManager *_iterationManager;
+	NSMutableDictionary *_optimizedRendering;   // this is initialized to a GFList (!) and treated as such (fooForKey: methods sent)
+	NSDictionary *_options;
+	NSMutableDictionary *_userInfo;
+	CFSetRef _renderingPatches;
+	id _proExtension;       // QCContextProExtension
+	void *_unused[1];
 }
 
 + (void)initialize;

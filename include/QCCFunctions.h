@@ -139,6 +139,13 @@ void QCPatchFromCompositionWithOptions(void);
 void QCPatchToComposition(void);
 void QCPatchToFlattenedComposition(void);
 
+/*  QCProFX() sets QCPatchExtensionclass to QCPatchProExtension and QCContextExtensionClass to QCContextProExtension,
+    registers a patch pre- and post-execution callback (type TBD), and registers I8, I16, Ih, and If pixel formats.
+ 
+    the extension classes are allocated and stored in the _proExtension ivar of QCPatch and QCContext for subsequently
+    allocated/inited patches and contexts.
+ */
+
 void QCProFX(void); // takes void, returns void
 void QCProFXRegisterAllocationCallbacks(void); // takes 2 function pointer args, QCImagePixelBuffer alloc and dealloc
 

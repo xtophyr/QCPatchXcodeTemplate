@@ -19,7 +19,7 @@
 	NSUInteger _kindAndUnits;   // bottom 16 bits are units, "top" 16 bits are kind, both populated by args["attributes"]["kind" | "units"] in -init.
                                 // these are exposed through -kind and -units, which are apparently only used in QCProFX stuff?
 	void *_observationInfo;
-	id _proExtension;
+	id _proExtension;           // unused (references QCPortExtensionClass, which is never written)
     NSUInteger _observerCount;
 	void *_unused2[1];
 }

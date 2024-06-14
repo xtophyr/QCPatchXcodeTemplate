@@ -23,7 +23,7 @@ extern NSString * const QCPatchTimebaseDidChangeNotification;
 	BOOL _enabled;	// 120 = 0x78
 	NSUInteger _activeCount;	// 124 = 0x7c
 	void *_observationInfo;	// 128 = 0x80
-	id _proExtension;	// 132 = 0x84
+	id _proExtension;       // QCPatchProExtension
 	double _unused31[2];	// 136 = 0x88
 	NSUInteger _unused32[1];	// 152 = 0x98
 }

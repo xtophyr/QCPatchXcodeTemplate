@@ -44,11 +44,19 @@ typedef struct _QCContactInfo {
 
 struct _QCDod;
 
+typedef struct _QCExecutionInfo {
+    void *_field1;
+    void *_field2;
+    void *_field3;  // QCExecutionPortArray
+    void *_field4;
+    void *_field5;
+    void *_field6;
+} QCExecutionInfo;
+
 typedef struct _QCExecutionArray {
-	struct {
-	} **_field1;
-    NSUInteger _field2;
-    NSUInteger _field3;
+	QCExecutionInfo **infos; // array of QCExecutionInfos
+    NSUInteger used;
+    NSUInteger capacity;
 } QCExecutionArray;
 
 typedef struct _QCExecutionStride {

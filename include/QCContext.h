@@ -26,7 +26,7 @@
 - (BOOL)renderPatch:(id)fp8 time:(double)time arguments:(NSDictionary*)args;
 - (void)resumeRenderingPatch:(id)fp8;
 - (void)stopRenderingPatch:(id)fp8;
-- (NSSet*)renderingPatches;
+- (NSArray*)renderingPatches;
 - (BOOL)willPushRenderState:(id)fp8;
 - (void)didPushRenderState:(id)fp8;
 - (void)willPopRenderState:(id)fp8;

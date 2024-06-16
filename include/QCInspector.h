@@ -19,6 +19,7 @@
 + (NSString*)viewNibName;   // NSInternalInconsistencyException : Function not implemented (subclasses must override)
 
 - (id)initWithBundle:(NSBundle*)bundle nibName:(NSString*)nibName;
+- (void)dealloc;
 
 - (void)didLoadNib;
 
@@ -33,5 +34,5 @@
 - (id)view;
 
 // called to get the title of the view (@"Settings" is the default unless no patch is selected, then it's "Not Applicable")
-- (id)viewTitle;
+- (NSString*)viewTitle;
 @end

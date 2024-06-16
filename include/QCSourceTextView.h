@@ -1,7 +1,4 @@
-@interface QCSourceTextView : NSTextView 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
-	<NSTextDelegate, NSTextViewDelegate>
-#endif
+@interface QCSourceTextView : NSTextView 	<NSTextDelegate, NSTextViewDelegate>
 {
 	BOOL _showLines;	// 84 = 0x54
 	NSDictionary *_keywordColors;	// 88 = 0x58
@@ -9,13 +6,9 @@
 	NSColor *_commentColor;	// 96 = 0x60
 	NSColor *_preprocessorColor;	// 100 = 0x64
 	NSColor *_errorColor;	// 104 = 0x68
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060	
 	NSColor *_numberColor;	// 108 = 0x6c
 	NSUInteger _fontSize;	// 112 = 0x70
 	void *_unused[3];	// 116 = 0x74
-#else
-	void *_unused[4];	// 108 = 0x6c
-#endif
 }
 
 + (void)parseSource:(id)fp8 callback:(void *)fp12 userInfo:(void *)userInfo;
@@ -44,7 +37,6 @@
 - (NSColor*)preprocessorColor;
 - (void)setErrorHighlightColor:(NSColor*)color;
 - (NSColor*)errorHighlightColor;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060	
 - (void)changeFont:(NSFont*)newFont;
 - (void)keyDown:(NSEvent*)event;
 - (void)setHighlightLine:(NSUInteger)line;
@@ -52,7 +44,6 @@
 - (NSColor*)numberColor;
 - (void)setFontSize:(CGFloat)fontSize;
 - (CGFloat)fontSize;
-#endif
 @end
 
 @interface QCSourceTextView (Actions)

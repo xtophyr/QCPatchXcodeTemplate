@@ -8,13 +8,13 @@
 	void *_unused3[3];	// 112 = 0x70
 }
 
-+ (Class)baseClass;
-- (id)rawValue;
-- (void)setRawValue:(id)fp8;
-- (BOOL)acceptValuesOfClass:(Class)fp8;
-- (Class)valueClass;
-- (id)stateValue;
-- (BOOL)setStateValue:(id)fp8;
++ (Class)baseClass;                     // returns [QCVirtualPort class]
+- (id)rawValue;                         // same as -value
+- (void)setRawValue:(id)rawValue;
+- (BOOL)acceptValuesOfClass:(Class)cls; // returns NO
+- (Class)valueClass;                    // returns nil
+- (id)stateValue;                       // returns nil
+- (BOOL)setStateValue:(id)stateValue;   // returns NO
 
 @end
 
@@ -23,10 +23,10 @@
 @end
 
 @interface QCVirtualPort (Override)
-- (id)initWithNode:(id)fp8 arguments:(id)fp12;
+- (id)initWithNode:(GFNode*)node arguments:(NSDictionary*)args;
 - (void)dealloc;
 - (id)value;
-- (BOOL)setValue:(id)fp8;
-- (BOOL)canConnectToPort:(id)fp8;
-- (BOOL)takeValue:(id)fp8 fromPort:(id)fp12;
+- (BOOL)setValue:(id)value;             // returns NO
+- (BOOL)canConnectToPort:(QCPort*)port; // returns YES
+- (BOOL)takeValue:(id)value fromPort:(QCPort*)port;
 @end

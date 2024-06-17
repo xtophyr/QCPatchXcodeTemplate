@@ -71,15 +71,25 @@ void QCGLMakeTransformationMatrix(CGFloat*,CGFloat xRotation,CGFloat yRotation,C
 
 int QCGetCompositionTrackAtIndex(void); // returns 0 (14.4.1)
 
-/* possible spaces returned:
-    kCGColorSpaceGenericGray
-    kCGColorSpaceGenericCMYK
-    kCGColorSpaceGenericRGB
-    kCGColorSpaceGenericRGBLinear
-    the main display's colorspace
-    others ?
- */
-CGColorSpaceRef QCGetIndexedColorSpace(int index); // indexes are 0 - 12 or so
+/* Note: parts of this function take the GFNodeManager lock, and can throw an exception with it held.  This leaves the lock held, so you're likely to
+ deadlock later when something else needs to take the lock (but it's a recursive lock, so the same thread won't expose the problem right away).
+ 
+ colorspace indexes:
+ 0: exception
+ 1: Generic Gray Profile    (kCGColorSpaceGenericGray)
+ 2: Generic RGB Profile     (kCGColorSpaceGenericRGB)
+ 3: Generic CMYK Profile    (kCGColorSpaceGenericCMYK)
+ 4: Device Gray             (CGColorSpaceCreateDeviceGray())
+ 5: Device RGB              (CGColorSpaceCreateDeviceRGB())
+ 6: Device CMYK             (CGColorSpaceCreateDeviceCMYK())
+ 7: Main Display Profile    (CGDisplayCopyColorSpace(CGMainDisplayID()))
+ 8: Generic HDR Profile     (kCGColorSpaceGenericRGBLinear)
+ 9: Composite NTSC profile  | ITU Rec601 / SMPTE
+ 10: Composite PAL profile  | EBU 3213           These three come from CoreVideo?
+ 11: HDTV profile           | ITU Rec709
+ 12+: exceptions
+*/
+CGColorSpaceRef QCGetIndexedColorSpace(int index); // indexes are 1 - 11
 
 /* returns mach_absolute_time() with the usual mach_timebase_info fixups (scale by numer/denom) */
 /* time is adjusted to roughly seconds of uptime (not nanoseconds) */

@@ -2,16 +2,18 @@
 
 @interface QCIndexPort : QCPort
 {
-	NSUInteger _index;	// 104 = 0x68
-	NSUInteger _maxIndex;	// 108 = 0x6c
-	void *_unused3[4];	// 112 = 0x70
+	NSUInteger _index;
+	NSUInteger _maxIndex;
+    NSUInteger _minIndex;
+	void *_unused3[3];
 }
 
 - (NSUInteger)indexValue;
 - (void)setIndexValue:(NSUInteger)indexValue;
 - (NSUInteger)maxIndexValue;
 - (void)setMaxIndexValue:(NSUInteger)maxIndexValue;
-
+- (NSUInteger)minIndexValue;
+- (void)setMinIndexValue:(NSUInteger)minIndexValue;
 @end
 
 @interface QCIndexPort (Override)

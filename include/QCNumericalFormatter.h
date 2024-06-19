@@ -1,20 +1,21 @@
 
+// Used in inspectors for QCNumberPorts
 
 @interface QCNumericalFormatter : NSFormatter
 {
-	BOOL _allowsFloats;	// 4 = 0x4
-	double _min;	// 8 = 0x8
-	double _max;	// 16 = 0x10
+	BOOL _allowsFloats;
+	double _min;
+	double _max;
 }
 
 - (id)init;
-- (void)setAllowsFloats:(BOOL)fp8;
+- (void)setAllowsFloats:(BOOL)flag;
 - (BOOL)allowsFloats;
 - (double)minimum;
-- (void)setMinimum:(double)fp8;
+- (void)setMinimum:(double)minimum;
 - (double)maximum;
-- (void)setMaximum:(double)fp8;
-- (BOOL)getObjectValue:(id *)fp8 forString:(id)fp12 errorDescription:(id *)fp16;
-- (id)stringForObjectValue:(id)fp8;
+- (void)setMaximum:(double)maximum;
+- (BOOL)getObjectValue:(id *)value forString:(NSString*)string errorDescription:(id *)error;
+- (id)stringForObjectValue:(id)value;
 
 @end

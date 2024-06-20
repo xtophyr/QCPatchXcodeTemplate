@@ -3,8 +3,9 @@
 
 @interface QCStringPort : QCPort
 {
-	NSString *_string;	// 104 = 0x68
-	void *_unused3[4];	// 108 = 0x6c
+	NSString *_string;
+    int _editorType;    // valid values are 0 and 1, no obvious differences between the two though.
+	void *_unused3[3];
 }
 
 - (NSString*)stringValue;
@@ -28,6 +29,8 @@
 @interface QCStringPort (ParameterView)
 - (id)setupParameterView;
 - (void)resetParameterView:(id)fp8;
+- (int)editorType;
+- (void)setEditorTyoe:(int)type;    // exception if type is >1
 @end
 
 @interface QCStringPort (QCProFX)

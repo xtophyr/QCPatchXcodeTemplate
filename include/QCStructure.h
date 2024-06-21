@@ -13,11 +13,16 @@
 @end
 
 @interface QCStructure (QCProFX)
-- (QCMD5Sum)md5WithTime:(double)time arguments:(NSDictionary*)args;
+- (QCMD5Sum)md5WithTime:(NSTimeInterval)time arguments:(NSDictionary*)args;
 @end
 
 @interface QCStructure (Override)
 - (NSString*)description;
+- (NSString*)descriptionWithDepth:(NSUInteger)depth;
+@end
+
+@interface QCStructure (Wrappers)
+- (id)objectAtIndex:(NSUInteger)index;
 @end
 
 @interface QCStructure (ExtendedStructure)
@@ -26,7 +31,7 @@
 - (id)initWithArray:(NSArray*)array;
 - (id)initWithMembers:(id)members, ...;
 - (id)initWithMembers:(id)members keyPrefix:(NSString*)keyPrefix;
-- (id)initWithMembersAndKeys:(id)fp8, ...;
+- (id)initWithMembersAndKeys:(id)members, ...;
 - (id)initWithMembers:(const id *)members forKeys:(const id *)keys count:(NSUInteger)count;
 - (id)init;
 - (void)dealloc;
@@ -37,10 +42,9 @@
 - (void)removeAllMembers;
 - (void)replaceMemberAtIndex:(NSUInteger)index withMember:(id)member;
 - (NSArray*)arrayRepresentation;
-- (NSDictionary*)dictionaryRepresentation;
-- (GFList*)_list;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060
 - (NSArray*)arrayRepresentationOfType:(int)type;
+- (NSDictionary*)dictionaryRepresentation;
+- (id)dictionaryAndArrayRepresentation;
+- (GFList*)_list;
 - (void)_setList:(GFList*)list;
-#endif
 @end

@@ -6,7 +6,6 @@
 }
 
 + (id)allocWithZone:(NSZone *)zone; // ensures there are only subclasses - this class cannot be instantiated directly.
-- (void)finalize;
 - (void)dealloc;
 - (void)setMetadata:(id)object forKey:(NSString*)key shouldForward:(BOOL)shouldForward;
 - (void)removeMetadataForKey:(NSString*)key;

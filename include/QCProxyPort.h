@@ -20,7 +20,11 @@
 
 @interface QCProxyPort (ParameterView)
 - (id)setupParameterView;
-- (void)resetParameterView:(id)fp8;
+- (void)resetParameterView:(id)parameterView;
+@end
+
+@interface QCProxyPort (QCInteractionPort)
+- (void)_setConnectedPort:(id)port;
 @end
 
 @interface QCProxyPort (QCColorPort)

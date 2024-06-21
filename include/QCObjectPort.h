@@ -2,8 +2,7 @@
 
 @interface QCObjectPort : QCVirtualPort
 {
-	id _cachedValue;	// 124 = 0x7c
-	void *_unused4[4];	// 128 = 0x80
+	void *_unused4[5];	// 128 = 0x80
 }
 
 + (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.

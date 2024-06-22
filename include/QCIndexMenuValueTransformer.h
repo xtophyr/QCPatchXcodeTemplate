@@ -1,4 +1,5 @@
-
+// This transformer is used for QCIndexPort inspectors, transforming the popup menu items to selected indices.
+// it handles @"-" entries as separators, adjusting the index value to accomodate them.
 
 @interface QCIndexMenuValueTransformer : NSValueTransformer
 {
@@ -7,9 +8,9 @@
 
 + (Class)transformedValueClass;
 + (BOOL)allowsReverseTransformation;
-+ (id)transformerWithItems:(id)fp8;
-- (id)initWithItems:(id)fp8;
++ (instancetype)transformerWithItems:(NSArray<NSString*>*)items;
+- (id)initWithItems:(NSArray<NSString*>*)items;
 - (void)dealloc;
-- (id)transformedValue:(id)fp8;
-- (id)reverseTransformedValue:(id)fp8;
+- (NSNumber*)transformedValue:(NSNumber*)value;
+- (NSNumber*)reverseTransformedValue:(NSNumber*)value;
 @end

@@ -121,11 +121,6 @@ typedef enum
 - (void)_drawDirtyRect;
 @end
 
-@interface QCPatch (FCPImageExtensions)
-- (id)inputForKey:(id)fp8;
-- (id)_executionContext;
-@end
-
 @interface QCPatch (File)
 + (BOOL)canInstantiateWithFile:(NSString*)filePath;
 + (id)instantiateWithFile:(NSString*)filePath;

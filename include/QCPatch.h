@@ -270,7 +270,7 @@ typedef enum
 - (void)setValue:(id)fp8 forStateKey:(id)fp12;
 - (BOOL)boolForStateKey:(id)fp8;
 - (void)setBool:(BOOL)fp8 forStateKey:(id)fp12;
-- (int)integerForStateKey:(id)fp8;
+- (NSInteger)integerForStateKey:(id)fp8;
 - (void)setInteger:(int)fp8 forStateKey:(id)fp12;
 - (double)doubleForStateKey:(id)fp8;
 - (void)setDouble:(double)fp8 forStateKey:(id)fp16;

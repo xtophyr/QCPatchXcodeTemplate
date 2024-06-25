@@ -1,4 +1,4 @@
-@interface QCSynchronousURLConnectionDelegate : NSObject
+@interface QCSynchronousURLConnectionDelegate : NSObject <NSURLConnectionDelegate>
 {
 	NSURLRequest *_request;	// 4 = 0x4
 	NSURLResponse *_response;	// 8 = 0x8

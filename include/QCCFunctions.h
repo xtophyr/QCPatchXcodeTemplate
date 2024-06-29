@@ -4,9 +4,8 @@
 typedef void (*MessageCallback)(NSString *_Nullable nodeIdentifier, NSString * _Nonnull formatString, void * _Nullable refCon);
 
 // This is used by QCStructure -initWithMembers: and -initWithMembersAndKeys:
-// builds an NSMutableArray filled with first, and then the items in list.  list is nil-terminated.
-// There might be a special mode where small integers are also used (the code checks list elements against 0x28 (40)).
-NSMutableArray* GFArrayFromArgumentList(id first, id *list);
+// builds an NSMutableArray filled with first and then the items in list, which is nil-terminated.
+NSMutableArray* GFArrayFromArgumentList(id first, va_list list);
 
 // each element of the returned array is a symbolicated string of the backtrace.  Symbolication is done by the private CoreSymbolication
 // framework, so they're usually higher-quality than dladdr-based symbolications available to the public.

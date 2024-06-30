@@ -80,11 +80,11 @@ typedef enum
 //		...?
 - (void)receiveMessage:(id)fp8 name:(id)fp12 attributes:(id)fp16;
 
-- (BOOL)setup:(QCOpenGLContext *)context;
-- (void)enable:(QCOpenGLContext*)context;
-- (BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)args;
-- (void)disable:(QCOpenGLContext*)context;
-- (void)cleanup:(QCOpenGLContext *)context;
+- (BOOL)setup:(QCContext *)context;
+- (void)enable:(QCContext*)context;
+- (BOOL)execute:(QCContext*)context time:(double)time arguments:(NSDictionary*)args;
+- (void)disable:(QCContext*)context;
+- (void)cleanup:(QCContext *)context;
 - (id)serializedValueForStateKey:(id)fp8;
 - (void)setSerializedValue:(id)fp8 forStateKey:(id)fp12;
 
@@ -200,6 +200,7 @@ typedef enum
 - (BOOL)__execute:(double)time arguments:(NSDictionary*)args;
 - (double)_nextExecutionTime:(double)time arguments:(NSDictionary*)args;
 - (void)_invalidateDodForSubpatches;
+- (void)_QCArrayResetSize:(QCArray*)array newSize:(NSUInteger)newSize;
 @end
 
 @interface QCPatch (PrivateRuntime)
@@ -255,25 +256,25 @@ typedef enum
 - (BOOL)isPausedRendering;
 - (BOOL)isRendering;
 - (QCContext *)renderingContext;
-- (void)setRenderingFlags:(int)fp8;
+- (void)setRenderingFlags:(int)flags;
 - (int)renderingFlags;
 - (double)nextExecutionTime:(double)time arguments:(NSDictionary*)args;
 @end
 
 @interface QCPatch (Search)
-- (id)findSubpatchesWithName:(id)fp8 options:(NSUInteger)fp12;
+- (id)findSubpatchesWithName:(id)name options:(NSUInteger)options;
 @end
 
 @interface QCPatch (StateKeys)
-- (BOOL)isStateKey:(id)fp8;
-- (id)valueForStateKey:(id)fp8;
-- (void)setValue:(id)fp8 forStateKey:(id)fp12;
-- (BOOL)boolForStateKey:(id)fp8;
-- (void)setBool:(BOOL)fp8 forStateKey:(id)fp12;
-- (NSInteger)integerForStateKey:(id)fp8;
-- (void)setInteger:(int)fp8 forStateKey:(id)fp12;
-- (double)doubleForStateKey:(id)fp8;
-- (void)setDouble:(double)fp8 forStateKey:(id)fp16;
+- (BOOL)isStateKey:(NSString*)key;
+- (id)valueForStateKey:(NSString*)key;
+- (void)setValue:(id)value forStateKey:(NSString*)key;
+- (BOOL)boolForStateKey:(NSString*)key;
+- (void)setBool:(BOOL)value forStateKey:(NSString*)key;
+- (NSInteger)integerForStateKey:(NSString*)key;
+- (void)setInteger:(NSInteger)value forStateKey:(NSString*)key;
+- (double)doubleForStateKey:(NSString*)key;
+- (void)setDouble:(double)value forStateKey:(NSString*)key;
 @end
 
 @interface QCPatch (UserInterface)
@@ -281,7 +282,7 @@ typedef enum
 + (Class)inspectorClassWithIdentifier:(id)identifier;
 - (id)nodeActorForView:(id)fp8;
 - (Class)graphViewClass;
-- (void)__setValue:(id)fp8 forPortKey:(id)fp12;
+- (void)__setValue:(id)fp8 forPortKey:(NSString*)key;
 - (void)_setIndex:(id)fp8 forPort:(id)fp12;
 - (void)_setKey:(id)fp8 forPort:(id)fp12;
 - (id)selectedNodes;
@@ -292,26 +293,26 @@ typedef enum
 - (NSArray *)outputs DEPRECATED_ATTRIBUTE; // deprecated -> outputPorts
 
 // in the following, `attributes` is a dictionary of port metadata, corresponding to the `inputAttributes` section of the patch xml file
-- (id)createInputWithPortClass:(Class)fp8 forKey:(id)fp12 attributes:(id)fp16;
-- (id)createInputWithPortClass:(Class)fp8 forKey:(id)fp12 attributes:(id)fp16 arguments:(id)fp20 order:(NSUInteger)fp24;
-- (void)setInputOrder:(NSUInteger)fp8 forKey:(id)fp12;
+- (id)createInputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(id)fp16;
+- (id)createInputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(id)fp16 arguments:(id)fp20 order:(NSUInteger)fp24;
+- (void)setInputOrder:(NSUInteger)fp8 forKey:(NSString*)key;
 
-- (id)createOutputWithPortClass:(Class)fp8 forKey:(id)fp12 attributes:(id)fp16;
-- (id)createOutputWithPortClass:(Class)fp8 forKey:(id)fp12 attributes:(id)fp16 arguments:(id)fp20 order:(NSUInteger)fp24;
-- (void)setOutputOrder:(NSUInteger)fp8 forKey:(id)fp12;
+- (id)createOutputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(id)fp16;
+- (id)createOutputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(id)fp16 arguments:(id)fp20 order:(NSUInteger)fp24;
+- (void)setOutputOrder:(NSUInteger)fp8 forKey:(NSString*)key;
 
-- (void)deleteInputForKey:(id)fp8;
-- (void)deleteOutputForKey:(id)fp8;
+- (void)deleteInputForKey:(NSString*)key;
+- (void)deleteOutputForKey:(NSString*)key;
 
 - (QCPatch *)parentPatch;
 - (NSArray *)subpatches;
 - (BOOL)canAddSubpatch:(QCPatch*)patch;
 - (BOOL)addSubpatch:(QCPatch*)patch;
 - (void)removeSubpatch:(QCPatch*)patch;
-- (id)subpatchForKey:(id)fp8;
+- (id)subpatchForKey:(NSString*)key;
 - (id)keyForSubpatch:(QCPatch*)patch;
 - (id)pathForSubpatch:(QCPatch*)patch;
-- (id)subpatchForPath:(id)fp8;
+- (id)subpatchForPath:(NSString*)path;
 
 - (BOOL)canPublishPort:(id)fp8;
 - (id)publishPort:(id)fp8;

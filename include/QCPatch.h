@@ -168,6 +168,7 @@ typedef enum
 - (void)setOutputPortOrder:(NSUInteger)fp8 forKey:(id)fp12;
 - (void)setObservationInfo:(void *)fp8;
 - (void *)observationInfo;
+- (void)nodeDidAddToGraph:(id)fp8;
 @end
 
 @interface QCPatch (Private)

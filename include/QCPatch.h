@@ -32,10 +32,8 @@ extern NSString * const QCPatchTimebaseDidChangeNotification;
 + (id)allocWithZone:(NSZone *)zone;
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;
 - (NSArray *)consumerSubpatches;	// This is likely pricey (no NSArrays are used internally, so they're synthesized on demand)
-- (void)__setOrder:(id)fp8 forConsumerSubpatch:(id)fp12;
 - (void)setOrder:(NSUInteger)fp8 forConsumerSubpatch:(id)fp12;
 - (NSUInteger)orderForConsumerSubpatch:(id)fp8;
-- (void)__setTimeBase:(id)fp8;
 - (void)setTimebase:(int)fp8;
 - (int)timebase;
 - (NSArray *)customInputPorts;

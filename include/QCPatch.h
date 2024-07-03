@@ -75,6 +75,9 @@ typedef enum
 // name =
 //		graphicsContext.frameDidChange
 //		graphicsContext.boundsDidChange
+//      graphicsContext.colorspaceDidChange
+//      openGLContext.virtualScreenDidChange
+//      graphicsContext.qualityDidChange
 //		...?
 - (void)receiveMessage:(id)fp8 name:(id)fp12 attributes:(id)fp16;
 

@@ -14,7 +14,7 @@ extern NSString * const GFGraphEditorViewSelectionDidChangeNotification;
 	void *_unused[4];	// 88 = 0x58
 }
 
-- (id)initWithFrame:(NSRect)fp8;
+- (id)initWithFrame:(NSRect)frame;
 - (void)dealloc;
 - (BOOL)isOpaque;
 - (void)resizeSubviewsWithOldSize:(NSSize)oldSize;  // oldSize is unused
@@ -42,7 +42,7 @@ extern NSString * const GFGraphEditorViewSelectionDidChangeNotification;
 - (void)setZoomFactor:(float)zoomFactor;
 - (void)zoomToFitSelection;
 - (void)zoomToFitAll;
-- (void)setTooltipDelay:(NSTimeInterval)fp8;
+- (void)setTooltipDelay:(NSTimeInterval)delay;
 - (NSTimeInterval)tooltipDelay;
 - (void)setNodeManager:(GFNodeManager)nodeManager;
 - (id)nodeManager;

@@ -13,7 +13,7 @@ extern NSString * const GFStateDidFinishLoadingNotification;
 
 + (Class)baseClass;
 + (Class)proxyPortClass;
-+ (Class)connectionClass;
++ (Class)connectionClass;   // returns GFConnection class
 - (void)dealloc;
 - (BOOL)canAddNode:(GFNode*)node;
 - (BOOL)addNode:(GFNode*)node forKey:(NSString*)key;
@@ -40,18 +40,18 @@ extern NSString * const GFStateDidFinishLoadingNotification;
 - (GFConnection*)connectionForKey:(NSString*)key;
 - (NSString*)keyForConnection:(GFConnection*)connection;
 - (NSString*)pathForNode:(GFNode*)node;
-- (GFNode*)nodeForPath:(id)path;
+- (GFNode*)nodeForPath:(NSString*)path;
 - (NSString*)pathForPort:(GFPort*)port;
-- (GFPort*)portForPath:(id)path;
+- (GFPort*)portForPath:(NSString*)path;
 - (BOOL)canCreateProxyPortWithOriginalPort:(GFPort*)port;
 - (GFPort*)createProxyPortWithOriginalPort:(GFPort*)port forKey:(NSString*)key;
 - (GFPort*)createProxyPortWithOriginalPort:(GFPort*)port;
-- (void)__createProxyPortWithNode:(id)fp8 portKey:(NSString*)portKey forKey:(NSString*)key withUserInfo:(id)fp20;
+- (void)__createProxyPortWithNode:(GFNode*)node portKey:(NSString*)portKey forKey:(NSString*)key withUserInfo:(id)userInfo;
 - (void)deleteInputPortForKey:(NSString*)key;
 - (void)deleteOutputPortForKey:(NSString*)key;
 - (void)deleteProxyPortForKey:(NSString*)key;
-- (void)deleteProxyPortWithOriginalPort:(id)fp8;
-- (GFPort*)proxyPortForOriginalPort:(id)fp8;
+- (void)deleteProxyPortWithOriginalPort:(GFPort*)port;
+- (GFPort*)proxyPortForOriginalPort:(GFPort*)port;
 - (id)proxyInputPorts;
 - (id)proxyOutputPorts;
 - (NSDictionary*)state;
@@ -65,11 +65,13 @@ extern NSString * const GFStateDidFinishLoadingNotification;
 @end
 
 @interface GFGraph (Notes)
-- (void)_setNote:(id)fp8 atIndex:(id)fp12;
+/* the note dictionary has 3 keys:  @"string", @"bounds", and @"color" */
+// index is an NSNumber for serialization purposes?
+- (void)_setNote:(NSDictionary*)note atIndex:(NSNumber*)index;
 @end
 
 @interface GFGraph (Private)
-- (NSString*)_uniqueProxyPortKeyFromPort:(id)fp8;
+- (NSString*)_uniqueProxyPortKeyFromPort:(GFPort*)port;
 - (BOOL)_finalizing;
 - (BOOL)_isNodeKeyInUse:(NSString*)key;
 - (NSString*)_uniqueKeyFromNode:(GFNode*)node;
@@ -77,10 +79,10 @@ extern NSString * const GFStateDidFinishLoadingNotification;
 - (NSString*)_uniqueConnectionKey;
 - (GFList*)_connections;
 - (GFList*)_nodes;
-- (void)_willDeleteNodeInputPort:(id)fp8;
-- (void)_willDeleteNodeOutputPort:(id)fp8;
+- (void)_willDeleteNodeInputPort:(id)port;
+- (void)_willDeleteNodeOutputPort:(id)port;
 - (void)_layoutUpdated;
-- (BOOL)_saveState:(id)fp8 filterTarget:(id)fp12 filterAction:(SEL)fp16 flatten:(BOOL)shouldFlatten;
+- (BOOL)_saveState:(id)fp8 filterTarget:(id)target filterAction:(SEL)filter flatten:(BOOL)shouldFlatten;
 - (BOOL)_loadState:(id)fp8;
 @end
 

@@ -176,13 +176,17 @@ extern NSString * const GFGraphViewZoomDidChangeNotification;
 - (NSUInteger)_performActionOnAllNodes:(SEL)selector context:(void *)ctx;
 - (NSRect)_boundsForSelection;
 - (BOOL)_deselectAll;
-- (BOOL)__selectionFilter:(id)fp8;
+
+// the follow are mainly for copy/paste machinery in the editor.
+- (BOOL)__selectionFilter:(id)object;   // used by _writeSelectionToState, takes a variety of object types and looks for selected-ness
 - (void)_writeSelectionToState:(NSMutableDictionary*)state fromPoint:(NSPoint)point;
 - (void)_writeSelectionToArchiver:(NSKeyedArchiver*)state fromPoint:(NSPoint)point;
 - (void)_writeSelectionToPasteboard:(NSPasteboard*)state fromPoint:(NSPoint)point;
 - (BOOL)_readSelectionFromState:(NSMutableDictionary*)state toPoint:(NSPoint)point;
 - (BOOL)_readSelectionFromUnarchiver:(NSKeyedUnarchiver*)state toPoint:(NSPoint)point;
 - (void)_readSelectionFromPasteboard:(NSPasteboard*)state toPoint:(NSPoint)point;
+
+
 - (id)_imageForSelection;
 - (GFNode*)_firstResponderNode;
 - (NSColor*)_colorForConnection:(id)connection;

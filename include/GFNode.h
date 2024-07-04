@@ -40,8 +40,8 @@
 - (NSDictionary*)argumentsForIvarPortWithKey:(NSString*)key;
 - (GFPort*)createInputPortWithArguments:(NSDictionary*)args forKey:(NSString*)key;
 - (GFPort*)createOutputPortWithArguments:(NSDictionary*)args forKey:(NSString*)key;
-- (void)setInputPortOrder:(NSUInteger)fp8 forKey:(NSString*)key;
-- (void)setOutputPortOrder:(NSUInteger)fp8 forKey:(NSString*)key;
+- (void)setInputPortOrder:(NSUInteger)order forKey:(NSString*)key;
+- (void)setOutputPortOrder:(NSUInteger)order forKey:(NSString*)key;
 - (void)deleteInputPortForKey:(NSString*)key;
 - (void)deleteOutputPortForKey:(NSString*)key;
 - (NSMutableDictionary *)userInfo;

@@ -32,9 +32,9 @@ extern NSString * const QCPatchTimebaseDidChangeNotification;
 + (id)allocWithZone:(NSZone *)zone;
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;
 - (NSArray *)consumerSubpatches;	// This is likely pricey (no NSArrays are used internally, so they're synthesized on demand)
-- (void)setOrder:(NSUInteger)fp8 forConsumerSubpatch:(id)fp12;
-- (NSUInteger)orderForConsumerSubpatch:(id)fp8;
-- (void)setTimebase:(int)fp8;
+- (void)setOrder:(NSUInteger)order forConsumerSubpatch:(QCPatch*)patch;   // used to change consumer layer numbers
+- (NSUInteger)orderForConsumerSubpatch:(QCPatch*)patch;
+- (void)setTimebase:(int)timebase;
 - (int)timebase;
 - (NSArray *)customInputPorts;
 - (NSArray *)customOutputPorts;
@@ -75,19 +75,19 @@ typedef enum
 // name =
 //		graphicsContext.frameDidChange
 //		graphicsContext.boundsDidChange
-//      graphicsContext.colorspaceDidChange
-//      openGLContext.virtualScreenDidChange
+//      graphicsContext.colorspaceDidChange     // probably sent when changing displays
+//      openGLContext.virtualScreenDidChange    // sent when changing GPUs
 //      graphicsContext.qualityDidChange
 //		...?
-- (void)receiveMessage:(id)fp8 name:(id)fp12 attributes:(id)fp16;
+- (void)receiveMessage:(id)context name:(NSString*)name attributes:(id)fp16;
 
 - (BOOL)setup:(QCContext *)context;
 - (void)enable:(QCContext*)context;
 - (BOOL)execute:(QCContext*)context time:(double)time arguments:(NSDictionary*)args;
 - (void)disable:(QCContext*)context;
 - (void)cleanup:(QCContext *)context;
-- (id)serializedValueForStateKey:(id)fp8;
-- (void)setSerializedValue:(id)fp8 forStateKey:(id)fp12;
+- (id)serializedValueForStateKey:(NSString*)key;
+- (void)setSerializedValue:(id)value forStateKey:(NSString*)key;
 
 + (id)cachedStateArrays;
 + (id)stateArrays;
@@ -110,7 +110,7 @@ typedef enum
 - (id)dataWithContentsOfURL:(NSURL*)url error:(NSError**)fp12;
 - (id)safeURLFromURL:(NSURL*)url;
 - (id)safeURLFromString:(NSString*)urlString;
-- (void)updateTimebase:(int)fp8;
+- (void)updateTimebase:(int)timebase;
 - (void)setNeedsExecution;
 - (BOOL)executeSubpatches:(double)time arguments:(NSDictionary*)args;
 - (BOOL)debuggingMode;
@@ -134,10 +134,10 @@ typedef enum
 + (Class)proxyPortClass;
 + (Class)connectionClass;
 + (Class)_listClass;
-+ (id)_keyFromName:(id)fp8;
++ (id)_keyFromName:(NSString*)name;
 - (id)_baseKey;
 - (void)_logMessage:(NSString*)format,...;
-- (id)initWithIdentifier:(id)identifier;
+- (id)initWithIdentifier:(NSString*)identifier;
 - (void)finalize;
 - (void)dealloc;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
@@ -146,11 +146,11 @@ typedef enum
 - (NSDictionary*)state;
 - (BOOL)setState:(NSDictionary*)state;
 - (void)stateUpdated;
-- (id)createInputPortWithArguments:(id)fp8 forKey:(id)fp12;
-- (id)createOutputPortWithArguments:(id)fp8 forKey:(id)fp12;
+- (id)createInputPortWithArguments:(id)fp8 forKey:(NSString*)key;
+- (id)createOutputPortWithArguments:(id)fp8 forKey:(NSString*)key;
 - (BOOL)canAddNode:(id)fp8;
-- (BOOL)addNode:(id)fp8 forKey:(id)fp12;
-- (void)removeNodeForKey:(id)fp8;
+- (BOOL)addNode:(id)fp8 forKey:(NSString*)key;
+- (void)removeNodeForKey:(NSString*)key;
 - (BOOL)canCreateConnectionFromPort:(id)fp8 toPort:(id)fp12;
 - (id)createConnectionFromPort:(id)fp8 toPort:(id)fp12 forKey:(id)fp16;
 - (void)deleteConnectionForKey:(id)fp8;
@@ -160,7 +160,7 @@ typedef enum
 - (void)deleteOutputPortForKey:(id)fp8;
 - (int)directionForPort:(id)fp8;
 - (void)setValue:(id)fp8 forKey:(id)fp12;
-- (void)setNilValueForKey:(id)fp8;
+- (void)setNilValueForKey:(NSString*)key;
 - (id)valueForKey:(id)fp8;
 - (id)customInputPorts;
 - (id)customOutputPorts;
@@ -225,7 +225,7 @@ typedef enum
 
 @interface QCPatch (QCProFX)
 + (BOOL)getMatrixFrom:(id)fp8 toPatch:(id)fp12 matrix:(CGFloat *)fp16 ignoreWithin:(id)fp20 includeFromTransform:(_Bool)fp24;
-- (QCMD5Sum)md5WithTime:(double)fp8 arguments:(id)fp16;
+- (QCMD5Sum)md5WithTime:(double)time arguments:(id)args;
 - (CGFloat *)getTransform;
 - (BOOL)patchSetsTransform;
 - (void)setPatchSetsTransform:(BOOL)fp8;
@@ -282,7 +282,7 @@ typedef enum
 @interface QCPatch (UserInterface)
 + (id)inspectorNibNameWithIdentifier:(id)identifier;
 + (Class)inspectorClassWithIdentifier:(id)identifier;
-- (id)nodeActorForView:(id)fp8;
+- (id)nodeActorForView:(id)view;
 - (Class)graphViewClass;
 - (void)__setValue:(id)fp8 forPortKey:(NSString*)key;
 - (void)_setIndex:(id)fp8 forPort:(id)fp12;

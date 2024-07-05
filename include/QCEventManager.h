@@ -7,7 +7,6 @@
 @property (readwrite,assign) BOOL interactive;
 
 - (id)init;
-- (void)finalize;
 - (void)dealloc;
 - (NSString*)description;
 - (void)addPatch:(id)patch atDepth:(CGFloat)depth forIteration:(NSUInteger)iteration index:(NSUInteger)index;

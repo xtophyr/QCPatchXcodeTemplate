@@ -89,11 +89,11 @@ typedef enum
 - (id)serializedValueForStateKey:(NSString*)key;
 - (void)setSerializedValue:(id)value forStateKey:(NSString*)key;
 
-+ (id)cachedStateArrays;
++ (NSMutableDictionary*)cachedStateArrays;    // this returns a dictionary initialized in +initialize that isn't used for anything (it's got cache in the name, so just having it helps performance I guess?)
 + (id)stateArrays;
 + (BOOL)supportsOptimizedExecutionForIdentifier:(id)identifier;	// default to false.  true for QCRenderInImage, QCCamera, QCGLSLShader, QCTrackBall, QCIterator, QCReplicator.  "optimized execution" apparently means something like "can tell you that it doesn't need to run until a specified time" (specified by -nextExecutionTime).
-- (double)nextExecutionTime:(id)fp8 time:(double)time arguments:(NSDictionary*)args;
-- (double)nextExecutionTimeForSubpatches:(id)fp8 time:(double)time arguments:(NSDictionary*)args;
+- (double)nextExecutionTime:(QCContext*)context time:(double)time arguments:(NSDictionary*)args;
+- (double)nextExecutionTimeForSubpatches:(QCContext*)context time:(double)time arguments:(NSDictionary*)args;
 - (void)invalidateDodForSubpatches;
 @end
 

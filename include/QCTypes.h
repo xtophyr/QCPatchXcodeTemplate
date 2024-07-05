@@ -115,7 +115,7 @@ typedef struct _QCPatchExecutionInfo {
 	double _field4;
 	QCArray *_field5;
 	char _field6;
-	char _field7;
+	char _field7;   // this field might disable nextExecutionTime optimizations
 } QCPatchExecutionInfo;
 
 struct __C3DEngineContext;

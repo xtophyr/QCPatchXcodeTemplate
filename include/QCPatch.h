@@ -136,7 +136,7 @@ typedef enum
 + (Class)_listClass;
 + (id)_keyFromName:(NSString*)name;
 - (id)_baseKey;
-- (void)_logMessage:(NSString*)format,...;
+- (void)_logMessage:(NSString*)message;
 - (id)initWithIdentifier:(NSString*)identifier;
 - (void)finalize;
 - (void)dealloc;

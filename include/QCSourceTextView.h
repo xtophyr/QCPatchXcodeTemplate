@@ -16,6 +16,7 @@
 - (id)initWithFrame:(NSRect)frameRect;
 - (id)initWithCoder:(NSCoder *)aDecoder;
 - (void)dealloc;
+- (void)awakeFromNib;
 - (void)_showLineNumbers:(BOOL)fp8;
 - (void)setHasLineNumbers:(BOOL)hasLineNumbers;
 - (BOOL)hasLineNumbers;

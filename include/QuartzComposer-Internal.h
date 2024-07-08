@@ -8,7 +8,6 @@ extern const unsigned char QuartzComposerVersionString[];   // C string, printf(
 #import "QCBasicImageBufferConverter.h"
 #import "QCBooleanPort.h"
 #import "QCCache.h"
-#import "QCCGLayerResource.h"
 #import "QCCGLContext.h"
 #import "QCCGLRootContext.h"
 #import "QCCirclePatchActor.h"

@@ -10,7 +10,7 @@ typedef enum
 	kQCProgrammableType_Image = 6,	// QCImagePort
 	kQCProgrammableType_Structure = 7,	// QCStructurePort
 	kQCProgrammableType_Virtual = 8,	// QCVirtualPort
-	kQCProgrammableNumTypes = 8,	// TODO: this was probably extended on 10.6 -- add additional types as discovered
+	kQCProgrammableNumTypes = 8,
 } QCProgrammableType;
 
 @interface QCParameterInfo : NSObject

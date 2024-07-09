@@ -285,8 +285,9 @@ typedef enum
 - (id)nodeActorForView:(id)view;
 - (Class)graphViewClass;
 - (void)__setValue:(id)fp8 forPortKey:(NSString*)key;
-- (void)_setIndex:(id)fp8 forPort:(id)fp12;
-- (void)_setKey:(id)fp8 forPort:(id)fp12;
+// the following two seem misnamed - should be forPortKey:
+- (void)_setIndex:(NSNumber*)index forPort:(NSString*)key;
+- (void)_setKey:(NSString*)key forPort:(NSString*)portKey;
 - (id)selectedNodes;
 @end
 

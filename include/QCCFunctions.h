@@ -190,7 +190,7 @@ void QCResolveAliasPath(void);
 // QCSave.. serializes patch's input port values into the returned dictionary, keyed by port key
 // QCRestore.. sets patch's input port values to those specified by parameters
 NSDictionary* QCSavePatchInputParameters(QCPatch *patch);
-void QCRestorePatchInputParameters(QCPatch *patch, NSDictionary *parameters);
+BOOL QCRestorePatchInputParameters(QCPatch *patch, NSDictionary *parameters);   // return TRUE on success
 
 // these don't appear to do anything useful, and aren't used in the QC framework or the editor app.
 id QCStateFromPath(id path); // sends -length to path, and returns path if length is non-zero, else returns nil // not used in QC

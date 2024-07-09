@@ -40,7 +40,7 @@ extern NSString * const QCPatchTimebaseDidChangeNotification;
 - (NSArray *)customOutputPorts;
 - (NSArray *)systemInputPorts;
 - (NSArray *)systemOutputPorts;
-- (void)applyFunctionOnSubpatches:(void *)fp8 context:(void *)ctx recursive:(BOOL)recurse;
+- (void)applyFunctionOnSubpatches:(void(*)(id patch, void*ctx))function context:(void *)ctx recursive:(BOOL)recurse;
 @end
 
 
@@ -79,7 +79,7 @@ typedef enum
 //      openGLContext.virtualScreenDidChange    // sent when changing GPUs
 //      graphicsContext.qualityDidChange
 //		...?
-- (void)receiveMessage:(id)context name:(NSString*)name attributes:(id)fp16;
+- (void)receiveMessage:(id)context name:(NSString*)name attributes:(id)attrs;
 
 - (BOOL)setup:(QCContext *)context;
 - (void)enable:(QCContext*)context;
@@ -105,9 +105,9 @@ typedef enum
 @end
 
 @interface QCPatch (Extensions)
-+ (id)validateResourceURL:(id)fp8 withOptions:(id)fp12;
++ (id)validateResourceURL:(NSURL*)url withOptions:(NSDictionary*)options;
 - (BOOL)inSafeMode;
-- (id)dataWithContentsOfURL:(NSURL*)url error:(NSError**)fp12;
+- (id)dataWithContentsOfURL:(NSURL*)url error:(NSError**)error;
 - (id)safeURLFromURL:(NSURL*)url;
 - (id)safeURLFromString:(NSString*)urlString;
 - (void)updateTimebase:(int)timebase;
@@ -152,24 +152,24 @@ typedef enum
 - (BOOL)addNode:(id)fp8 forKey:(NSString*)key;
 - (void)removeNodeForKey:(NSString*)key;
 - (BOOL)canCreateConnectionFromPort:(id)fp8 toPort:(id)fp12;
-- (id)createConnectionFromPort:(id)fp8 toPort:(id)fp12 forKey:(id)fp16;
+- (id)createConnectionFromPort:(id)fp8 toPort:(id)fp12 forKey:(NSString*)key;
 - (void)deleteConnectionForKey:(id)fp8;
-- (id)createProxyPortWithOriginalPort:(id)fp8 forKey:(id)fp12;
-- (void)deleteProxyPortForKey:(id)fp8;
-- (void)deleteInputPortForKey:(id)fp8;
-- (void)deleteOutputPortForKey:(id)fp8;
-- (int)directionForPort:(id)fp8;
-- (void)setValue:(id)fp8 forKey:(id)fp12;
+- (id)createProxyPortWithOriginalPort:(id)fp8 forKey:(NSString*)key;
+- (void)deleteProxyPortForKey:(NSString*)key;
+- (void)deleteInputPortForKey:(NSString*)key;
+- (void)deleteOutputPortForKey:(NSString*)key;
+- (int)directionForPort:(QCPort*)port;
+- (void)setValue:(id)value forKey:(NSString*)key;
 - (void)setNilValueForKey:(NSString*)key;
-- (id)valueForKey:(id)fp8;
+- (id)valueForKey:(NSString*)key;
 - (id)customInputPorts;
 - (id)customOutputPorts;
-- (id)proxyPortForOriginalPort:(id)fp8;
-- (void)setInputPortOrder:(NSUInteger)fp8 forKey:(id)fp12;
-- (void)setOutputPortOrder:(NSUInteger)fp8 forKey:(id)fp12;
-- (void)setObservationInfo:(void *)fp8;
+- (id)proxyPortForOriginalPort:(QCPort*)port;
+- (void)setInputPortOrder:(NSUInteger)order forKey:(NSString*)key;
+- (void)setOutputPortOrder:(NSUInteger)order forKey:(NSString*)key;
+- (void)setObservationInfo:(void *)observationInfo;
 - (void *)observationInfo;
-- (void)nodeDidAddToGraph:(id)fp8;
+- (void)nodeDidAddToGraph:(id)graph;
 @end
 
 @interface QCPatch (Private)
@@ -181,12 +181,12 @@ typedef enum
 - (id)_enableInput;
 - (int)_checkExecutionMode;
 - (void)_invalidateExecutionMode;
-- (BOOL)__isPatchInUse:(id)fp8;
+- (BOOL)__isPatchInUse:(QCPatch*)patch;
 - (void)_invalidateTimeMode;
 - (BOOL)_enabled;
 - (NSUInteger)_activeCount;
 - (void)_resetExecution;
-- (BOOL)_setup:(id)fp8 state:(id)fp12;
+- (BOOL)_setup:(QCPatchRenderingInfo*)info state:(QCRenderState*)state;
 - (void)_enable;
 - (void)_activate;
 - (BOOL)_execute:(double)time arguments:(NSDictionary*)args;
@@ -228,12 +228,12 @@ typedef enum
 - (QCMD5Sum)md5WithTime:(double)time arguments:(id)args;
 - (CGFloat *)getTransform;
 - (BOOL)patchSetsTransform;
-- (void)setPatchSetsTransform:(BOOL)fp8;
+- (void)setPatchSetsTransform:(BOOL)flag;
 - (BOOL)patchIsInMacro:(id)fp8;
 - (NSUInteger)getNumberOfInputImagePorts;
-- (id)getNthInputImagePort:(NSUInteger)fp8;
+- (id)getNthInputImagePort:(NSUInteger)index;
 - (NSUInteger)getNumberOfInputPorts;
-- (id)getNthInputPort:(NSUInteger)fp8;
+- (id)getNthInputPort:(NSUInteger)index;
 - (BOOL)getMatrix:(CGFloat *)fp8;
 @end
 
@@ -284,7 +284,7 @@ typedef enum
 + (Class)inspectorClassWithIdentifier:(id)identifier;
 - (id)nodeActorForView:(id)view;
 - (Class)graphViewClass;
-- (void)__setValue:(id)fp8 forPortKey:(NSString*)key;
+- (void)__setValue:(id)value forPortKey:(NSString*)key;
 // the following two seem misnamed - should be forPortKey:
 - (void)_setIndex:(NSNumber*)index forPort:(NSString*)key;
 - (void)_setKey:(NSString*)key forPort:(NSString*)portKey;
@@ -296,13 +296,13 @@ typedef enum
 - (NSArray *)outputs DEPRECATED_ATTRIBUTE; // deprecated -> outputPorts
 
 // in the following, `attributes` is a dictionary of port metadata, corresponding to the `inputAttributes` section of the patch xml file
-- (id)createInputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(id)fp16;
-- (id)createInputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(id)fp16 arguments:(id)fp20 order:(NSUInteger)fp24;
-- (void)setInputOrder:(NSUInteger)fp8 forKey:(NSString*)key;
+- (id)createInputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(NSDictionary*)fp16;
+- (id)createInputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(NSDictionary*)fp16 arguments:(NSDictionary*)args order:(NSUInteger)order;
+- (void)setInputOrder:(NSUInteger)order forKey:(NSString*)key;
 
-- (id)createOutputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(id)fp16;
-- (id)createOutputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(id)fp16 arguments:(id)fp20 order:(NSUInteger)fp24;
-- (void)setOutputOrder:(NSUInteger)fp8 forKey:(NSString*)key;
+- (id)createOutputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(NSDictionary*)fp16;
+- (id)createOutputWithPortClass:(Class)portClass forKey:(NSString*)key attributes:(NSDictionary*)fp16 arguments:(NSDictionary*)args order:(NSUInteger)order;
+- (void)setOutputOrder:(NSUInteger)order forKey:(NSString*)key;
 
 - (void)deleteInputForKey:(NSString*)key;
 - (void)deleteOutputForKey:(NSString*)key;
@@ -317,8 +317,8 @@ typedef enum
 - (id)pathForSubpatch:(QCPatch*)patch;
 - (id)subpatchForPath:(NSString*)path;
 
-- (BOOL)canPublishPort:(id)fp8;
-- (id)publishPort:(id)fp8;
-- (void)unpublishPort:(id)fp8;
-- (id)isPortPublished:(id)fp8;
+- (BOOL)canPublishPort:(QCPort*)port;
+- (id)publishPort:(QCPort*)port;
+- (void)unpublishPort:(QCPort*)port;
+- (id)isPortPublished:(QCPort*)port;
 @end

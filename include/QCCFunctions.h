@@ -186,8 +186,11 @@ void QCQuaternion_SquareRoot(const QCVector4 *u, QCVector4 *result); // not used
 void QCQuaternion_Substract(const QCVector4 *u, const QCVector4 *v, QCVector4 *result);	// not used in QC
 
 void QCResolveAliasPath(void);
-void QCRestorePatchInputParameters(void);
-void QCSavePatchInputParameters(void);
+
+// QCSave.. serializes patch's input port values into the returned dictionary, keyed by port key
+// QCRestore.. sets patch's input port values to those specified by parameters
+NSDictionary* QCSavePatchInputParameters(QCPatch *patch);
+void QCRestorePatchInputParameters(QCPatch *patch, NSDictionary *parameters);
 
 // these don't appear to do anything useful, and aren't used in the QC framework or the editor app.
 id QCStateFromPath(id path); // sends -length to path, and returns path if length is non-zero, else returns nil // not used in QC

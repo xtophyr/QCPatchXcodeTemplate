@@ -45,7 +45,7 @@
 - (cl_command_queue *)commandQueue;
 - (cl_device_id *)device;
 - (void)setDevice:(cl_device_id *)fp8;
-- (cl_program *)createProgramWithSource:(id)fp8 error:(NSError**)fp12;
+- (cl_program *)createProgramWithSource:(id)fp8 error:(NSError**)error;
 - (void)finalize;
 - (void)dealloc;
 - (CFArrayRef)deviceNames;

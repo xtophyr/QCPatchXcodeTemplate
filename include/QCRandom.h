@@ -26,7 +26,7 @@
 - (BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)args;
 - (NSDictionary*)state;
 - (BOOL)setState:(NSDictionary*)state;
-- (BOOL)validateValue:(id *)fp8 forKey:(id)fp12 error:(NSError**)fp16;
+- (BOOL)validateValue:(id *)fp8 forKey:(id)fp12 error:(NSError**)error;
 @end
 
 @interface QCRandom (QCInspector)

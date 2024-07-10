@@ -1,10 +1,10 @@
 @interface QCPixelFormat_I8 : QCPixelFormat
 {
-	NSArray *_compatibilities;	// 20 = 0x14
+	unsigned long long _compatibilities;	// 20 = 0x14
 }
 
 - (NSString*)name;
-- (NSArray*)compatibilities;
+- (unsigned long long)compatibilities;
 - (NSString*)description;
 - (void)dealloc;
 - (int)pixelColorModel;

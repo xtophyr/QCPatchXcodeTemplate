@@ -5,11 +5,11 @@
  */
 @interface QCPixelFormat_422YpCbCr8_709 : QCPixelFormat
 {
-	NSArray *_compatibilities;	// 20 = 0x14
+    unsigned long long _compatibilities;	// 20 = 0x14
 }
 
 - (NSString*)name;	// @"422YpCbCr8_709"
-- (NSArray*)compatibilities; // see above
+- (unsigned long long)compatibilities; // see above
 - (NSString*)description; // @"Internal_422YpCbCr8_709"
 - (void)dealloc;
 - (int)pixelColorModel;	// 2
@@ -18,7 +18,7 @@
 - (NSUInteger)pixelBlockWidth;	// 2
 - (NSUInteger)pixelBlockHeight;	// 1
 - (NSUInteger)bitsPerBlock;	// 0x20 = 32
-- (BOOL)isSupportedOnContext:(id)fp8;
+- (BOOL)isSupportedOnContext:(id)context;
 - (unsigned int)QTPixelFormat; // 0x32767579 = 'yuv2'
 - (GLuint)openGLInternalFormat;	// 0
 - (GLuint)openGLPixelFormat;	// 0

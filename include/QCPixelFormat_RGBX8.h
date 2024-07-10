@@ -3,11 +3,11 @@
 
 @interface QCPixelFormat_RGBX8 : QCPixelFormat
 {
-	NSArray *_compatibilities;	// 20 = 0x14
+    unsigned long long _compatibilities;	// 20 = 0x14
 }
 
 - (NSString*)name;
-- (NSArray*)compatibilities;
+- (unsigned long long)compatibilities;
 - (NSString*)description;
 - (void)dealloc;
 - (int)pixelColorModel;
@@ -16,7 +16,7 @@
 - (NSUInteger)pixelBlockWidth;
 - (NSUInteger)pixelBlockHeight;
 - (NSUInteger)bitsPerBlock;
-- (BOOL)isSupportedOnContext:(id)fp8;
+- (BOOL)isSupportedOnContext:(id)context;
 - (unsigned int)QTPixelFormat;
 - (GLuint)openGLInternalFormat;
 - (GLuint)openGLPixelFormat;

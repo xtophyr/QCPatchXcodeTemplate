@@ -9,11 +9,11 @@
 
 @interface QCPixelFormat_IndexedGray8 : QCPixelFormat
 {
-	NSArray *_compatibilities;	// 20 = 0x14
+    unsigned long long _compatibilities;	// 20 = 0x14
 }
 
 - (NSString*)name;	// @"IndexedGray8"
-- (NSArray*)compatibilities; // see above
+- (unsigned long long)compatibilities; // see above
 - (NSString*)description;	// @"Internal_Indexed_Gray8"
 - (void)dealloc;
 - (int)pixelColorModel;	// 1
@@ -22,7 +22,7 @@
 - (NSUInteger)pixelBlockWidth;	// 1
 - (NSUInteger)pixelBlockHeight;	// 1
 - (NSUInteger)bitsPerBlock;	// 0x8 = 8
-- (BOOL)isSupportedOnContext:(id)fp8;
+- (BOOL)isSupportedOnContext:(id)context;
 - (unsigned int)QTPixelFormat;	// 0x28 = 40 (? not a 4-char constant?)
 - (GLuint)openGLInternalFormat;	// 0x804b = GL_INTENSITY8
 - (GLuint)openGLPixelFormat;	// 0x1909 = GL_LUMINANCE

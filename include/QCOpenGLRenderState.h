@@ -2,7 +2,7 @@
 
 @interface QCOpenGLRenderState : QCGraphicsRenderState
 {
-	int currentVirtualScreen;	// 156 = 0x9c
+	NSInteger currentVirtualScreen;	// 156 = 0x9c
 	float currentFieldOfView;	// 160 = 0xa0
 	float saveFieldOfView;	// 164 = 0xa4
 	BOOL saveFlipped;	// 168 = 0xa8

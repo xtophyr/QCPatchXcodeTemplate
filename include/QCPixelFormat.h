@@ -181,3 +181,7 @@ extern NSString * const kQCPixelFormatCompatibility_QuickTime;
 @interface QCPixelFormat (pixelFormatXRGB8)
 + (id)pixelFormatXRGB8;
 @end
+
+@interface QCPixelFormat (pixelFormatYUVS)
++ (id)pixelFormatYUVS;
+@end

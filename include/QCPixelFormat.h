@@ -49,7 +49,7 @@ extern NSString * const kQCPixelFormatCompatibility_QuickTime;
 - (BOOL)areValidBounds:(NSRect)trialBounds;
 - (NSRect)validateBounds:(NSRect)bounds;
 - (NSUInteger)packedBytesPerRowForWidth:(NSUInteger)width;
-- (NSUInteger)optimalBytesPerRowForWidth:(NSUInteger)height;
+- (NSUInteger)optimalBytesPerRowForWidth:(NSUInteger)width;
 - (double)compareWithPixelFormat:(id)fp8;
 - (QCPixelFormat *)closestPixelFormat:(QCPixelFormat *)pixelformat outDifference:(double *)fp12;
 - (NSUInteger)pixelSamples;

@@ -1,16 +1,26 @@
-extern NSString * const QCPixelFormatCompatibility_CoreVideo;
-extern NSString * const kQCPixelFormatCompatibility_CGBitmapContext;
-extern NSString * const kQCPixelFormatCompatibility_CGImage;
-extern NSString * const kQCPixelFormatCompatibility_CIBitmapContext;
-extern NSString * const kQCPixelFormatCompatibility_CIImage;
-extern NSString * const kQCPixelFormatCompatibility_CoreVideo;
-extern NSString * const kQCPixelFormatCompatibility_GLContext;
-extern NSString * const kQCPixelFormatCompatibility_OpenCL_Read;
-extern NSString * const kQCPixelFormatCompatibility_OpenCL_Write;
-extern NSString * const kQCPixelFormatCompatibility_OpenGL;
-extern NSString * const kQCPixelFormatCompatibility_QuickTime;
+extern const uint64_t QCPixelFormatCompatibility_CoreVideo;
+extern const uint64_t kQCPixelFormatCompatibility_CGBitmapContext;
+extern const uint64_t kQCPixelFormatCompatibility_CGImage;
+extern const uint64_t kQCPixelFormatCompatibility_CIBitmapContext;
+extern const uint64_t kQCPixelFormatCompatibility_CIImage;
+extern const uint64_t kQCPixelFormatCompatibility_CoreVideo;
+extern const uint64_t kQCPixelFormatCompatibility_GLContext;
+extern const uint64_t kQCPixelFormatCompatibility_OpenCL_Read;
+extern const uint64_t kQCPixelFormatCompatibility_OpenCL_Write;
+extern const uint64_t kQCPixelFormatCompatibility_OpenGL;
+extern const uint64_t kQCPixelFormatCompatibility_QuickTime;
 
-// TODO: figure out compatibility bits
+// kQCPixelFormatCompatibility_CGImage          = 0x0001
+// kQCPixelFormatCompatibility_CGBitmapContext  = 0x0002
+// kQCPixelFormatCompatibility_OpenGL           = 0x0004
+// kQCPixelFormatCompatibility_GLContext        = 0x0008
+//  QCPixelFormatCompatibility_CoreVideo        = 0x0010 (probably missing the k- prefix for bin compat)
+// kQCPixelFormatCompatibility_CoreVideo        = 0x0010 (same as above, just with k- prefix)
+// kQCPixelFormatCompatibility_QuickTime        = 0x0020
+// kQCPixelFormatCompatibility_CIImage          = 0x0040
+// kQCPixelFormatCompatibility_CIBitmapContext  = 0x0080
+// kQCPixelFormatCompatibility_OpenCL_Read      = 0x0100
+// kQCPixelFormatCompatibility_OpenCL_Write     = 0x0200
 
 @interface QCPixelFormat : NSObject
 {
@@ -62,7 +72,7 @@ extern NSString * const kQCPixelFormatCompatibility_QuickTime;
 @end
 
 @interface QCPixelFormat (Registry)
-+ (void)registerPixelFormat:(id)fp8;
++ (void)registerPixelFormat:(id)pixelFormat;
 + (id)allPixelFormats;
 + (id)pixelFormatsWithCompatibility:(id)fp8;
 + (id)pixelFormatsWithCompatibilities:(id)fp8 pixelColorModel:(int)fp12 pixelAlpha:(int)fp16 pixelType:(int)fp20;

@@ -88,10 +88,11 @@
 - (NSUInteger)videoMemorySize;
 - (NSUInteger)textureMemorySize;
 - (NSUInteger)_validateCachedVirtualScreen;
-- (id)rendererVendor;
-- (id)rendererName;
+- (NSString*)rendererVendor;
+- (NSString*)rendererName;
 - (float)rendererVersion;
-- (int)rendererID;
+- (NSInteger)rendererID;
+- (NSInteger)rendererIDForVirtualScreen:(NSInteger)virtualScreen;
 - (NSUInteger)textureUnits;
 - (NSUInteger)textureMaxImageUnits;
 - (BOOL)isAccelerated;

@@ -144,7 +144,6 @@ extern const unsigned char QuartzComposerVersionString[];   // C string, printf(
 #import "QCPixelFormat_I8.h"
 #import "QCPixelFormat_If.h"
 #import "QCPixelFormat_Ih.h"
-#import "QCPixelFormat_IndexedGray8.h"
 #import "QCPixelFormat_KYMC8.h"
 #import "QCPixelFormat_M_I16.h"
 #import "QCPixelFormat_M_I8.h"

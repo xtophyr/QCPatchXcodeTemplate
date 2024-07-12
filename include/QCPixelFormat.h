@@ -128,10 +128,6 @@ extern const uint64_t kQCPixelFormatCompatibility_QuickTime;
 + (id)pixelFormatIh;
 @end
 
-@interface QCPixelFormat (pixelFormatIndexedGray8)
-+ (id)pixelFormatIndexedGray8;
-@end
-
 @interface QCPixelFormat (pixelFormatKYMC8)
 + (id)pixelFormatKYMC8;
 @end

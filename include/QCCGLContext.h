@@ -35,11 +35,11 @@
 - (id)options;
 - (CGLContextObj)CGLContextObj;
 - (CGLPixelFormatObj)CGLPixelFormatObj;
-- (BOOL)enable:(int)fp8;
-- (BOOL)disable:(int)fp8;
-- (BOOL)isEnabled:(int)fp8;
-- (BOOL)setParameter:(int)fp8 value:(int)fp12;
-- (int)getParameter:(int)fp8;
+- (BOOL)enable:(CGLContextEnable)pname;
+- (BOOL)disable:(CGLContextEnable)pname;
+- (BOOL)isEnabled:(CGLContextEnable)pname;
+- (BOOL)setParameter:(CGLContextParameter)pname value:(int)value;
+- (int)getParameter:(CGLContextParameter)pname;
 - (void)lock;
 - (void)unlock;
 - (void)setBestVirtualScreenForRenderingSize:(NSSize)renderingSize;
@@ -68,9 +68,9 @@
 @end
 
 @interface QCCGLContext (NSOpenGLContext)
-- (id)initWithOpenGLContext:(id)fp8 pixelFormat:(id)fp12 options:(NSDictionary *)options;
-- (id)NSOpenGLContext;
-- (id)NSOpenGLPixelFormat;
+- (id)initWithOpenGLContext:(NSOpenGLContext*)context pixelFormat:(NSOpenGLPixelFormat*)pixelFormat options:(NSDictionary *)options;
+- (NSOpenGLContext*)NSOpenGLContext;
+- (NSOpenGLPixelFormat*)NSOpenGLPixelFormat;
 @end
 
 @interface QCCGLContext (QCGraphicsContext)

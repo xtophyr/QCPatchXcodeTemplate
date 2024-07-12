@@ -64,7 +64,7 @@
 + (id)CIBitmapContext;
 - (id)_ciContext;
 - (id)CIContext;
-- (struct __C3DEngineContext *)C3DContext;
+- (struct __C3DEngineContext *)QCSCN_Context;
 @end
 
 @interface QCCGLContext (NSOpenGLContext)
@@ -80,12 +80,6 @@
 
 @interface QCCGLContext (SnapshotImage)
 - (id)createSnapshotImageOfType:(id)fp8 withColorSpace:(CGColorSpaceRef)fp12;
-@end
-
-@interface QCCGLContext (TextureDependencies)
-- (BOOL)hasDependentTextures;
-- (void)addDependentTexture:(id)fp8;
-- (void)removeAllDependentTextures;
 @end
 
 @interface QCCGLContext (Utilities)

@@ -18,5 +18,6 @@
 - (void)drawRect:(NSRect)fp8;
 - (void)setHidden:(BOOL)fp8;
 - (id)cglContext;
+- (BOOL)wantsBestResolutionOpenGLSurface;
 
 @end

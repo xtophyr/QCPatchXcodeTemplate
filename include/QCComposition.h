@@ -60,6 +60,7 @@ extern NSString * const QCCompositionCategoryUtility;
 - (id)initWithCompositionFile:(id)fp8 safeMode:(BOOL)safeMode requiredProtocol:(id)protocol;
 - (double)_timestamp;
 - (BOOL)_stateOK;
+- (void)_reclaimResources;  // tosses _outputKeys and _protocols (driven by QCCompositionRepository -reclaimResources, which in turn is driven by QCCompositionPickerPanel -close).
 - (NSString*)identifier;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;

@@ -20,7 +20,7 @@
 	double _maximumAvailableRAM;	// 112 = 0x70
 	double _requestedVRAM[8];	// 120 = 0x78
 	double _maximumAvailableVRAM[8];	// 184 = 0xb8
-	int _rendererID[8];	// 248 = 0xf8
+	NSInteger _rendererID[8];	// 248 = 0xf8
 	double _reclaimResourcesTimestamp;	// 280 = 0x118
 	CGFloat _GCReclaimResourcesTimestamp;	// 288 = 0x120
 	GFList *_converterCache;	// 292 = 0x124

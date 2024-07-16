@@ -42,7 +42,7 @@
 }
 
 + (void)initialize;
-+ (double)_maximumAvailableMemoryForRendererID:(int)fp8;
++ (double)_maximumAvailableMemoryForRendererID:(NSInteger)fp8;
 + (id)sharedSoftwareImageManager;
 + (QCImageManager *)createUniqueImageManagerForQCCGLContext:(QCCGLContext *)context options:(NSDictionary *)options;
 - (id)initWithQCCGLContext:(id)fp8 options:(id)fp12;    // deprecated -> initWithOpenGLContext:options:
@@ -86,6 +86,10 @@
 
 @interface QCImageManager (QCProFX)
 - (id)copyPixelBufferFromImageBuffer:(id)fp8 sourceBounds:(NSRect)fp12 options:(id)fp28;
+@end
+
+@interface QCImageManager (BasicImageManipulation)
+- (BOOL)copyPixelsFromImage:(id)arg1 toBaseAddress:(void *)arg2 withBytesPerRow:(unsigned int)arg3;
 @end
 
 @interface QCImageManager (Internal)

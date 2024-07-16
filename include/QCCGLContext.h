@@ -2,6 +2,29 @@
 
 @class QCPixelFormat, QCResourcePool;
 
+// flags:
+//  rootContext     0x01  (maybe?)
+//  softwareCIMode  0x02
+//  maxTextureSize  0x04  max texture size override set
+
+// these flags are paired -- one flags if we've checked or not, so we don't interrogate the context or pixelformat more than once.
+// the second flag flags the result of the query.
+
+//  0x10000 - Asked the pixelformat if it's accelerated Flag (kCGLPFAAccelerated) -isAccelerated will always set this
+//  0x20000 - pixelFormat is accelerated Flag (kCGLPFAAccelerated) -isAccelerated might set this if the pf is accelerated
+
+//  0x40000 - checked context for GL_ARB_fragment_program extension -isProgrammable always sets this
+//  0x80000 - context has GL_ARB_fragment_program extension -isProgrammable might set this
+
+//  0x100000 - checked context for GL_EXT_framebuffer_object extension -isFBOSupported always sets this
+//  0x200000 - context has GL_EXT_framebuffer_object extension -isFBOSupported might set this
+
+//  0x400000 - checked context for GL_APPLE_float_pixels extension -isFloatSupported always sets this
+//  0x800000 - context has GL_APPLE_float_pixels extension -isFloatSupported might set this
+
+//  0x1000000 - checked for isCoreImageAccelerated -isCoreImageAccelerated will always set this
+//  0x2000000 - isCoreImageAccelerated flag -isCoreImageAccelerated might set this
+
 @interface QCCGLContext : QCResource
 {
 	QCCGLContext *_rootContext;	// 28 = 0x1c

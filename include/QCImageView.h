@@ -2,8 +2,8 @@
 - (void)_resetImage;
 - (void)_loadImage;
 - (void)mouseDown:(NSEvent*)theEvent;
-- (BOOL)_canCreateImageFromPasteboard:(id)fp8;
-- (id)_newImageFromPasteboard:(id)fp8;
+- (BOOL)_canCreateImageFromPasteboard:(NSPasteboard*)pasteboard;
+- (id)_newImageFromPasteboard:(NSPasteboard*)pasteboard;
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender;
 - (void)draggingExited:(id <NSDraggingInfo>)sender;
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender;

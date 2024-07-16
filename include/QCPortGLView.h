@@ -5,18 +5,18 @@
 
 @interface QCPortGLView : QCPortView
 {
-	QCCGLContext *_cglContext;	// 84 = 0x54
-	NSOpenGLContext *_glContext;	// 88 = 0x58
+	QCCGLContext *_cglContext;
+	NSOpenGLContext *_glContext;
 }
 
-- (void)_startRendering:(id)fp8;
-- (void)_stopRendering:(id)fp8;
-- (id)initWithPort:(id)fp8;
+- (void)_startRendering:(NSNotification*)notification;
+- (void)_stopRendering:(NSNotification*)notification;
+- (id)initWithPort:(QCPort*)port;
 - (void)finalize;
 - (void)dealloc;
 - (void)lockFocus;
-- (void)drawRect:(NSRect)fp8;
-- (void)setHidden:(BOOL)fp8;
+- (void)drawRect:(NSRect)rect;
+- (void)setHidden:(BOOL)flag;
 - (id)cglContext;
 - (BOOL)wantsBestResolutionOpenGLSurface;
 

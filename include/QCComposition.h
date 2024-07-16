@@ -17,14 +17,14 @@ extern NSString * const QCCompositionCategoryUtility;
 
 @interface QCComposition : NSObject <NSCopying>
 {
-	NSArray *_protocols;	// 4 = 0x4
-	NSDictionary *_attributes;	// 8 = 0x8
-	NSArray *_inputKeys;	// 12 = 0xc
-	NSArray *_outputKeys;	// 16 = 0x10
-	id _backing;	// 20 = 0x14    // one of NSString*, NSData*, NSDictionary*, NSURL*, else InternalInconsistencyException
-	NSString *_identifier;	// 24 = 0x18
-	double _timestamp;	// 28 = 0x1c
-	BOOL _stateOK;	// 36 = 0x24
+	NSArray *_protocols;
+	NSDictionary *_attributes;
+	NSArray *_inputKeys;
+	NSArray *_outputKeys;
+	id _backing;            // one of NSString*, NSData*, NSDictionary*, NSURL*, else InternalInconsistencyException
+	NSString *_identifier;
+	double _timestamp;
+	BOOL _stateOK;
 }
 
 - (void)initialize; // locks GFNodeManager, then invokes [QCImage class].  seems like a hackaround.  added after SSDK was dumped.
@@ -35,8 +35,8 @@ extern NSString * const QCCompositionCategoryUtility;
 - (id)copyWithZone:(NSZone *)zone;
 - (id)_makePatch;
 - (id)_initWithBacking:(id)backing; // one of the supported backing types (see _backing ivar)
-- (id)initWithComposition:(id)fp8;
-- (id)initWithPatchName:(id)fp8;
+- (id)initWithComposition:(QCComposition*)composition;
+- (id)initWithPatchName:(NSString*)patchName;
 - (void)dealloc;
 - (id)defaultInputParameters;
 - (id)composition;
@@ -52,12 +52,12 @@ extern NSString * const QCCompositionCategoryUtility;
 @end
 
 @interface QCComposition (InternalExtensions)
-+ (BOOL)isCompositionIdentity:(id)fp8;  // QCCompositionRepository can make an "identity" composition (does nothing).  This tests for equality against that.  used by QCCompositionPickerController
++ (BOOL)isCompositionIdentity:(QCComposition*)composition;  // QCCompositionRepository can make an "identity" composition (does nothing).  This tests for equality against that.  used by QCCompositionPickerController
 @end
 
 @interface QCComposition (QCCompositionRepository)
 - (id)init;
-- (id)initWithCompositionFile:(id)fp8 safeMode:(BOOL)safeMode requiredProtocol:(id)protocol;
+- (id)initWithCompositionFile:(NSString*)path safeMode:(BOOL)safeMode requiredProtocol:(id)protocol;
 - (double)_timestamp;
 - (BOOL)_stateOK;
 - (void)_reclaimResources;  // tosses _outputKeys and _protocols (driven by QCCompositionRepository -reclaimResources, which in turn is driven by QCCompositionPickerPanel -close).

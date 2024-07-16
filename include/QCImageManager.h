@@ -45,8 +45,8 @@
 + (double)_maximumAvailableMemoryForRendererID:(NSInteger)fp8;
 + (id)sharedSoftwareImageManager;
 + (QCImageManager *)createUniqueImageManagerForQCCGLContext:(QCCGLContext *)context options:(NSDictionary *)options;
-- (id)initWithQCCGLContext:(id)fp8 options:(id)fp12;    // deprecated -> initWithOpenGLContext:options:
-- (id)initWithOpenGLContext:(id)fp8 options:(id)fp12;
+- (id)initWithQCCGLContext:(id)fp8 options:(id)options;    // deprecated -> initWithOpenGLContext:options:
+- (id)initWithOpenGLContext:(id)fp8 options:(id)options;
 - (void)_finalize_QCImageManager;
 - (void)finalize;
 - (void)dealloc;
@@ -59,8 +59,8 @@
 - (id)registeredClients;
 - (void)_setProfileCache:(BOOL)fp8;
 - (QCCacheProfileInfo *)_cacheProfileInfo;
-- (void)setUserInfo:(id)fp8 forKey:(id)fp12;
-- (id)userInfoForKey:(id)fp8;
+- (void)setUserInfo:(id)fp8 forKey:(id)key;
+- (id)userInfoForKey:(id)key;
 - (id)userInfo;
 - (double)availableMemoryForRequestedMemory:(double)fp8 ofType:(int)fp16 virtualScreen:(NSUInteger)fp20;
 - (void)optimizeCaches;

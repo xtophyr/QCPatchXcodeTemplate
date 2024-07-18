@@ -76,7 +76,6 @@ extern const unsigned char QuartzComposerVersionString[];   // C string, printf(
 #import "QCImageProvider.h"
 #import "QCImageTextureBuffer.h"
 #import "QCImageTextureBuffer_CVOpenGLTexture.h"
-#import "QCImageValuePort.h"
 #import "QCImageView.h"
 #import "QCIndexMenuValueTransformer.h"
 #import "QCIndexPort.h"

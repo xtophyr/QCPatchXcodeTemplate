@@ -46,7 +46,6 @@
 
 + (NSUInteger)maxActiveContacts;
 - (void)reset;
-- (void)_setValuesFromRenderingPatch;
 - (void)setRenderingPatch:(id)fp8;
 - (id)init;
 - (id)initWithParentPatch:(id)fp8;

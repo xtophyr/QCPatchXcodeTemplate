@@ -2,35 +2,30 @@
 
 @interface QCInteractionManager : NSObject
 {
-	QCContactInfo _contacts[64];	// 4 = 0x4
-	CGFloat _rotation;	// 1284 = 0x504
-	CGFloat _feedbackRotation;	// 1288 = 0x508
-	CGFloat _rotationOffset;	// 1292 = 0x50c
-	CGFloat _feedbackScaleX;	// 1296 = 0x510
-	CGFloat _scaleX;	// 1300 = 0x514
-	CGFloat _scaleOffsetX;	// 1304 = 0x518
-	CGFloat _feedbackScaleY;	// 1308 = 0x51c
-	CGFloat _scaleY;	// 1312 = 0x520
-	CGFloat _scaleOffsetY;	// 1316 = 0x524
-	CGPoint _translation;	// 1320 = 0x528
-	CGPoint _feedbackTranslation;	// 1328 = 0x530
-	CGPoint _translationOffset;	// 1336 = 0x538
-	CGPoint _origin;	// 1344 = 0x540
-	NSUInteger _activeContactCount;	// 1352 = 0x548
-	NSUInteger _maxActiveContacts;	// 1356 = 0x54c
-	NSUInteger _flags;	// 1360 = 0x550
-	NSUInteger _timestamp;	// 1364 = 0x554
-	NSUInteger _previousTimestamp;	// 1368 = 0x558
-	BOOL _updated;	// 1372 = 0x55c
-	BOOL _useFeedback;	// 1373 = 0x55d
-	BOOL _exposeScale;	// 1374 = 0x55e
-	BOOL _exposeRotation;	// 1375 = 0x55f
-	BOOL _allowNonUniformScaling;	// 1376 = 0x560
-	struct _QCDod *_roi;	// 1380 = 0x564
-	CGAffineTransform _transform;	// 1384 = 0x568
-	QCRenderingPatch *_renderingPatch;	// 1408 = 0x580
-	QCPatch *_parent;	// 1412 = 0x584
-	void *_unused[6];	// 1416 = 0x588
+	QCContactInfo _contacts[64];
+	CGFloat _rotation;
+	CGFloat _rotationOffset;
+	CGFloat _scaleX;
+	CGFloat _scaleOffsetX;
+	CGFloat _scaleY;
+	CGFloat _scaleOffsetY;
+	CGPoint _translation;
+	CGPoint _translationOffs
+	CGPoint _origin;
+	NSUInteger _activeContactCount;
+	NSUInteger _maxActiveContacts;
+	NSUInteger _flags;
+	NSUInteger _timestamp;
+	NSUInteger _previousTimestamp;
+	BOOL _updated;
+    BOOL _exposeScale;
+	BOOL _exposeRotation;
+	BOOL _allowNonUniformScaling;
+	struct _QCDod *_roi;
+	CGAffineTransform _transform;
+	QCRenderingPatch *_renderingPatch;
+	QCPatch *_parent;
+	void *_unused[6];
 }
 @property (readonly,assign) BOOL translating;
 @property (readonly,assign) BOOL scaling;
@@ -41,7 +36,6 @@
 @property (readwrite,assign) BOOL allowNonUniformScaling;
 @property (readwrite,assign) BOOL exposeRotation;
 @property (readwrite,assign) BOOL exposeScale;
-@property (readwrite,assign) BOOL useFeedback;
 @property (readonly,assign) BOOL updated;
 @property (readonly,assign) CGAffineTransform transform;
 @property (readonly,assign) CGFloat scaleY;
@@ -86,8 +80,6 @@
 - (BOOL)exposeRotation;
 - (BOOL)exposeScale;
 - (void)setExposeScale:(BOOL)fp8;
-- (BOOL)useFeedback;
-- (void)setUseFeedback:(BOOL)fp8;
 - (BOOL)updated;
 @end
 

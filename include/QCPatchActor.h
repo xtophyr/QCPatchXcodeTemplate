@@ -33,6 +33,7 @@
 - (id)_colorForNode:(id)fp8;
 - (NSDictionary*)_titleTextAttributesForNode:(id)node;
 - (NSDictionary*)_portTextAttributesForNode:(id)node;
+- (NSDictionary*)_patchTypeTextAttributesForNode:(id)node;  // used for subtitle text when a patch has a custom title
 - (void)_makeCGPathForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)context;
 - (void)_makeSelectionPathForNode:(id)fp8 border:(float)fp12 bounds:(NSRect)fp16 inContext:(CGContextRef)context;
 - (void)_drawBackgroundGradientLayerForNode:(id)fp8 bounds:(NSRect)fp12 reflectionHeight:(CGFloat)fp28 inContext:(CGContextRef)context;

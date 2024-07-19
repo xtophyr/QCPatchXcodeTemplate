@@ -31,8 +31,8 @@
 - (void)_drawTitle:(id)fp8 inContext:(CGContextRef)context atPoint:(NSPoint)point withAttributes:(id)fp24;
 - (void)_drawString:(id)fp8 inContext:(CGContextRef)context atPoint:(NSPoint)point withAttributes:(id)fp24;
 - (id)_colorForNode:(id)fp8;
-- (id)_titleTextAttributesForNode:(id)fp8;
-- (id)_portTextAttributesForNode:(id)fp8;
+- (NSDictionary*)_titleTextAttributesForNode:(id)node;
+- (NSDictionary*)_portTextAttributesForNode:(id)node;
 - (void)_makeCGPathForNode:(id)fp8 bounds:(NSRect)fp12 inContext:(CGContextRef)context;
 - (void)_makeSelectionPathForNode:(id)fp8 border:(float)fp12 bounds:(NSRect)fp16 inContext:(CGContextRef)context;
 - (void)_drawBackgroundGradientLayerForNode:(id)fp8 bounds:(NSRect)fp12 reflectionHeight:(CGFloat)fp28 inContext:(CGContextRef)context;
@@ -54,7 +54,7 @@
 - (QCMD5Sum *)nodeMD5List:(id)fp8 bounds:(NSRect)fp12 view:(id)fp28 zoom:(CGFloat)fp32 outCount:(NSUInteger *)fp36;
 - (void)drawNode:(id)fp8 bounds:(NSRect)bounds view:(NSView*)view;
 - (id)parametersViewForPatch:(id)fp8;
-- (NSSize)sizeForNode:(id)fp8;
+- (NSSize)sizeForNode:(QCPatch*)node;
 - (BOOL)dragsOnPortForNode:(id)fp8;
 
 @end
@@ -74,7 +74,7 @@
 
 // NSTableView stuff (not sure what this is used for, maybe the UI is modeled as a table view with each row being a port?)
 - (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView;
-- (id)tableView:(NSTableView*)tableView portForRow:(int)row;
+- (id)tableView:(NSTableView*)tableView portForRow:(NSInteger)row;
 - (id)tableView:(NSTableView*)tableView objectValueForTableColumn:(NSTableColumn*)fp12 row:(NSInteger)row;
 - (BOOL)tableView:(NSTableView*)tableView shouldEditTableColumn:(NSTableColumn*)fp12 row:(NSInteger)row;
 - (void)tableView:(NSTableView*)tableView setObjectValue:(id)fp12 forTableColumn:(NSTableColumn*)fp16 row:(NSInteger)row;
@@ -85,9 +85,9 @@
 - (id)parametersViewForPatch:(id)fp8;
 - (void)_setLayer:(id)fp8;
 - (void)_explodeSubgraph:(id)fp8;
-- (void)_parent:(id)fp8;
-- (void)_local:(id)fp8;
-- (void)_external:(id)fp8;
+- (void)_parent:(NSMenuItem*)sender;
+- (void)_local:(NSMenuItem*)sender;
+- (void)_external:(NSMenuItem*)sender;
 - (void)_refactor:(id)fp8;
 - (id)menuForNode:(id)fp8 view:(id)fp12;
 @end

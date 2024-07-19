@@ -1,7 +1,6 @@
 // superclass patch types first
 #import "QCThreadPatch.h"
 
-#import "QCEventPatch.h"
 #import "QCFakePatch.h"
 #import "QCNetworkPatch.h"
 #import "QCOSCPatch.h"

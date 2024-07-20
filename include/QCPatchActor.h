@@ -63,9 +63,9 @@
 @interface QCPatchActor (Interaction)
 - (BOOL)pointInConsumerOrderRect:(NSPoint)fp8 inNode:(id)fp16 bounds:(NSRect)fp20;
 - (BOOL)pointInTitleRect:(NSPoint)fp8 inNode:(id)fp16 bounds:(NSRect)fp20;
-- (void)setTitle:(id)fp8 forNode:(id)fp12;
+- (void)setTitle:(NSString*)title forNode:(id)patch;
 - (BOOL)trackMouse:(id)fp8 inNode:(id)fp12 bounds:(NSRect)fp16 view:(id)fp32;
-- (id)_portIsConnected:(id)fp8 view:(id)fp12;
+- (id)_portIsConnected:(id)fp8 view:(id)view;
 - (id)inspectorForPatch:(id)fp8;
 - (void)_updatedParameters:(id)fp8;
 - (id)setupInspectorViewsForNode:(id)fp8;
@@ -73,24 +73,24 @@
 - (void)_updatedState:(id)fp8;
 - (void)_updatedPorts:(id)fp8;
 
-// NSTableView stuff (not sure what this is used for, maybe the UI is modeled as a table view with each row being a port?)
+// NSTableView delegates, used to populate the published port UI in the inspector.  Also manages drag/drop reordering of the ports.
 - (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView;
 - (id)tableView:(NSTableView*)tableView portForRow:(NSInteger)row;
 - (id)tableView:(NSTableView*)tableView objectValueForTableColumn:(NSTableColumn*)fp12 row:(NSInteger)row;
 - (BOOL)tableView:(NSTableView*)tableView shouldEditTableColumn:(NSTableColumn*)fp12 row:(NSInteger)row;
-- (void)tableView:(NSTableView*)tableView setObjectValue:(id)fp12 forTableColumn:(NSTableColumn*)fp16 row:(NSInteger)row;
-- (BOOL)tableView:(NSTableView*)tableView writeRows:(id)fp12 toPasteboard:(id)fp16;
+- (void)tableView:(NSTableView*)tableView setObjectValue:(id)value forTableColumn:(NSTableColumn*)column row:(NSInteger)row;
+- (BOOL)tableView:(NSTableView*)tableView writeRows:(id)fp12 toPasteboard:(NSPasteboard*)pboard;
 - (NSUInteger)tableView:(NSTableView*)tableView validateDrop:(id)fp12 proposedRow:(NSInteger)row proposedDropOperation:(NSUInteger)fp20;
 - (BOOL)tableView:(NSTableView*)tableView acceptDrop:(id)fp12 row:(NSInteger)row dropOperation:(NSUInteger)fp20;
 
-- (id)parametersViewForPatch:(id)fp8;
+- (id)parametersViewForPatch:(id)patch;
 - (void)_setLayer:(id)fp8;
 - (void)_explodeSubgraph:(id)fp8;
 - (void)_parent:(NSMenuItem*)sender;
 - (void)_local:(NSMenuItem*)sender;
 - (void)_external:(NSMenuItem*)sender;
 - (void)_refactor:(id)fp8;
-- (id)menuForNode:(id)fp8 view:(id)fp12;
+- (id)menuForNode:(id)node view:(id)view;
 @end
 
 @interface QCPatchActor (Tooltip)

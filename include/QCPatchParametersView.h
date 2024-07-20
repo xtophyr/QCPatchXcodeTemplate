@@ -28,7 +28,6 @@
 - (void)_attributesUpdated:(id)fp8;
 - (void)_finishInitialization;
 - (id)initWithFrame:(NSRect)fp8;
-- (void)finalize;
 - (void)dealloc;
 - (BOOL)isInputPortVisible:(id)fp8;
 - (void)localizePortInfo:(id)fp8;
@@ -45,5 +44,6 @@
 - (id)initWithCoder:(NSCoder *)aDecoder;
 - (void)drawRect:(NSRect)fp8;
 - (id)_labels;
+- (void)viewWillMoveToWindow:(id)arg1;
 
 @end

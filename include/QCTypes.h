@@ -42,7 +42,19 @@ typedef struct _QCContactInfo {
 	int state;
 } QCContactInfo;
 
-struct _QCDod;
+struct _QCDod;  // QCDod is a CF type, so proper name is probably QCDodRef
+
+typedef struct _QCDod
+{
+    uintptr_t   _cfisa;     // CF, don't touch
+    uint8_t     _cfinfo[4]; // CF, don't touch
+    uint32_t    _rc;        // CF, don't touch
+    CGPoint    *points;
+    CGRect      bounds;
+    uint64_t    count;      // current index in points array
+    uint64_t    pointsSize; // allocation size for *points (in CGPoint, not bytes)
+    BOOL        convextFlag;
+} QCDod;
 
 typedef struct _QCExecutionInfo {
     void *_field1;

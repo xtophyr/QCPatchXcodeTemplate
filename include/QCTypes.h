@@ -69,10 +69,10 @@ typedef struct _QCExecutionStride {
 typedef struct _QCIterationManager {
 	QCArray *_field1;
 	QCArray *_field2;
-    NSUInteger _field3;
-    NSUInteger _field4;
-    NSUInteger _field5;
-    NSUInteger _field6;
+    NSUInteger _currentIteration;
+    NSUInteger _maxIterations;
+    NSUInteger _field5; //
+    NSUInteger _field6; // something to do with iterator depth (nested iterators)
 } QCIterationManager;
 
 typedef struct _QCIterationStack {

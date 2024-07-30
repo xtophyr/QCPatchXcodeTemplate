@@ -66,7 +66,9 @@ void QCDataFromComposition(void); // "deprecated" form of QCCompositionToData
 BOOL QCFileIsComposition(NSString *path);   // this probably accepts NSURL too - it just does -pathExtension to check for qtz or xml
 BOOL QCGLExtensionSupported(id cglContext, const char *extension);
 
-void QCGLMakeTransformationMatrix(CGFloat*,CGFloat xRotation,CGFloat yRotation,CGFloat zRotation,CGFloat xTranslation,CGFloat yTranslation,CGFloat zTranslation);
+// this is used by the various rendering patches that have rotation and translation inputs.  It uses QCMatrix_SetRotationFromAngles and then adds
+// the translation vector.
+void QCGLMakeTransformationMatrix(QCMatrix *result ,CGFloat xRotation, CGFloat yRotation, CGFloat zRotation, CGFloat xTranslation, CGFloat yTranslation, CGFloat zTranslation);
 
 int QCGetCompositionTrackAtIndex(void); // returns 0 (14.4.1)
 

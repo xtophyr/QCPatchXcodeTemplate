@@ -3,12 +3,12 @@
 
 // TODO: this struct is also in QCTypes, can probably get moved to here?
 typedef struct _BackgroundInfo {
-    id _field1;
-    unsigned int _field2;
+    NSColor  *color;
+    GLuint _field2; // glList for checkerboard
     float _field3;
     float _field4;
-    unsigned long long _field5;
-    char _field6;
+    unsigned long long checkerboardSize;
+    char inLiveResize;
 } BackgroundInfo;
 
 typedef struct _GLMatrices {
@@ -75,7 +75,7 @@ typedef struct _GLMatrices {
 - (void)setScissorTest:(BOOL)scissorTest;
 - (void)setEraseBackground:(int)fp8;
 - (int)eraseBackground;
-- (void)setBackgroundColor:(NSColor*)color checkerboardSize:(NSUInteger)size checkerboardWidth:(float)width height:(float)height inLiveResize:(BOOL)inLiveResize;
+- (void)setBackgroundColor:(NSColor*)color checkerboardSize:(NSUInteger)size inLiveResize:(BOOL)inLiveResize;
 - (void)invalidate;
 - (void)setColorSpace:(CGColorSpaceRef)fp8;
 - (BOOL)startRenderingPatch:(id)fp8 options:(NSDictionary *)options;

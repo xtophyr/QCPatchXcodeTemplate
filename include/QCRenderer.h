@@ -11,7 +11,6 @@ typedef struct __QCRendererPrivateStruct {   // 0x58 = 88 bytes
     // offset 0x44 -
     // offset 0x48 - is set to 1 in initWithComposition:colorSpace:
     // offset 0x50 is void * "ObservationInfo"
-    // offset 0x58
 } QCRendererPrivateStruct;
 
 @interface QCRenderer : NSObject <QCCompositionRenderer>

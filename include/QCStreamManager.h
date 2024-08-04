@@ -11,9 +11,9 @@
 	QCImageManager *_imageManager;	// 28 = 0x1c
 	NSUInteger _deviceCount;	// 32 = 0x20
 	unsigned long long *_deviceSizes;	// 36 = 0x24
-	cl_context *_context;	// 40 = 0x28
-	cl_device_id **_devices;	// 44 = 0x2c
-	cl_device_id **_virtualScreenCache;	// 48 = 0x30
+	cl_context _context;	// 40 = 0x28
+	cl_device_id *_devices;	// 44 = 0x2c
+	cl_device_id *_virtualScreenCache;	// 48 = 0x30
 	NSUInteger *_deviceTypes;	// 52 = 0x34
 	BOOL _disableGPUDevice;	// 56 = 0x38
 	NSMutableDictionary *_exporterClassCache;	// 60 = 0x3c

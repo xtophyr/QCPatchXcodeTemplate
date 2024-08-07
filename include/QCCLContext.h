@@ -3,10 +3,10 @@
 
 @interface QCCLContext : NSObject
 {
-	cl_context *_context;	// 4 = 0x4
+	cl_context _context;	// 4 = 0x4
 	unsigned long long *_deviceType;	// 8 = 0x8
-	cl_device_id **_devices;	// 12 = 0xc
-	cl_device_id *_bestDevice;	// 16 = 0x10
+	cl_device_id *_devices;	// 12 = 0xc
+	cl_device_id _bestDevice;	// 16 = 0x10
 	NSUInteger _deviceCount;	// 20 = 0x14
 	BOOL _isAccelerated;	// 24 = 0x18
 	BOOL _isAsynchronous;	// 25 = 0x19
@@ -30,30 +30,30 @@
 @property (readonly,assign) NSUInteger deviceImage2DMaxWidth;
 @property (readonly,assign) NSUInteger deviceImage2DMaxHeight;
 @property (readonly,assign) CFArrayRef deviceNames;
-@property (readwrite,assign) cl_device_id *device;
-@property (readonly,assign) cl_command_queue *commandQueue;
+@property (readwrite,assign) cl_device_id device;
+@property (readonly,assign) cl_command_queue commandQueue;
 @property (readonly,assign) BOOL isAsynchronous;
 @property (readonly,assign) BOOL isAccelerated;
 @property (readonly,assign) NSUInteger deviceCount;
-@property (readonly,assign) cl_device_id **devices;
-@property (readonly,assign) cl_context *context;
+@property (readonly,assign) cl_device_id *devices;
+@property (readonly,assign) cl_context context;
 
 
 + (void)initialize;
-- (id)initWithContext:(cl_context *)fp8 options:(id)fp12;
-- (NSUInteger)indexOfDevice:(cl_device_id *)fp8;
-- (cl_command_queue *)commandQueue;
-- (cl_device_id *)device;
-- (void)setDevice:(cl_device_id *)fp8;
-- (cl_program *)createProgramWithSource:(id)fp8 error:(NSError**)error;
+- (id)initWithContext:(cl_context)fp8 options:(id)fp12;
+- (NSUInteger)indexOfDevice:(cl_device_id)fp8;
+- (cl_command_queue)commandQueue;
+- (cl_device_id)device;
+- (void)setDevice:(cl_device_id)fp8;
+- (cl_program)createProgramWithSource:(id)fp8 error:(NSString***)error;
 - (void)finalize;
 - (void)dealloc;
 - (CFArrayRef)deviceNames;
 - (BOOL)isAsynchronous;
 - (BOOL)isAccelerated;
 - (NSUInteger)deviceCount;
-- (cl_device_id **)devices;
-- (cl_context *)context;
+- (cl_device_id *)devices;
+- (cl_context)context;
 @end
 
 @interface QCCLContext (Utilities)

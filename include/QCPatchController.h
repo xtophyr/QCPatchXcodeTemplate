@@ -1,21 +1,26 @@
 
-
 @class QCPatch;
+
+typedef struct _QCPatchControllerPrivate {
+    QCPatch *patch;
+} QCPatchControllerPrivate;
 
 @interface QCPatchController : NSController
 {
-	QCPatch *_patch;	// 60 = 0x3c
-	void *_unused[4];	// 64 = 0x40
+    void *_QCPatchControllerPrivate;
 }
 
 + (BOOL)accessInstanceVariablesDirectly;
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key;
+
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+- (id)initWithCoder:(NSCoder *)aDecoder;
+- (id)init;
 - (void)dealloc;
+
+- (void)setPatch:(id)fp8;
 - (id)patch;
 - (void)_real_willChangeValueForKey:(NSString*)key;
 - (void)_real_didChangeValueForKey:(NSString*)key;
-- (void)setPatch:(id)fp8;
-- (void)encodeWithCoder:(NSCoder *)aCoder;
-- (id)initWithCoder:(NSCoder *)aDecoder;
 
 @end

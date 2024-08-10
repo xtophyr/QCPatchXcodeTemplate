@@ -12,7 +12,7 @@
 	NSUInteger _height;	// 48 = 0x30
 	BOOL _flipped;	// 52 = 0x34
 	void *_backing;	// 56 = 0x38
-	void *_backingCallback;	// 60 = 0x3c
+	void (*_backingCallback)(void *backing, void *ctx);	// 60 = 0x3c
 	void *_backingInfo;	// 64 = 0x40
 	double _cost;	// 68 = 0x44
 	NSUInteger _cacheRetainCount;	// 76 = 0x4c
@@ -23,7 +23,7 @@
 
 + (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
 + (void)initialize;
-- (id)initWithFormat:(id)fp8 pixelsWide:(NSUInteger)fp12 pixelsHigh:(NSUInteger)fp16 options:(id)fp20;
+- (id)initWithFormat:(QCPixelFormat*)format pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height options:(NSDictionary*)options;
 - (id)copyWithZone_GCCacheResource:(NSZone *)zone;
 - (void)_finalize_QCImageBuffer;
 - (void)finalize;
@@ -35,15 +35,15 @@
 - (NSUInteger)pixelsWide;
 - (NSUInteger)pixelsHigh;
 - (BOOL)isFlipped;
-- (BOOL)beginUpdateBuffer:(BOOL)fp8;
-- (BOOL)beginUpdateBuffer:(BOOL)fp8 colorSpace:(CGColorSpaceRef)fp12;
-- (void)endUpdateBuffer:(BOOL)fp8;
-- (void)setBacking:(void *)fp8 releaseCallback:(void *)fp12 releaseInfo:(void *)fp16;
+- (BOOL)beginUpdateBuffer:(BOOL)flipped;
+- (BOOL)beginUpdateBuffer:(BOOL)flipped colorSpace:(CGColorSpaceRef)colorspace;
+- (void)endUpdateBuffer:(BOOL)flag;
+- (void)setBacking:(void *)backing releaseCallback:(void *)backingReleaseCallback releaseInfo:(void *)backingReleaseCtx;
 - (void *)backing;
 - (void *)backingReleaseCallback;
 - (void *)backingReleaseInfo;
-- (void)willRecycleResource:(id)fp8;
-- (BOOL)didRecycleResource:(id)fp8;
+- (void)willRecycleResource:(id)sender;
+- (BOOL)didRecycleResource:(id)sender;
 - (NSString*)description;
 @end
 

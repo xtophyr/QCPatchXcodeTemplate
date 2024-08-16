@@ -16,6 +16,7 @@
 	QCNumberPort *_CPULoadPort_2;	// 208 = 0xd0
 	processor_cpu_load_info_t _savedTicks;	// 212 = 0xd4
 	unsigned int _savedSize;	// 216 = 0xd8
+    NSObject<OS_dispatch_queue> *_queue;
 }
 
 + (QCPatchExecutionMode)executionModeWithIdentifier:(id)identifier;

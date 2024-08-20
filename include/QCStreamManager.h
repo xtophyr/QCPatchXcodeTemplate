@@ -38,6 +38,7 @@
 + (id)copySharedManager;
 + (id)copyManagerWithOpenGLContext:(id)fp8;
 + (id)copyManagerWithImageManager:(id)fp8;
++ (BOOL)isUsingOpenCL;
 - (id)_QCOpenGLContextForCurrentThread;
 - (BOOL)_initializeContext;
 - (void)_finalizeContext;

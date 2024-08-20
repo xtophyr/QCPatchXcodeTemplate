@@ -14,7 +14,6 @@
 	NSUInteger _depth;	// 232 = 0xe8
 	GLuint _frameBuffer;	// 236 = 0xec
 	GLuint _renderBuffer;	// 240 = 0xf0
-	CGLPBufferObj *_pBuffer;	// 244 = 0xf4
 	NSUInteger _virtualScreen;	// 248 = 0xf8
 	QCCGLContext *_updateContext;	// 252 = 0xfc
 	int _saveBuffer;	// 256 = 0x100
@@ -61,10 +60,6 @@
 - (void)_setRenderStates;
 @end
 
-@interface QCImageTextureBuffer (QCOpenGLPort_Image)
-- (CGLPBufferObj)_pBuffer;
-@end
-
 @interface QCImageTextureBuffer (Extensions)
 + (id)_supportedPixelFormatsForContext:(id)fp8 compatibility:(id)fp12;
 + (id)supportedUploadFormatsForContext:(id)fp8;
@@ -75,7 +70,6 @@
 - (BOOL)_downloadTextureWithBounds:(NSRect)fp8 usingPixelFormat:(id)fp24 toAddress:(void *)fp28 bytesPerRow:(NSUInteger)fp32;
 - (BOOL)downloadTextureWithBounds:(NSRect)fp8 toAddress:(void *)fp24 bytesPerRow:(NSUInteger)fp28;
 - (BOOL)isValidOnContext:(id)fp8;
-- (BOOL)_hasPBuffer;
 - (unsigned int)_renderBuffer;
 - (NSUInteger)_levels;
 - (NSUInteger)_depth;

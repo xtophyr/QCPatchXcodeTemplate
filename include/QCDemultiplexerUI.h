@@ -3,11 +3,11 @@
 
 @interface QCDemultiplexerUI : QCInspector
 {
-	IBOutlet NSPopUpButton *classMenu;	// 28 = 0x1c
+	IBOutlet NSPopUpButton *classMenu;
 }
 
 + (NSString*)viewNibName;
-- (void)setupViewForPatch:(id)fp8;
-- (void)setClass:(id)fp8;
+- (void)setupViewForPatch:(id)patch;
+- (IBAction)setClass:(id)sender;
 
 @end

@@ -1,21 +1,21 @@
 @interface QCDemultiplexer : QCPatch
 {
-	QCIndexPort *inputIndex;	// 156 = 0x9c
-	NSMutableArray *_outPorts;	// 160 = 0xa0
-	QCPort *_inPort;	// 164 = 0xa4
-	QCPort *_resetPort;	// 168 = 0xa8
+	QCIndexPort *inputIndex;
+	NSMutableArray *_outPorts;
+	QCPort *_inPort;
+	QCPort *_resetPort;
 }
 
-+ (BOOL)allowsSubpatchesWithIdentifier:(id)fp8;
-+ (id)stateKeysWithIdentifier:(id)fp8;
-+ (id)serializedStateKeysWithIdentifier:(id)fp8;
++ (BOOL)allowsSubpatchesWithIdentifier:(id)identifier;
++ (id)stateKeysWithIdentifier:(id)identifier;
++ (id)serializedStateKeysWithIdentifier:(id)identifier;
 + (BOOL)isSafe;
-- (id)initWithIdentifier:(id)fp8;
+- (id)initWithIdentifier:(id)identifier;
 - (NSUInteger)outputCount;
-- (void)setOutputCount:(NSUInteger)fp8;
+- (void)setOutputCount:(NSUInteger)count;
 - (Class)portClass;
-- (void)setPortClass:(Class)fp8;
-- (void)setResetOutputs:(BOOL)fp8;
+- (void)setPortClass:(Class)cls;
+- (void)setResetOutputs:(BOOL)flag;
 - (BOOL)resetOutputs;
 - (void)dealloc;
 - (NSDictionary*)state;
@@ -25,5 +25,5 @@
 @end
 
 @interface QCDemultiplexer (QCInspector)
-+ (Class)inspectorClassWithIdentifier:(id)fp8;
++ (Class)inspectorClassWithIdentifier:(id)identifier;
 @end

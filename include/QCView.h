@@ -43,6 +43,7 @@ typedef struct __QCViewPrivateStruct
 + (void)initialize;
 - (Class)valueClassForBinding:(NSBindingName)binding;
 - (id)_createLayer;
+- (void)_createLayerAndInitialize;
 - (void)setEraseColor:(NSColor*)eraseColor;
 - (NSColor*)eraseColor;
 - (void)setBackgroundColor:(NSColor*)bgColor;

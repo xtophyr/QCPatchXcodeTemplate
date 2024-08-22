@@ -12,7 +12,7 @@
 }
 
 + (id)allocWithZone:(NSZone *)zone;     // ensures there are only subclasses - this class cannot be instantiated directly.
-+ (Class)portClassFromParameterInfo:(id)fp8;
++ (Class)portClassFromParameterInfo:(QCParameterInfo*)parameter;
 + (int)indicesType;
 + (NSArray *)sourceTypes; // array of NSStrings* -- NSInternalInconsistencyException : Function not implemented (subclasses must override this)
 + (id)stateKeysWithIdentifier:(id)fp8;

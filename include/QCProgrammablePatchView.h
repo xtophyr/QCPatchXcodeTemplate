@@ -4,7 +4,6 @@
 
 @interface QCProgrammablePatchView : QCSourceTextView
 {
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1060	
 	IBOutlet NSTextField *_statusField;	// 128 = 0x80
 	IBOutlet NSImageView *_statusImage;	// 132 = 0x84
 	NSString *_sourceType;	// 136 = 0x88
@@ -13,16 +12,6 @@
 	NSTimer *_typingTimer;	// 148 = 0x94
 	BOOL _disableUpdate;	// 152 = 0x98
 	void *_unused2[3];	// 156 = 0x9c
-#else
-	QCProgrammablePatch *_targetPatch;	// 124 = 0x7c
-	NSString *_sourceType;	// 128 = 0x80
-	IBOutlet NSTextField *_statusField;	// 132 = 0x84
-	IBOutlet NSImageView *_statusImage;	// 136 = 0x88
-	NSUndoManager *_undoManager;	// 140 = 0x8c
-	NSTimer *_typingTimer;	// 144 = 0x90
-	BOOL _disableUpdate;	// 148 = 0x94
-	void *_unused2[3];	// 152 = 0x98
-#endif
 }
 
 + (void)initialize;

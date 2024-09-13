@@ -59,7 +59,7 @@ NSData* QCCompositionToData(NSDictionary *compositionDictionary); // serializes 
 void QCCompositionToFile(void);
 void QCCompositionToMovieFile(void);
 int QCCompositionsFromMovieFile(void);  // returns nil (14.4.1)
-CGSize QCComputeAspectRatioBounds(CGSize A, CGSize B, double ratio);
+CGRect QCComputeAspectRatioBounds(CGRect bounds, double ratio); // returns an adjusted rect based on ratio that will fit within bounds.  ratios <0 just return bounds.
 void QCComputeProportionalBounds(void);
 int QCCountCompositionTracksInMovie(void);  // returns 0 (14.4.1)
 void QCDataFromComposition(void); // "deprecated" form of QCCompositionToData

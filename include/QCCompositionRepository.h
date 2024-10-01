@@ -14,7 +14,7 @@ extern NSString * const QCCompositionProtocolScreenSaver;
     dispatch_queue_t                    cq;
 }
 
-// this class seems wildly different from how it looks in the public header
+// this class seems wildly different from how it looks in the public header.  since it can't be subclassed, public headers are likely quite stale.
 /*@interface QCCompositionRepository : NSObject
 {
 	pthread_mutex_t _mutex;	// 4 = 0x4
@@ -39,13 +39,12 @@ extern NSString * const QCCompositionProtocolScreenSaver;
 - (id)_cachedCompositions:(CFDictionaryRef)fp8;
 - (BOOL)_updateCompositions:(CFDictionaryRef)fp8;
 - (void)_initCompositionGCDSources;
-- (void)_compositionThread:(id)fp8;
 - (void)__swapCompositions:(id)fp8;
 - (void)_loadAllCompositions;
 - (void)_registerProtocols;
 - (id)initWithOptions:(id)fp8;
 - (id)compositionWithIdentifier:(NSString*)identifier;
-- (id)compositionsWithProtocols:(NSArary*)protocols andAttributes:(NSDictionary*)attributes sortedBy:(id)fp16;
+- (id)compositionsWithProtocols:(NSArray*)protocols andAttributes:(NSDictionary*)attributes sortedBy:(id)fp16;
 - (NSArray*)compositionsWithProtocols:(NSArray*)protocols andAttributes:(NSDictionary*)attributes;
 - (NSArray*)allCompositions;
 - (void)registerProtocol:(id)fp8 withDescription:(id)fp12;

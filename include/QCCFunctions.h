@@ -115,7 +115,7 @@ QCMD5Sum QCMD5WithString(NSString *string);    // hashes string
 
 void QCMatrix_Clear(QCMatrix *m);   // initializes to identity matrix (4x4)
 void QCMatrix_SetIdentity(QCMatrix *m); // same as above, added some time after SSDK was dumped
-void QCMatrix_ConcatenateWithMatrix(void);
+void QCMatrix_ConcatenateWithMatrix(const QCMatrix *lhs, const QCMatrix *rhs, QCMatrix *dest);
 void QCMatrix_Copy(const QCMatrix *source, QCMatrix *dest);   // copies source to dest
 BOOL QCMatrix_EqualsMatrix(const QCMatrix *x, const QCMatrix *y); // added some time after SSDK was dumped
 double QCMatrix_Determinant(QCMatrix *matrix); // returns the determinant of matrix
@@ -129,7 +129,7 @@ void QCMatrix_GetVectorZ(const QCMatrix *m, QCVector3 *vec); // sets vec to 3rd 
 void QCMatrix_Invert(void); // added some time after SSDK was dumped
 BOOL QCMatrix_IsIdentity(const QCMatrix *matrix); // returns true iff matrix is identity matrix
 void QCMatrix_MultiplyByMatrix(CGFloat left[16], CGFloat right[16], CGFloat product[16]);
-void QCMatrix_Negate(void);
+void QCMatrix_Negate(const QCMatrix *src, QCMatrix *dest); // transposes src, clears the bottom row, and does something weird with the translation vector
 void QCMatrix_Project(void); // added some time after SSDK was dumped
 void QCMatrix_RotateQuaternion(void); // added some time after SSDK was dumped
 void QCMatrix_RotateVector(void);

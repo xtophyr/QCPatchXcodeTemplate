@@ -6,6 +6,7 @@
 {
 	QCImage *_image;	// 4 = 0x4
 	QCImageTextureBuffer *_texture;	// 8 = 0x8
+    QCArray *_cachedTextures;
 	QCMD5Sum _textureProviderMD5;	// 12 = 0xc
 	NSRect _textureBounds;	// 28 = 0x1c
 	NSAffineTransform *_textureTransformation;	// 44 = 0x2c
@@ -14,6 +15,8 @@
 }
 
 - (id)initWithPatch:(id)fp8;
+- (void)dealloc;
+- (void)_clearCachedTextures;
 - (void)updateWithImage:(id)fp8;
 - (id)image;
 - (void)clearTexture;

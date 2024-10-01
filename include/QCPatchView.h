@@ -32,6 +32,7 @@
 - (void)setGraph:(id)fp8;
 - (void)_finishInitialization;
 - (void)dealloc;
+- (Class)classForPath:(id)arg1;
 - (BOOL)acceptDroppedFile:(id)fp8;
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender;
 - (void)_drawConnection:(id)fp8 fromPort:(id)fp12 point:(NSPoint)fp16 toPoint:(NSPoint)fp24;
